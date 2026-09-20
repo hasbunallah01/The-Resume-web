@@ -5,6 +5,7 @@ import "@fontsource-variable/newsreader/wght-italic.css";
 import "@fontsource/cormorant-garamond/500.css";
 import "@fontsource/cormorant-garamond/600.css";
 import "@fontsource/cormorant-garamond/700.css";
+import "@fontsource/caveat/600.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

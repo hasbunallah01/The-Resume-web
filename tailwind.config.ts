@@ -30,6 +30,7 @@ const config: Config = {
       fontFamily: {
         serif: ['"Newsreader Variable"', "Georgia", "serif"],
         logo: ['"Cormorant Garamond"', "Georgia", "serif"],
+        script: ["Caveat", "cursive"],
         sans: ['"Inter Variable"', "system-ui", "sans-serif"],
       },
     },
