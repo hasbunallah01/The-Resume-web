@@ -10,15 +10,15 @@ import { partnershipSteps, storySteps } from "@/data/pricing";
 import { reviews } from "@/data/reviews";
 
 export const metadata: Metadata = {
-  title: "Resume Writing Services | Veylora",
+  title: "Services | Veylora",
   description:
     "Strategically written resumes for professionals and executives. Explore Veylora's Professional, Executive and C-Suite resume packages.",
 };
 
-export default function ResumesPage() {
+export default function ServicesPage() {
   return (
     <>
-      <Header active="Resumes" />
+      <Header active="Services" />
       <main>
         <Intro />
         <Pricing />

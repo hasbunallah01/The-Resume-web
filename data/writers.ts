@@ -75,7 +75,6 @@ export const writers: Writer[] = [
 
 export const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Resumes", href: "/resumes" },
   { label: "Services", href: "/services" },
   { label: "Our Writers", href: "/#writers" },
   { label: "About", href: "/about" },

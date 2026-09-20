@@ -97,6 +97,18 @@ export const TickIcon = (p: P) => (
   </svg>
 );
 
+export const MailIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <rect x="3.5" y="5.5" width="17" height="13" rx="1.5" />
+    <path d="m4 7 8 6 8-6" />
+  </svg>
+);
+export const StarOutlineIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="m12 3.4 2.6 5.4 5.9.8-4.3 4.2 1 5.9L12 16.9l-5.2 2.8 1-5.9-4.3-4.2 5.9-.8L12 3.4Z" />
+  </svg>
+);
+
 export const iconMap = {
   document: DocIcon,
   person: PersonIcon,
