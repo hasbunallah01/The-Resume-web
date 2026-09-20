@@ -36,7 +36,7 @@ export default function Founder() {
             possible way.
           </p>
           <p className="mt-[17px] max-w-[548px] text-[16.1px] leading-[24.8px] text-ink-body">
-            My goal is simple &mdash; to make high-quality, professional career
+            My goal is simple: to make quality, professional career
             documents accessible to everyone, and to support individuals at
             every stage of their career journey.
           </p>

@@ -83,7 +83,7 @@ export function AboutIntro() {
           <p className="mt-4 text-[15.5px] leading-[1.75] text-ink-body">
             Through Veylora, Qudus focuses on helping professionals present
             their experience with greater clarity, structure, and
-            purpose&mdash;whether they are entering the job market, moving into
+            purpose, whether they are entering the job market, moving into
             a new role, repositioning their experience, or preparing for a more
             senior opportunity.
           </p>
@@ -178,7 +178,7 @@ export function WhyVeylora() {
 const steps = [
   { n: "01", title: "Understand", text: "We begin by understanding your experience, goals, strengths, and the opportunity you're pursuing." },
   { n: "02", title: "Position", text: "We identify the professional value that should be most visible and build the document around it." },
-  { n: "03", title: "Write", text: "We turn your experience into clear, achievement-focused content with a professional structure." },
+  { n: "03", title: "Write", text: "We turn your experience into clear content that highlights your achievements, with a professional structure." },
   { n: "04", title: "Refine", text: "We review the document carefully and refine the language, organization, and presentation so the finished resume feels accurate and purposeful." },
 ];
 
@@ -304,7 +304,7 @@ export function BrandStatement() {
           </h2>
           <p className="text-[16px] leading-[1.75] text-white/85">
             We believe professional documents should reflect the person behind
-            them. That means avoiding one-size-fits-all language and taking the
+            them. That means avoiding one size fits all language and taking the
             time to understand what makes each candidate&rsquo;s experience
             meaningful.
           </p>
@@ -364,7 +364,7 @@ export function FounderPerspective() {
               value easier to see.&rdquo;
             </blockquote>
             <p className="mt-4 text-[13.5px] text-ink-muted">
-              &mdash; Daramola Qudus Abolaji
+              Daramola Qudus Abolaji
               <br />
               Founder, Veylora
             </p>

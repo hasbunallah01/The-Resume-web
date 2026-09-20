@@ -2,8 +2,8 @@ import { AtsIcon, DocumentIcon, ExpertIcon, HeartCheckIcon } from "./Icons";
 
 const items = [
   { label: "Expert Writers", Icon: ExpertIcon },
-  { label: "ATS-Focused", Icon: AtsIcon },
-  { label: "High-Quality Documents", Icon: DocumentIcon },
+  { label: "ATS Focused", Icon: AtsIcon },
+  { label: "Quality Documents", Icon: DocumentIcon },
   { label: "Your Goals, Our Priority", Icon: HeartCheckIcon },
 ];
 
@@ -12,7 +12,7 @@ export default function TrustStrip() {
     <section className="bg-mist text-[#12406a]">
       <div className="mx-auto w-[min(1232px,calc(100%-48px))] py-9 lg:h-[174px] lg:py-0 lg:pt-[34px]">
         <p className="text-center font-serif text-[20px] italic leading-[30px] text-[#0f3557] lg:text-[25.1px]">
-          Professional documents. Thoughtful writing. Career-focused strategy.
+          Professional documents. Thoughtful writing. Career focused strategy.
         </p>
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6 lg:mt-[21px] lg:flex lg:items-center lg:justify-center lg:gap-0 xl:pl-[61px]">
           {items.map(({ label, Icon }, i) => (

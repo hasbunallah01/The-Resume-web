@@ -13,11 +13,11 @@ export type Writer = {
 export const writers: Writer[] = [
   {
     slug: "ericka-mingus",
-    lines: ["Specializes in crafting", "high-impact resumes,", "cover letters and career", "documents for 40+ industries."],
+    lines: ["Specializes in crafting", "high impact resumes,", "cover letters and career", "documents for 40+ industries."],
     name: "Ericka Mingus",
     credentials: "CPRW",
     summary:
-      "Specializes in crafting high-impact resumes, cover letters and career documents for 40+ industries.",
+      "Specializes in crafting high impact resumes, cover letters and career documents for 40+ industries.",
     photo: "/images/writer-ericka-mingus.jpg",
     weight: 143,
   },

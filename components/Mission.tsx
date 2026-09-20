@@ -27,7 +27,7 @@ export default function Mission() {
         </h2>
         <p className="mt-[16px] max-w-[468px] text-[14px] leading-[23px] text-white/95 lg:text-[13.9px] lg:leading-[23.2px]">
           At Veylora, we help job seekers communicate their experience, skills,
-          achievements, and professional value through strong, well-crafted
+          achievements, and professional value through strong, well crafted
           career documents that open doors to new opportunities.
         </p>
       </div>

@@ -23,7 +23,7 @@ export default function Pricing() {
             Resume Writing Services
           </h2>
           <p className="mt-5 text-[16px] leading-[1.75] text-ink-body">
-            From early-career professionals to experienced executives, Veylora
+            From early career professionals to experienced executives, Veylora
             creates strategically written career documents designed to
             communicate your experience clearly and position you for your next
             opportunity.

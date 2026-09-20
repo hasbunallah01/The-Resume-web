@@ -21,20 +21,20 @@ export const plans: Plan[] = [
     id: "professional",
     name: "Professional Resume",
     blurb:
-      "A brand-new resume that presents your value clearly, showcases your achievements and earns attention from hiring managers.",
+      "A new resume that presents your value clearly, showcases your achievements and earns attention from hiring managers.",
     perfectFor:
       "professionals who want an expert to sharpen and strengthen their resume.",
     items: [
       {
-        lead: "One-on-one strategy interview.",
-        text: "A 60–90 minute conversation with an experienced, industry-aware resume writer who draws out the achievements you may be overlooking.",
+        lead: "Personal strategy interview.",
+        text: "A 60 to 90 minute conversation with an experienced resume writer who knows your industry and draws out the achievements you may be overlooking.",
       },
       {
-        lead: "Brand-focused positioning.",
+        lead: "Personal brand positioning.",
         text: "Your resume tells one clear story, so you stand apart from the stack.",
       },
       {
-        lead: "Word, PDF and ATS-optimized versions.",
+        lead: "Word, PDF and ATS optimized versions.",
         text: "You're ready for any application portal, and far less likely to be filtered out by screening software.",
       },
       {
@@ -46,7 +46,7 @@ export const plans: Plan[] = [
         text: "So the final document sounds and feels like you.",
       },
       {
-        lead: "3–5 business day turnaround.",
+        lead: "3 to 5 business day turnaround.",
         text: "Start applying sooner.",
       },
     ],
@@ -59,9 +59,9 @@ export const plans: Plan[] = [
     id: "executive",
     name: "Executive Resume",
     blurb:
-      "A brand-new resume, a matching cover letter and an optimized LinkedIn profile: a complete makeover of how you show up to employers.",
+      "A new resume, a matching cover letter and an optimized LinkedIn profile: a complete makeover of how you show up to employers.",
     perfectFor:
-      "mid- to senior-level professionals investing in their next perfect-fit role.",
+      "mid to senior level professionals investing in their next perfect fit role.",
     includes: "Everything in Professional Resume, plus:",
     items: [
       {
@@ -69,7 +69,7 @@ export const plans: Plan[] = [
         text: "Your project is led by a certified executive resume writer with experience in your field.",
       },
       {
-        lead: "SEO- and keyword-optimized LinkedIn profile.",
+        lead: "LinkedIn profile written for search.",
         text: "Written in a narrative voice to attract recruiters, lift profile views and engage employers.",
       },
       {
@@ -97,21 +97,21 @@ export const plans: Plan[] = [
     id: "csuite",
     name: "Executive / C-Suite Package",
     blurb:
-      "A complete career-positioning program: your resume, your personal brand and hands-on search coaching, designed to put you in front of the right decision-makers.",
+      "A complete career positioning program: your resume, your personal brand and hands on search coaching, designed to put you in front of the right decision makers.",
     perfectFor:
       "senior executives, directors, vice presidents and founders who want to catch the attention of major players in their industry.",
     includes: "Everything in Executive Resume, plus:",
     items: [
       {
-        lead: "Rapid-response search coaching.",
-        text: "Skip the long line with hidden-market, networking and advanced search strategies.",
+        lead: "Rapid response search coaching.",
+        text: "Skip the long line with hidden market, networking and advanced search strategies.",
       },
       {
         lead: "A writer with C-level hiring experience.",
         text: "They know what it takes to stand out among the very best candidates.",
       },
       {
-        lead: "Thank-you letter.",
+        lead: "Thank you letter.",
         text: "Thoughtfully written and customizable, to keep you top of mind while they decide.",
       },
       {
@@ -123,7 +123,7 @@ export const plans: Plan[] = [
         text: "A brief, impactful account of what you achieve and the value you bring.",
       },
       {
-        lead: "Personal-brand-rich documents.",
+        lead: "Documents that showcase your brand.",
         text: "Employers see immediately what sets you apart.",
       },
     ],
@@ -134,7 +134,7 @@ export const plans: Plan[] = [
       },
       {
         lead: "Elevator pitch template and examples.",
-        text: "Build a confident 30-second pitch with a step-by-step template and sample positioning statements.",
+        text: "Build a confident elevator pitch with a simple template and sample positioning statements.",
       },
     ],
     price: "$2,495 – $2,995+",
@@ -147,7 +147,7 @@ export const plans: Plan[] = [
 export const storySteps = [
   { n: "01", title: "Understand", text: "We learn about your experience, achievements, career direction and goals.", icon: "person" },
   { n: "02", title: "Position", text: "We identify the strongest professional themes and communicate your value clearly.", icon: "target" },
-  { n: "03", title: "Write", text: "We transform your experience into concise, achievement-focused career content.", icon: "document" },
+  { n: "03", title: "Write", text: "We transform your experience into concise career content that highlights your achievements.", icon: "document" },
   { n: "04", title: "Refine", text: "We review the document carefully and refine the final presentation.", icon: "check" },
 ] as const;
 
