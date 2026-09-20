@@ -32,13 +32,13 @@ export default function Logo({ variant = "dark", size = "lg" }: LogoProps) {
       <span
         className={`relative font-logo font-bold ${
           isLight ? "text-white" : "text-[#0a2a48]"
-        } ${lg ? "text-[60px] leading-[52px] tracking-[0.065em]" : "text-[35px] leading-[30px] tracking-[0.055em]"}`}
+        } ${lg ? "text-[42px] leading-[36px] tracking-[0.065em] lg:text-[60px] lg:leading-[52px]" : "text-[35px] leading-[30px] tracking-[0.055em]"}`}
       >
         Veylora
         <Leaf
           className={`absolute ${
             lg
-              ? "left-[36px] top-[-1px] h-[13px] w-[17px]"
+              ? "left-[25px] top-[-1px] h-[9px] w-[12px] lg:left-[36px] lg:h-[13px] lg:w-[17px]"
               : "left-[20px] top-[-1px] h-[8px] w-[10px]"
           }`}
         />
@@ -48,7 +48,7 @@ export default function Logo({ variant = "dark", size = "lg" }: LogoProps) {
           isLight ? "text-white/85" : "text-[#1a4a70]"
         } ${
           lg
-            ? "ml-[12px] mt-[10px] gap-[9px] text-[10.5px] tracking-[0.1em]"
+            ? "ml-[8px] mt-[7px] gap-[6px] text-[7px] tracking-[0.1em] lg:ml-[12px] lg:mt-[10px] lg:gap-[9px] lg:text-[10.5px]"
             : "ml-[7px] mt-[6px] gap-[5px] text-[6.6px] tracking-[0.13em]"
         }`}
       >

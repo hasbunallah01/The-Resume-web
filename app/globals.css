@@ -7,6 +7,12 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 body {
   background: #f7f6f1;
   color: #0b2a46;

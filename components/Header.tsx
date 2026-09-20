@@ -10,9 +10,7 @@ export default function Header() {
   return (
     <header className="relative z-30 bg-ivory-nav">
       <div className="relative mx-auto flex h-[84px] w-[min(1232px,calc(100%-48px))] items-center justify-between lg:h-[108px]">
-        <div className="origin-left scale-[0.72] lg:scale-100">
-          <Logo />
-        </div>
+        <Logo />
 
         <nav
           aria-label="Primary"
