@@ -14,7 +14,7 @@ export default function Header({ active = "Home" }: { active?: string }) {
 
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-[34px] text-[14.2px] text-[#12324f] lg:absolute lg:left-[451px] lg:top-1/2 lg:flex lg:-translate-y-1/2"
+          className="hidden items-center gap-[12px] whitespace-nowrap text-[13.5px] text-[#12324f] md:flex lg:gap-[26px] lg:text-[14px] xl:absolute xl:left-[451px] xl:top-1/2 xl:-translate-y-1/2 xl:gap-[34px] xl:text-[14.2px]"
         >
           {navLinks.map((link) => (
             <a
@@ -34,14 +34,14 @@ export default function Header({ active = "Home" }: { active?: string }) {
 
         <a
           href="/contact"
-          className="hidden h-[49px] w-[136px] items-center justify-center rounded-[4px] bg-gold text-[14px] font-medium tracking-[0.01em] text-white transition-colors hover:bg-[#a5895f] lg:inline-flex"
+          className="hidden h-[42px] w-[104px] items-center justify-center rounded-[4px] bg-gold text-[14px] font-medium tracking-[0.01em] text-white transition-colors hover:bg-[#a5895f] md:inline-flex lg:h-[49px] lg:w-[136px]"
         >
           Get Started
         </a>
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-[#12324f]/25 text-[#12324f] lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-[#12324f]/25 text-[#12324f] md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -71,7 +71,7 @@ export default function Header({ active = "Home" }: { active?: string }) {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="absolute inset-x-0 top-full border-t border-[#12324f]/10 bg-ivory-nav px-6 pb-6 pt-2 shadow-[0_12px_24px_rgba(11,42,70,0.08)] lg:hidden"
+          className="absolute inset-x-0 top-full border-t border-[#12324f]/10 bg-ivory-nav px-6 pb-6 pt-2 shadow-[0_12px_24px_rgba(11,42,70,0.08)] md:hidden"
         >
           <ul className="flex flex-col">
             {navLinks.map((link) => (

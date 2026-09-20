@@ -14,13 +14,13 @@ export default function TrustStrip() {
         <p className="text-center font-serif text-[20px] italic leading-[30px] text-[#0f3557] lg:text-[25.1px]">
           Professional documents. Thoughtful writing. Career-focused strategy.
         </p>
-        <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6 lg:mt-[21px] lg:flex lg:items-center lg:justify-center lg:gap-0 lg:pl-[61px]">
+        <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6 lg:mt-[21px] lg:flex lg:items-center lg:justify-center lg:gap-0 xl:pl-[61px]">
           {items.map(({ label, Icon }, i) => (
             <li
               key={label}
               className={`flex items-center gap-3 lg:gap-[17px] ${
                 i > 0
-                  ? "lg:ml-[75px] lg:border-l lg:border-[#a9bccb] lg:pl-[75px]"
+                  ? "lg:ml-[36px] lg:border-l lg:border-[#a9bccb] lg:pl-[36px] xl:ml-[75px] xl:pl-[75px]"
                   : ""
               } lg:h-[42px]`}
             >

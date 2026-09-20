@@ -166,7 +166,7 @@ export default function Reviews({ reviews }: { reviews: Review[] }) {
           })}
         </div>
 
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
           {shown.map((r, i) => (
             <ReviewCard key={r.id} review={r} hiddenOnMobile={!expanded && i >= 4} />
           ))}

@@ -39,7 +39,7 @@ export default function CTA() {
         </div>
         <a
           href="/contact"
-          className="inline-flex h-[42px] w-[176px] items-center justify-center gap-[10px] rounded-[4px] bg-gold text-[14px] font-medium text-white transition-colors hover:bg-[#a5895f] lg:absolute lg:left-[897px] lg:top-[32px]"
+          className="inline-flex h-[42px] w-[176px] items-center justify-center gap-[10px] rounded-[4px] bg-gold text-[14px] font-medium text-white transition-colors hover:bg-[#a5895f] lg:absolute lg:right-[140px] lg:top-[32px] xl:left-[897px] xl:right-auto"
         >
           Get Started
           <ArrowRight className="h-[15px] w-[15px]" />

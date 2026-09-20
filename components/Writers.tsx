@@ -9,7 +9,7 @@ export default function Writers() {
     <section
       id="writers"
       aria-labelledby="writers-heading"
-      className="bg-ivory py-12 lg:h-[478px] lg:py-0 lg:pt-[31px]"
+      className="bg-ivory py-12 xl:h-[478px] xl:py-0 xl:pt-[31px]"
     >
       <div className="mx-auto w-[min(1232px,calc(100%-48px))]">
         <div className="text-center">
@@ -27,13 +27,13 @@ export default function Writers() {
         </div>
 
         <ul
-          className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mx-auto lg:mt-[16px] lg:max-w-[1224px] lg:grid-cols-[var(--cols)] lg:gap-x-[14px]"
+          className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-auto xl:mt-[16px] xl:max-w-[1224px] xl:grid-cols-[var(--cols)] xl:gap-x-[14px]"
           style={{ ["--cols" as string]: columns }}
         >
           {writers.map((w) => (
             <li
               key={w.slug}
-              className="flex flex-col items-center rounded-[3px] border border-[#e9e6dd] bg-ivory-card px-[14px] pb-[16px] pt-[14px] shadow-[0_1px_7px_rgba(20,40,60,0.06)] lg:h-[317px]"
+              className="flex flex-col items-center rounded-[3px] border border-[#e9e6dd] bg-ivory-card px-[14px] pb-[16px] pt-[14px] shadow-[0_1px_7px_rgba(20,40,60,0.06)] xl:h-[317px]"
             >
               <div className="relative h-[101px] w-[101px] shrink-0 overflow-hidden rounded-full">
                 <Image
@@ -51,8 +51,8 @@ export default function Writers() {
                 {w.credentials}
               </p>
               <p className="mt-[12px] w-full text-left text-[11.7px] leading-[18.9px] text-ink-muted">
-                <span className="lg:hidden">{w.summary}</span>
-                <span className="hidden lg:block">
+                <span className="xl:hidden">{w.summary}</span>
+                <span className="hidden xl:block">
                   {w.lines.map((line) => (
                     <span key={line} className="block whitespace-nowrap">
                       {line}
@@ -62,7 +62,7 @@ export default function Writers() {
               </p>
               <a
                 href={`/writers/${w.slug}`}
-                className="mt-3 flex h-[16px] lg:mt-auto w-full items-center gap-[8px] text-left text-[12px] font-medium text-[#1d3d5c] transition-colors hover:text-navy-btn"
+                className="mt-3 flex h-[16px] xl:mt-auto w-full items-center gap-[8px] text-left text-[12px] font-medium text-[#1d3d5c] transition-colors hover:text-navy-btn"
               >
                 View Profile
                 <ArrowRight className="h-[12px] w-[12px]" />

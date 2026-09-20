@@ -37,7 +37,7 @@ export default function Footer() {
           ))}
         </nav>
 
-        <ul className="mt-8 flex items-center gap-[20px] lg:absolute lg:left-[1100px] lg:top-[24px] lg:mt-0 lg:gap-[19px]">
+        <ul className="mt-8 flex items-center gap-[20px] lg:absolute lg:right-[24px] lg:top-[24px] lg:mt-0 lg:gap-[19px]">
           {socials.map(({ label, href, Icon }) => (
             <li key={label}>
               <a

@@ -36,7 +36,7 @@ export default function Pricing() {
             return (
               <article
                 key={plan.id}
-                className={`relative flex flex-col rounded-[4px] bg-white px-7 pb-8 pt-9 lg:px-8 ${
+                className={`relative flex flex-col rounded-[4px] bg-white px-7 pb-8 pt-9 xl:px-8 ${
                   plan.featured
                     ? "border border-[#c9b98f] shadow-[0_18px_44px_rgba(11,42,70,0.12)] lg:-my-4 lg:pb-11 lg:pt-11"
                     : "border border-[#e4dfd0] shadow-[0_2px_14px_rgba(11,42,70,0.05)]"
@@ -69,7 +69,7 @@ export default function Pricing() {
                   <p className="text-[11.5px] font-medium uppercase tracking-[0.12em] text-[#527b98]">
                     Investment
                   </p>
-                  <p className="mt-1.5 whitespace-nowrap font-serif text-[29px] font-[500] leading-[1.1] tracking-[-0.01em] text-navy sm:text-[34px] lg:text-[36px]">
+                  <p className="mt-1.5 whitespace-nowrap font-serif text-[29px] font-[500] leading-[1.1] tracking-[-0.01em] text-navy sm:text-[34px] lg:text-[29px] xl:text-[36px]">
                     {plan.price}
                   </p>
                 </div>
