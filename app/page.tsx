@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 export default function HomePage() {
   return (
     <>
-      <Header />
+      <Header active="Home" />
       <main>
         <Hero />
         <TrustStrip />

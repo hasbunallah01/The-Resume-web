@@ -4,7 +4,7 @@ import { useState } from "react";
 import Logo from "./Logo";
 import { navLinks } from "@/data/writers";
 
-export default function Header() {
+export default function Header({ active = "Home" }: { active?: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -16,13 +16,13 @@ export default function Header() {
           aria-label="Primary"
           className="hidden items-center gap-[34px] text-[14.2px] text-[#12324f] lg:absolute lg:left-[451px] lg:top-1/2 lg:flex lg:-translate-y-1/2"
         >
-          {navLinks.map((link, i) => (
+          {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              aria-current={i === 0 ? "page" : undefined}
+              aria-current={link.label === active ? "page" : undefined}
               className={`relative py-1 transition-colors hover:text-navy-btn ${
-                i === 0
+                link.label === active
                   ? "after:absolute after:bottom-[-2px] after:left-0 after:h-[1.5px] after:w-full after:bg-[#12324f]"
                   : ""
               }`}
