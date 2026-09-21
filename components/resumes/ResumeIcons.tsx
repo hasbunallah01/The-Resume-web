@@ -109,6 +109,31 @@ export const StarOutlineIcon = (p: P) => (
   </svg>
 );
 
+export const UploadIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M12 16V5M7.5 9.5 12 5l4.5 4.5" />
+    <path d="M4.5 15.5v3a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-3" />
+  </svg>
+);
+export const ClockIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 7v5.2l3.4 2" />
+  </svg>
+);
+export const CalendarIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <rect x="4" y="5.5" width="16" height="14.5" rx="1.5" />
+    <path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" />
+    <path d="M8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17h.01M12 17h.01" strokeWidth="2" />
+  </svg>
+);
+export const PlusIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+
 export const iconMap = {
   document: DocIcon,
   person: PersonIcon,
