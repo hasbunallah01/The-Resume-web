@@ -1,74 +1,151 @@
 export type Writer = {
   slug: string;
   name: string;
-  credentials: string;
+  /** Full professional title, shown on the Writers page */
+  title: string;
+  /** Short label shown on homepage cards */
+  cardRole: string;
+  /** Short summary (mobile and small screens) */
   summary: string;
-  /** Line breaks used on desktop to match the reference mockup */
+  /** Line breaks used on wide desktop homepage cards */
   lines: string[];
-  photo: string;
-  /** Column weight that reproduces the card widths in the reference mockup */
-  weight: number;
+  /** Areas of focus mentioned in the bio */
+  focus: string[];
+  /** Full biography, one string per paragraph */
+  bio: string[];
+  /** Portrait. Without one, initials are shown. Replace with a real photo. */
+  photo?: string;
+  /** Shown in the homepage writers row */
+  featured?: boolean;
+  /** Column weight that reproduces the card widths in the design (homepage) */
+  weight?: number;
 };
 
 export const writers: Writer[] = [
   {
-    slug: "ericka-mingus",
-    lines: ["Specializes in crafting", "high impact resumes,", "cover letters and career", "documents for 40+ industries."],
-    name: "Ericka Mingus",
-    credentials: "CPRW",
+    slug: "raffaella-morgan",
+    name: "Raffaella Morgan",
+    title: "Senior Resume Writer & Career Development Professional",
+    cardRole: "Senior Resume Writer",
     summary:
-      "Specializes in crafting high impact resumes, cover letters and career documents for 40+ industries.",
+      "Polished, achievement driven resumes and career documents that feel authentic to the person behind them.",
+    lines: [],
+    focus: ["Resumes", "Cover Letters", "Professional Biographies"],
+    bio: [
+      "Raffaella Morgan brings more than 15 years of experience helping professionals communicate their value with clarity and confidence. Her background spans career development, professional writing, and individual guidance for candidates at different stages of their careers, from early career professionals building their first strong resume to experienced leaders preparing for their next opportunity.",
+      "Raffaella takes a thoughtful approach to every project, taking time to understand a client's experience, accomplishments, goals, and the type of opportunities they want to pursue. She believes a strong resume should do more than list responsibilities. It should tell a clear professional story and make the candidate's value immediately understandable.",
+      "Her work focuses on creating polished, achievement driven resumes, cover letters, professional biographies, and career documents that feel authentic to the person behind them.",
+    ],
+  },
+  {
+    slug: "ericka-m",
+    name: "Ericka M.",
+    title: "Certified Professional Resume Writer & Career Writer",
+    cardRole: "CPRW",
+    summary:
+      "Resumes, cover letters, bios and LinkedIn content for professionals across many industries.",
+    lines: ["Resumes, cover letters,", "bios and LinkedIn content", "for professionals across", "many industries."],
+    focus: ["Resumes", "LinkedIn Content", "Professional Biographies"],
+    bio: [
+      "Ericka M. is a professional resume writer with more than 15 years of experience in career writing and professional communication. She works with job seekers across a broad range of industries and career stages, developing resumes, cover letters, professional biographies, LinkedIn content, and other career documents.",
+      "Ericka is known for her attention to detail and her ability to uncover the strongest parts of a client's professional story. She looks beyond job titles and responsibilities to identify accomplishments, transferable strengths, leadership contributions, and the qualities that make each candidate distinctive.",
+      "Her work combines clear writing with thoughtful career positioning. Whether working with someone entering the workforce, an experienced professional seeking advancement, or a senior leader preparing for a major transition, Ericka focuses on producing documents that are professional, authentic, and easy for hiring teams to understand.",
+    ],
     photo: "/images/writer-ericka-mingus.jpg",
+    featured: true,
     weight: 143,
   },
   {
-    slug: "alexis-binder",
-    lines: ["Brings 11 years of resume", "writing experience and", "5 years in recruiting and", "HR, with an MBA and BA", "in English."],
-    name: "Alexis Binder",
-    credentials: "ACRW",
+    slug: "alexis-b",
+    name: "Alexis B.",
+    title: "Senior Resume Writer & Career Branding Advisor",
+    cardRole: "Senior Resume Writer",
     summary:
-      "Brings 11 years of resume writing experience and 5 years in recruiting and HR, with an MBA and BA in English.",
+      "Turns complex career histories into clear, compelling stories, with a focus on career branding.",
+    lines: ["Turns complex career", "histories into clear,", "compelling stories, with a", "focus on career branding."],
+    focus: ["Personal Branding", "Interview Preparation", "Career Documentation"],
+    bio: [
+      "Alexis B. has more than 15 years of experience working with professionals to strengthen the way they present themselves throughout the hiring process. Her experience includes professional resume development, career documentation, interview preparation, and personal branding for candidates ranging from early career professionals to experienced managers and senior leaders.",
+      "Alexis has a particularly strong interest in turning complex career histories into clear, compelling stories. She works closely with clients to identify accomplishments that are often overlooked and transform them into concise, meaningful statements that communicate professional value.",
+      "Her approach combines careful writing, strategic positioning, and a genuine understanding of what makes each candidate different. Every document is developed to sound natural, confident, and personal rather than generic or overly polished.",
+    ],
     photo: "/images/writer-alexis-binder.jpg",
+    featured: true,
     weight: 138,
   },
   {
-    slug: "bethany-camasura",
-    lines: ["Career strategist and executive", "resume writer with a proven", "track record of helping", "professionals reach their", "goals."],
-    name: "Bethany Camasura",
-    credentials: "MSOL, HRM, CPRW",
+    slug: "bethany-c",
+    name: "Bethany C.",
+    title: "Senior Career Writer & Professional Development Specialist",
+    cardRole: "Senior Career Writer",
     summary:
-      "Career strategist and executive resume writer with a proven track record of helping professionals reach their goals.",
+      "Supports professionals through career changes, advancement and new professional goals.",
+    lines: ["Supports professionals", "through career changes,", "advancement and new", "professional goals."],
+    focus: ["Career Changes", "Advancement", "Resume Writing"],
+    bio: [
+      "Bethany C. brings more than 15 years of experience supporting professionals as they navigate career changes, advancement opportunities, and new professional goals. Her background includes career development, professional communication, resume writing, and helping candidates clarify the direction they want their careers to take.",
+      "She has worked with professionals across different levels, including recent graduates, experienced specialists, managers, and senior professionals preparing for significant career moves.",
+      "Bethany believes that effective career documents begin with listening. Before writing, she takes the time to understand a client's experience, strengths, ambitions, and accomplishments. Her goal is to create documents that communicate those qualities naturally while giving employers a clear picture of what the candidate can contribute.",
+      "Her writing style is practical, personable, and focused on helping clients present their experience with confidence.",
+    ],
     photo: "/images/writer-bethany-camasura.jpg",
+    featured: true,
     weight: 135,
   },
   {
-    slug: "jonathan-nugent",
-    lines: ["Over 21 years of experience", "in career services, with", "7 industry certifications", "and a strong recruiting", "background."],
-    name: "Jonathan Nugent",
-    credentials: "NCRW",
+    slug: "jonathan-n",
+    name: "Jonathan N.",
+    title: "Senior Resume Writer & Career Strategy Consultant",
+    cardRole: "Senior Resume Writer",
     summary:
-      "Over 21 years of experience in career services, with 7 industry certifications and a strong recruiting background.",
+      "Strategic resume writing that turns complicated career histories into clear narratives.",
+    lines: ["Strategic resume writing", "that turns complicated", "career histories into", "clear, easy to follow", "narratives."],
+    focus: ["Resume Writing", "Career Strategy", "Career Narratives"],
+    bio: [
+      "Jonathan N. brings more than 15 years of experience in career services, professional writing, and talent focused career development. His work has given him the opportunity to support professionals at many different stages, from candidates beginning their careers to experienced managers and senior level professionals pursuing leadership opportunities.",
+      "Jonathan takes a strategic approach to resume writing. Rather than simply rewriting a client's existing document, he works to understand the progression of their career, the results they have delivered, and the direction they want to take next.",
+      "His experience with professional communication and career strategy allows him to turn complicated career histories into organized, easy to follow narratives. Clients appreciate his practical approach, careful attention to detail, and ability to make professional achievements stand out without making the document feel exaggerated or artificial.",
+    ],
     photo: "/images/writer-jonathan-nugent.jpg",
+    featured: true,
     weight: 134,
   },
   {
-    slug: "jessica-coppens",
-    lines: ["Combines 10 years of HR", "and recruiting experience", "with 7+ years in resume", "writing and career coaching."],
-    name: "Jessica Coppens",
-    credentials: "CPRW, M.Ed.",
+    slug: "jessica-c",
+    name: "Jessica C.",
+    title: "Senior Resume Writer & Career Development Professional",
+    cardRole: "Senior Resume Writer",
     summary:
-      "Combines 10 years of HR and recruiting experience with 7+ years in resume writing and career coaching.",
+      "Treats every resume as an individual project, written in a natural, confident voice.",
+    lines: ["Treats every resume as an", "individual project, written", "in a natural, confident", "voice."],
+    focus: ["Resume Writing", "Candidate Positioning", "Career Development"],
+    bio: [
+      "Jessica C. has more than 15 years of experience helping professionals improve their career documents and communicate their experience more effectively. Her background includes professional writing, career development, candidate positioning, and working directly with individuals to identify the strengths that deserve greater attention in their job search.",
+      "Jessica works with a wide range of professionals, including early career candidates, established specialists, managers, and senior professionals. She understands that no two career paths are exactly alike, which is why she approaches each resume as an individual project rather than relying on a standard formula.",
+      "Her process begins with understanding the person behind the career history. From there, she develops clear, accomplishment focused content designed to communicate experience, strengths, and career direction in a natural and confident voice.",
+      "Jessica's goal is simple: to help every client walk away with career documents that genuinely represent who they are and where they want to go.",
+    ],
     photo: "/images/writer-jessica-coppens.jpg",
+    featured: true,
     weight: 134.5,
   },
   {
-    slug: "suzanne-taylor",
-    lines: ["Helps clients build stronger", "career documents and", "strategies, with a focus on", "personal and professional", "growth."],
-    name: "Suzanne Taylor",
-    credentials: "CPRW, GCDF",
+    slug: "suzanne-t",
+    name: "Suzanne T.",
+    title: "Senior Resume Writer & Career Development Specialist",
+    cardRole: "Senior Resume Writer",
     summary:
-      "Helps clients build stronger career documents and strategies, with a focus on personal and professional growth.",
+      "Helps clients see the value in their experience and shape a focused professional story.",
+    lines: ["Helps clients see the value", "in their experience and", "shape a focused", "professional story."],
+    focus: ["Resume Writing", "Career Direction", "Career Transitions"],
+    bio: [
+      "Suzanne T. brings more than 15 years of experience in professional writing and career development. Her work has involved helping professionals organize their experience, clarify their career direction, and create stronger professional documents for important career transitions.",
+      "Suzanne has experience working with candidates across multiple career levels, including students and recent graduates, experienced professionals, managers, and senior level candidates. She particularly enjoys helping clients recognize the value in experiences they may not initially consider significant.",
+      "Her writing philosophy is centered on clarity, authenticity, and relevance. Suzanne believes a resume should sound like the person it represents while making it easy for a hiring manager to understand the candidate's capabilities and accomplishments.",
+      "Through a collaborative approach, she helps clients turn years of experience into a focused professional story that supports their next career move.",
+    ],
     photo: "/images/writer-suzanne-taylor.jpg",
+    featured: true,
     weight: 135,
   },
 ];
@@ -76,7 +153,7 @@ export const writers: Writer[] = [
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Our Writers", href: "/#writers" },
+  { label: "Our Writers", href: "/writers" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

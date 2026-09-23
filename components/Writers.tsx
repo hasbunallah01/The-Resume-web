@@ -3,7 +3,8 @@ import { ArrowRight } from "./Icons";
 import { writers } from "@/data/writers";
 
 export default function Writers() {
-  const columns = writers.map((w) => `${w.weight}fr`).join(" ");
+  const featured = writers.filter((w) => w.featured && w.photo);
+  const columns = featured.map((w) => `${w.weight ?? 135}fr`).join(" ");
 
   return (
     <section
@@ -30,14 +31,14 @@ export default function Writers() {
           className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-auto xl:mt-[16px] xl:max-w-[1224px] xl:grid-cols-[var(--cols)] xl:gap-x-[14px]"
           style={{ ["--cols" as string]: columns }}
         >
-          {writers.map((w) => (
+          {featured.map((w) => (
             <li
               key={w.slug}
               className="flex flex-col items-center rounded-[3px] border border-[#e9e6dd] bg-ivory-card px-[14px] pb-[16px] pt-[14px] shadow-[0_1px_7px_rgba(20,40,60,0.06)] xl:h-[317px]"
             >
               <div className="relative h-[101px] w-[101px] shrink-0 overflow-hidden rounded-full">
                 <Image
-                  src={w.photo}
+                  src={w.photo as string}
                   alt={`Portrait of ${w.name}`}
                   fill
                   sizes="101px"
@@ -48,7 +49,7 @@ export default function Writers() {
                 {w.name}
               </h3>
               <p className="mt-[6px] text-center text-[12px] leading-[16px] text-ink-soft">
-                {w.credentials}
+                {w.cardRole}
               </p>
               <p className="mt-[12px] w-full text-left text-[11.7px] leading-[18.9px] text-ink-muted">
                 <span className="xl:hidden">{w.summary}</span>
@@ -61,7 +62,7 @@ export default function Writers() {
                 </span>
               </p>
               <a
-                href={`/writers/${w.slug}`}
+                href={`/writers#${w.slug}`}
                 className="mt-3 flex h-[16px] xl:mt-auto w-full items-center gap-[8px] text-left text-[12px] font-medium text-[#1d3d5c] transition-colors hover:text-navy-btn"
               >
                 View Profile
