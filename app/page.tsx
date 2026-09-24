@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
-import Founder from "@/components/Founder";
 import Mission from "@/components/Mission";
 import Writers from "@/components/Writers";
 import CTA from "@/components/CTA";
@@ -14,7 +13,6 @@ export default function HomePage() {
       <main>
         <Hero />
         <TrustStrip />
-        <Founder />
         <Mission />
         <Writers />
         <CTA />

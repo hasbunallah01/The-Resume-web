@@ -4,13 +4,12 @@ import { writers } from "@/data/writers";
 
 export default function Writers() {
   const featured = writers.filter((w) => w.featured && w.photo);
-  const columns = featured.map((w) => `${w.weight ?? 135}fr`).join(" ");
 
   return (
     <section
       id="writers"
       aria-labelledby="writers-heading"
-      className="bg-ivory py-12 xl:h-[478px] xl:py-0 xl:pt-[31px]"
+      className="bg-ivory py-12 lg:py-[64px]"
     >
       <div className="mx-auto w-[min(1232px,calc(100%-48px))]">
         <div className="text-center">
@@ -27,14 +26,11 @@ export default function Writers() {
           </h2>
         </div>
 
-        <ul
-          className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:mx-auto xl:mt-[16px] xl:max-w-[1224px] xl:grid-cols-[var(--cols)] xl:gap-x-[14px]"
-          style={{ ["--cols" as string]: columns }}
-        >
+        <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-[28px] lg:grid-cols-3 xl:grid-cols-4">
           {featured.map((w) => (
             <li
               key={w.slug}
-              className="flex flex-col items-center rounded-[3px] border border-[#e9e6dd] bg-ivory-card px-[14px] pb-[16px] pt-[14px] shadow-[0_1px_7px_rgba(20,40,60,0.06)] xl:h-[317px]"
+              className="flex flex-col items-center rounded-[3px] border border-[#e9e6dd] bg-ivory-card px-[14px] pb-[16px] pt-[14px] shadow-[0_1px_7px_rgba(20,40,60,0.06)] xl:h-[300px]"
             >
               <div className="relative h-[101px] w-[101px] shrink-0 overflow-hidden rounded-full">
                 <Image
@@ -51,19 +47,12 @@ export default function Writers() {
               <p className="mt-[6px] text-center text-[12px] leading-[16px] text-ink-soft">
                 {w.cardRole}
               </p>
-              <p className="mt-[12px] w-full text-left text-[11.7px] leading-[18.9px] text-ink-muted">
-                <span className="xl:hidden">{w.summary}</span>
-                <span className="hidden xl:block">
-                  {w.lines.map((line) => (
-                    <span key={line} className="block whitespace-nowrap">
-                      {line}
-                    </span>
-                  ))}
-                </span>
+              <p className="mt-[12px] w-full text-left text-[12.5px] leading-[18.9px] text-ink-muted">
+                {w.summary}
               </p>
               <a
                 href={`/writers#${w.slug}`}
-                className="mt-3 flex h-[16px] xl:mt-auto w-full items-center gap-[8px] text-left text-[12px] font-medium text-[#1d3d5c] transition-colors hover:text-navy-btn"
+                className="mt-3 flex h-[16px] w-full items-center gap-[8px] text-left text-[12px] font-medium text-[#1d3d5c] transition-colors hover:text-navy-btn xl:mt-auto"
               >
                 View Profile
                 <ArrowRight className="h-[12px] w-[12px]" />

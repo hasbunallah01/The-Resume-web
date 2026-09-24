@@ -23,6 +23,23 @@ export type Writer = {
 
 export const writers: Writer[] = [
   {
+    slug: "daramola-qudus-abolaji",
+    name: "Daramola Qudus Abolaji",
+    title: "Founder, Veylora",
+    cardRole: "Founder",
+    summary:
+      "Founded Veylora to help job seekers present their experience, skills and achievements clearly and confidently.",
+    lines: ["Founded Veylora to help", "job seekers present their", "experience clearly and", "confidently."],
+    focus: ["Career Strategy", "Executive Resumes", "Personal Branding"],
+    bio: [
+      "Daramola Qudus Abolaji founded Veylora with a simple belief: people should not have to struggle to explain the value of the work they have already done.",
+      "Through Veylora, Qudus focuses on helping professionals present their experience with greater clarity, structure, and purpose, whether they are entering the job market, moving into a new role, repositioning their experience, or preparing for a more senior opportunity.",
+      "His goal is not to make every resume look the same. It is to understand the person behind the document, identify the strongest parts of their professional story, and turn that information into a resume that communicates their value clearly.",
+    ],
+    photo: "/images/founder-square.jpg",
+    featured: true,
+  },
+  {
     slug: "raffaella-morgan",
     name: "Raffaella Morgan",
     title: "Senior Resume Writer & Career Development Professional",
