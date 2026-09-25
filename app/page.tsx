@@ -5,7 +5,6 @@ import Mission from "@/components/Mission";
 import Steps from "@/components/resumes/Steps";
 import { storySteps } from "@/data/pricing";
 import Writers from "@/components/Writers";
-import ServicesTeaser from "@/components/ServicesTeaser";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -23,7 +22,6 @@ export default function HomePage() {
           steps={storySteps}
         />
         <Writers />
-        <ServicesTeaser />
         <CTA />
       </main>
       <Footer />
