@@ -109,7 +109,7 @@ function WriterCard({ writer }: { writer: Writer }) {
             {writer.title}
           </p>
           <p className="mt-5 inline-flex items-center rounded-full border border-[#d8c8a0] bg-white px-4 py-1.5 text-[11.5px] font-semibold uppercase tracking-[0.12em] text-[#8a6d3a]">
-            15+ years of experience
+            {writer.experience} years of experience
           </p>
           <ul className="mt-6 flex flex-wrap justify-center gap-2">
             {writer.focus.map((f) => (

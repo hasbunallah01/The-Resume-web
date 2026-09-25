@@ -19,6 +19,8 @@ export type Writer = {
   featured?: boolean;
   /** Column weight that reproduces the card widths in the design (homepage) */
   weight?: number;
+  /** Shown in the "X+ years of experience" badge on the Writers page */
+  experience: string;
 };
 
 export const writers: Writer[] = [
@@ -31,6 +33,7 @@ export const writers: Writer[] = [
       "Founded Veylora to help job seekers present their experience, skills and achievements clearly and confidently.",
     lines: ["Founded Veylora to help", "job seekers present their", "experience clearly and", "confidently."],
     focus: ["Career Strategy", "Executive Resumes", "Personal Branding"],
+    experience: "12+",
     bio: [
       "Daramola Qudus Abolaji founded Veylora with a simple belief: people should not have to struggle to explain the value of the work they have already done.",
       "Through Veylora, Qudus focuses on helping professionals present their experience with greater clarity, structure, and purpose, whether they are entering the job market, moving into a new role, repositioning their experience, or preparing for a more senior opportunity.",
@@ -40,19 +43,22 @@ export const writers: Writer[] = [
     featured: true,
   },
   {
-    slug: "raffaella-morgan",
-    name: "Raffaella Morgan",
-    title: "Senior Resume Writer & Career Development Professional",
-    cardRole: "Senior Resume Writer",
+    slug: "abdul-kareem-ismail",
+    name: "Abdul-Kareem Ismail",
+    title: "Co-Founder, Veylora",
+    cardRole: "Co-Founder",
     summary:
-      "Polished, achievement driven resumes and career documents that feel authentic to the person behind them.",
-    lines: [],
-    focus: ["Resumes", "Cover Letters", "Professional Biographies"],
+      "Co-founded Veylora to help professionals present their experience with clarity, structure and confidence.",
+    lines: ["Co-founded Veylora to help", "professionals present their", "experience with clarity and", "confidence."],
+    focus: ["Career Strategy", "Resume Writing", "Client Experience"],
+    experience: "9+",
     bio: [
-      "Raffaella Morgan brings more than 15 years of experience helping professionals communicate their value with clarity and confidence. Her background spans career development, professional writing, and individual guidance for candidates at different stages of their careers, from early career professionals building their first strong resume to experienced leaders preparing for their next opportunity.",
-      "Raffaella takes a thoughtful approach to every project, taking time to understand a client's experience, accomplishments, goals, and the type of opportunities they want to pursue. She believes a strong resume should do more than list responsibilities. It should tell a clear professional story and make the candidate's value immediately understandable.",
-      "Her work focuses on creating polished, achievement driven resumes, cover letters, professional biographies, and career documents that feel authentic to the person behind them.",
+      "Abdul-Kareem Ismail co-founded Veylora alongside Daramola Qudus Abolaji, bringing more than 9 years of experience in career development and professional writing to the company.",
+      "He focuses on the experience clients have while working with Veylora, from the first conversation about their goals through to the final document, making sure every project is handled with care, clear communication, and attention to detail.",
+      "Abdul-Kareem believes a career document is only as strong as the understanding behind it. He works to make sure Veylora's process starts with genuinely listening to a client's story before a single word is written.",
     ],
+    photo: "/images/writer-abdul-kareem-ismail.jpg",
+    featured: true,
   },
   {
     slug: "ericka-m",
@@ -68,6 +74,7 @@ export const writers: Writer[] = [
       "Ericka is known for her attention to detail and her ability to uncover the strongest parts of a client's professional story. She looks beyond job titles and responsibilities to identify accomplishments, transferable strengths, leadership contributions, and the qualities that make each candidate distinctive.",
       "Her work combines clear writing with thoughtful career positioning. Whether working with someone entering the workforce, an experienced professional seeking advancement, or a senior leader preparing for a major transition, Ericka focuses on producing documents that are professional, authentic, and easy for hiring teams to understand.",
     ],
+    experience: "15+",
     photo: "/images/writer-ericka-mingus.jpg",
     featured: true,
     weight: 143,
@@ -86,6 +93,7 @@ export const writers: Writer[] = [
       "Alexis has a particularly strong interest in turning complex career histories into clear, compelling stories. She works closely with clients to identify accomplishments that are often overlooked and transform them into concise, meaningful statements that communicate professional value.",
       "Her approach combines careful writing, strategic positioning, and a genuine understanding of what makes each candidate different. Every document is developed to sound natural, confident, and personal rather than generic or overly polished.",
     ],
+    experience: "15+",
     photo: "/images/writer-alexis-binder.jpg",
     featured: true,
     weight: 138,
@@ -105,6 +113,7 @@ export const writers: Writer[] = [
       "Bethany believes that effective career documents begin with listening. Before writing, she takes the time to understand a client's experience, strengths, ambitions, and accomplishments. Her goal is to create documents that communicate those qualities naturally while giving employers a clear picture of what the candidate can contribute.",
       "Her writing style is practical, personable, and focused on helping clients present their experience with confidence.",
     ],
+    experience: "15+",
     photo: "/images/writer-bethany-camasura.jpg",
     featured: true,
     weight: 135,
@@ -123,6 +132,7 @@ export const writers: Writer[] = [
       "Jonathan takes a strategic approach to resume writing. Rather than simply rewriting a client's existing document, he works to understand the progression of their career, the results they have delivered, and the direction they want to take next.",
       "His experience with professional communication and career strategy allows him to turn complicated career histories into organized, easy to follow narratives. Clients appreciate his practical approach, careful attention to detail, and ability to make professional achievements stand out without making the document feel exaggerated or artificial.",
     ],
+    experience: "15+",
     photo: "/images/writer-jonathan-nugent.jpg",
     featured: true,
     weight: 134,
@@ -142,6 +152,7 @@ export const writers: Writer[] = [
       "Her process begins with understanding the person behind the career history. From there, she develops clear, accomplishment focused content designed to communicate experience, strengths, and career direction in a natural and confident voice.",
       "Jessica's goal is simple: to help every client walk away with career documents that genuinely represent who they are and where they want to go.",
     ],
+    experience: "15+",
     photo: "/images/writer-jessica-coppens.jpg",
     featured: true,
     weight: 134.5,
@@ -161,6 +172,7 @@ export const writers: Writer[] = [
       "Her writing philosophy is centered on clarity, authenticity, and relevance. Suzanne believes a resume should sound like the person it represents while making it easy for a hiring manager to understand the candidate's capabilities and accomplishments.",
       "Through a collaborative approach, she helps clients turn years of experience into a focused professional story that supports their next career move.",
     ],
+    experience: "15+",
     photo: "/images/writer-suzanne-taylor.jpg",
     featured: true,
     weight: 135,
