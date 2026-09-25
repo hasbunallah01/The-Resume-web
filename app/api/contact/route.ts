@@ -1,6 +1,29 @@
 import { NextResponse } from "next/server";
+import { writers } from "../../../data/writers";
 
 export const runtime = "nodejs";
+
+const WRITER_EMAILS: Record<string, string> = {
+  "daramola-qudus-abolaji": "abdulqudus@veylora.haybee.xyz",
+  "abdul-kareem-ismail": "ismail@veylora.haybee.xyz",
+};
+
+const DEFAULT_WRITER_EMAIL = "team@veylora.haybee.xyz";
+
+const WRITER_LABELS: Record<string, string> = {
+  "daramola-qudus-abolaji": "Qudus",
+  "abdul-kareem-ismail": "Ismail",
+};
+
+function writerRecipient(writer: string) {
+  const to = Object.hasOwn(WRITER_EMAILS, writer)
+    ? WRITER_EMAILS[writer]
+    : DEFAULT_WRITER_EMAIL;
+  const name =
+    (Object.hasOwn(WRITER_LABELS, writer) ? WRITER_LABELS[writer] : undefined) ??
+    writers.find((w) => w.slug === writer)?.name;
+  return { to, name };
+}
 
 const MAX_FILE_BYTES = 4 * 1024 * 1024; // stays under Vercel's 4.5 MB request limit
 const ALLOWED_EXT = [".pdf", ".doc", ".docx"];
@@ -92,11 +115,12 @@ export async function POST(req: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
+  const writer = clean(form.get("writer"), 100);
+  const { to, name: writerName } = writerRecipient(writer);
   const from = process.env.CONTACT_FROM_EMAIL || "Veylora <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
-    console.error("Contact form: RESEND_API_KEY or CONTACT_TO_EMAIL is not set.");
+    console.error("Contact form: RESEND_API_KEY is not set.");
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
   }
 
@@ -104,6 +128,7 @@ export async function POST(req: Request) {
   const lines: [string, string][] = [
     ["Name", fullName],
     ["Email", email],
+    ...(writerName ? [["Writer", writerName] as [string, string]] : []),
     ["Phone", phone || "Not provided"],
     ["Career level", level],
     ["Service", service],
@@ -138,7 +163,9 @@ export async function POST(req: Request) {
       from,
       to: [to],
       reply_to: email,
-      subject: `New inquiry from ${fullName} (${service})`,
+      subject: writerName
+        ? `New inquiry for ${writerName} from ${fullName} (${service})`
+        : `New inquiry from ${fullName} (${service})`,
       text,
       html,
       ...(attachment ? { attachments: [attachment] } : {}),

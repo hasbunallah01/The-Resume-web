@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, type ChangeEvent, type DragEvent, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type DragEvent, type FormEvent, type ReactNode } from "react";
+import { writers } from "@/data/writers";
 import { ArrowRight } from "../Icons";
 import {
   CalendarIcon,
@@ -37,6 +38,14 @@ const SOURCES = [
 
 const MAX_BYTES = 4 * 1024 * 1024;
 const ALLOWED = [".pdf", ".doc", ".docx"];
+const writerSlugs = new Set(writers.map((w) => w.slug));
+
+/** Writer slug from the profile link, only if it matches a known writer. */
+function selectedWriterSlug() {
+  if (typeof window === "undefined") return "";
+  const raw = new URLSearchParams(window.location.search).get("writer") ?? "";
+  return writerSlugs.has(raw) ? raw : "";
+}
 
 type Values = {
   firstName: string;
@@ -170,6 +179,7 @@ function ChoiceGroup({
 
 export default function ContactSection() {
   const [values, setValues] = useState<Values>(empty);
+  const [writer, setWriter] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<Errors>({});
@@ -179,6 +189,10 @@ export default function ContactSection() {
   const goalsRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setWriter(selectedWriterSlug());
+  }, []);
 
   const set = (k: keyof Values) => (v: string) => {
     setValues((s) => ({ ...s, [k]: v }));
@@ -243,6 +257,8 @@ export default function ContactSection() {
     try {
       const body = new FormData();
       (Object.keys(values) as (keyof Values)[]).forEach((k) => body.append(k, values[k].trim()));
+      const writerSlug = writer || selectedWriterSlug();
+      if (writerSlug) body.append("writer", writerSlug);
       body.append("website", website);
       if (file) body.append("resume", file);
 

@@ -136,7 +136,7 @@ function WriterCard({ writer }: { writer: Writer }) {
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-[#ece7d8] pt-6">
             <a
-              href="/contact"
+              href={`/contact?writer=${encodeURIComponent(writer.slug)}`}
               className="inline-flex h-[46px] items-center gap-2.5 rounded-[4px] bg-navy-dark px-6 text-[14px] font-medium text-white transition-colors hover:bg-[#0a2a42]"
             >
               Start Your Resume
