@@ -99,26 +99,6 @@ export const writers: Writer[] = [
     weight: 138,
   },
   {
-    slug: "bethany-c",
-    name: "Bethany C.",
-    title: "Senior Career Writer & Professional Development Specialist",
-    cardRole: "Senior Career Writer",
-    summary:
-      "Supports professionals through career changes, advancement and new professional goals.",
-    lines: ["Supports professionals", "through career changes,", "advancement and new", "professional goals."],
-    focus: ["Career Changes", "Advancement", "Resume Writing"],
-    bio: [
-      "Bethany C. brings more than 9 years of experience supporting professionals as they navigate career changes, advancement opportunities, and new professional goals. Her background includes career development, professional communication, resume writing, and helping candidates clarify the direction they want their careers to take.",
-      "She has worked with professionals across different levels, including recent graduates, experienced specialists, managers, and senior professionals preparing for significant career moves.",
-      "Bethany believes that effective career documents begin with listening. Before writing, she takes the time to understand a client's experience, strengths, ambitions, and accomplishments. Her goal is to create documents that communicate those qualities naturally while giving employers a clear picture of what the candidate can contribute.",
-      "Her writing style is practical, personable, and focused on helping clients present their experience with confidence.",
-    ],
-    experience: "9+",
-    photo: "/images/writer-bethany-camasura.jpg",
-    featured: true,
-    weight: 135,
-  },
-  {
     slug: "jonathan-n",
     name: "Jonathan N.",
     title: "Senior Resume Writer & Career Strategy Consultant",
@@ -136,26 +116,6 @@ export const writers: Writer[] = [
     photo: "/images/writer-jonathan-nugent.jpg",
     featured: true,
     weight: 134,
-  },
-  {
-    slug: "jessica-c",
-    name: "Jessica C.",
-    title: "Senior Resume Writer & Career Development Professional",
-    cardRole: "Senior Resume Writer",
-    summary:
-      "Treats every resume as an individual project, written in a natural, confident voice.",
-    lines: ["Treats every resume as an", "individual project, written", "in a natural, confident", "voice."],
-    focus: ["Resume Writing", "Candidate Positioning", "Career Development"],
-    bio: [
-      "Jessica C. has more than 8 years of experience helping professionals improve their career documents and communicate their experience more effectively. Her background includes professional writing, career development, candidate positioning, and working directly with individuals to identify the strengths that deserve greater attention in their job search.",
-      "Jessica works with a wide range of professionals, including early career candidates, established specialists, managers, and senior professionals. She understands that no two career paths are exactly alike, which is why she approaches each resume as an individual project rather than relying on a standard formula.",
-      "Her process begins with understanding the person behind the career history. From there, she develops clear, accomplishment focused content designed to communicate experience, strengths, and career direction in a natural and confident voice.",
-      "Jessica's goal is simple: to help every client walk away with career documents that genuinely represent who they are and where they want to go.",
-    ],
-    experience: "8+",
-    photo: "/images/writer-jessica-coppens.jpg",
-    featured: true,
-    weight: 134.5,
   },
   {
     slug: "suzanne-t",
