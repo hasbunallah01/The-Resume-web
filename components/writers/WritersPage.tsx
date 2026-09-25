@@ -56,7 +56,7 @@ export function WritersHero() {
         <p className="mt-6 max-w-[640px] text-[17px] leading-[1.75] text-ink-body lg:text-[18px]">
           Experienced professionals dedicated to helping job seekers
           communicate their value with clarity and confidence. Every writer
-          brings more than 15 years of experience and a personal approach to
+          brings years of hands-on experience and a personal approach to
           each project.
         </p>
 
