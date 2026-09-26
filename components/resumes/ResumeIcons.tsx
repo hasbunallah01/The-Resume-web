@@ -134,6 +134,43 @@ export const PlusIcon = (p: P) => (
   </svg>
 );
 
+export const GraduationCapIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M2.5 9.5 12 5l9.5 4.5L12 14 2.5 9.5Z" />
+    <path d="M6.5 11.6v4.3c0 1.4 2.5 2.6 5.5 2.6s5.5-1.2 5.5-2.6v-4.3" />
+    <path d="M21 9.5v6" />
+  </svg>
+);
+export const GlobeIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M3.5 12h17M12 3.5c2.4 2.3 3.6 5.3 3.6 8.5s-1.2 6.2-3.6 8.5c-2.4-2.3-3.6-5.3-3.6-8.5S9.6 5.8 12 3.5Z" />
+  </svg>
+);
+export const SwapIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M4 8h13.5M14 4.5 17.5 8 14 11.5" />
+    <path d="M20 16H6.5M10 12.5 6.5 16l3.5 3.5" />
+  </svg>
+);
+export const HeartIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M12 20.2C6.8 16.4 3.5 13.2 3.5 9.4 3.5 6.6 5.7 4.5 8.4 4.5c1.6 0 3.1.8 3.6 2.1.5-1.3 2-2.1 3.6-2.1 2.7 0 4.9 2.1 4.9 4.9 0 3.8-3.3 7-8.5 10.8Z" />
+  </svg>
+);
+export const ShieldIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M12 3.5 19.5 6v6c0 5-3.5 8-7.5 9-4-1-7.5-4-7.5-9V6L12 3.5Z" />
+    <path d="m8.7 12.2 2.4 2.4 4.2-4.6" />
+  </svg>
+);
+export const LayersIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="m12 3.5 8.5 4.5-8.5 4.5L3.5 8 12 3.5Z" />
+    <path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 15.8 12 20.2l8.5-4.4" />
+  </svg>
+);
+
 export const iconMap = {
   document: DocIcon,
   person: PersonIcon,

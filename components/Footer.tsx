@@ -54,7 +54,7 @@ export default function Footer() {
         </ul>
 
         <p className="mt-8 text-[12px] text-white/90 lg:absolute lg:left-[10px] lg:top-[86px] lg:mt-0 lg:text-[9.6px]">
-          &copy; 2025 Veylora. All rights reserved.
+          &copy; {new Date().getFullYear()} Veylora. All rights reserved.
         </p>
         <p className="mt-2 text-[12px] text-gold lg:absolute lg:right-[12px] lg:top-[86px] lg:mt-0 lg:text-[10px]">
           Your Goals. Our Expertise.
