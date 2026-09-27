@@ -1,5 +1,4 @@
 import { randomUUID } from "crypto";
-import sharp from "sharp";
 
 export class PhotoValidationError extends Error {}
 
@@ -24,13 +23,20 @@ export async function processAndUploadPhoto(file: File): Promise<string> {
 
   let outputBuffer: Buffer;
   try {
+    // Loaded lazily: sharp ships native, platform-specific binaries, so a
+    // failure here should only affect submissions that include a photo,
+    // never the rest of the review form.
+    const sharp = (await import("sharp")).default;
     outputBuffer = await sharp(inputBuffer)
       .rotate() // respect EXIF orientation
       .resize(OUTPUT_SIZE, OUTPUT_SIZE, { fit: "cover" })
       .webp({ quality: 82 })
       .toBuffer();
-  } catch {
-    throw new PhotoValidationError("That image couldn't be processed. Please try a different file.");
+  } catch (err) {
+    console.error("Photo processing failed", err);
+    throw new PhotoValidationError(
+      "That image couldn't be processed. Please try a different file, or submit without a photo.",
+    );
   }
 
   const { put } = await import("@vercel/blob");
