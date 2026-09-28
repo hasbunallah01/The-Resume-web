@@ -6,7 +6,10 @@ import { UploadIcon } from "../resumes/ResumeIcons";
 import StarPicker from "./StarPicker";
 
 const COMMENT_MAX = 600;
-const PHOTO_MAX_BYTES = 6 * 1024 * 1024;
+// Must stay under Vercel's 4.5 MB serverless function request-body limit
+// (multipart overhead included). Anything bigger is rejected at the edge
+// with a 413 that the browser can't read as JSON.
+const PHOTO_MAX_BYTES = 4 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 type Errors = Partial<Record<"name" | "rating" | "comment" | "photo", string>>;
@@ -32,7 +35,7 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
       return;
     }
     if (file.size > PHOTO_MAX_BYTES) {
-      setErrors((er) => ({ ...er, photo: "That image is larger than 6 MB." }));
+      setErrors((er) => ({ ...er, photo: "That image is larger than 4 MB." }));
       return;
     }
     setErrors((er) => ({ ...er, photo: undefined }));
@@ -182,7 +185,7 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
             <UploadIcon className="h-[20px] w-[20px] shrink-0 text-navy" />
             <span className="text-[13px] leading-[1.4] text-ink-muted">
               <span className="font-medium text-navy">Choose a photo</span>
-              <span className="block text-[11.5px]">JPG, PNG or WebP (max 6 MB)</span>
+              <span className="block text-[11.5px]">JPG, PNG or WebP (max 4 MB)</span>
             </span>
             <input
               ref={fileRef}
