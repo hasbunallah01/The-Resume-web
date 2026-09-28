@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -17,10 +16,9 @@ export async function GET(req: Request) {
       env[k] = null;
     }
   }
-  const h = headers();
-  const oidcHeader = h.get("x-vercel-oidc-token");
+  const oidcHeader = req.headers.get("x-vercel-oidc-token");
   const headerOidc = oidcHeader
-    ? { present: true, length: oidcHeader.length, prefix: oidcHeader.slice(0, 20) }
+    ? { present: true, length: oidcHeader.length, prefix: oidcHeader.slice(0, 24) }
     : { present: false };
 
   // Try a real blob.put with whatever credentials are present
