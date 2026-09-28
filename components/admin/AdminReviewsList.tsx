@@ -111,7 +111,7 @@ export default function AdminReviewsList() {
               <div className="flex items-center gap-3">
                 {r.photo_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={r.photo_url} alt="" className="h-[40px] w-[40px] rounded-full object-cover" />
+                  <img src={`/api/review-photo/${r.id}`} alt="" className="h-[40px] w-[40px] rounded-full object-cover" />
                 ) : (
                   <span className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#e3ebf1] text-[13px] font-semibold text-navy">
                     {r.name.slice(0, 2).toUpperCase()}

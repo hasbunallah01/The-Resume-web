@@ -53,6 +53,15 @@ export async function listApprovedReviews(): Promise<ReviewRow[]> {
   `) as ReviewRow[];
 }
 
+export async function getReviewPhotoUrl(id: number): Promise<string | null> {
+  await ensureReviewsTable();
+  const db = sql();
+  const rows = (await db`
+    SELECT photo_url FROM reviews WHERE id = ${id} AND photo_url IS NOT NULL LIMIT 1
+  `) as { photo_url: string }[];
+  return rows[0]?.photo_url ?? null;
+}
+
 export async function listAllReviews(): Promise<ReviewRow[]> {
   await ensureReviewsTable();
   const db = sql();

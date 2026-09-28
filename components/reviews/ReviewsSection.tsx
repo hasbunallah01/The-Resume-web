@@ -36,7 +36,7 @@ function ReviewCard({ review }: { review: ReviewRow }) {
         {review.photo_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={review.photo_url}
+            src={`/api/review-photo/${review.id}`}
             alt={`Photo of ${review.name}`}
             className="h-[48px] w-[48px] shrink-0 rounded-full object-cover"
           />

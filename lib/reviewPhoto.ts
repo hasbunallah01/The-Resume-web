@@ -53,7 +53,7 @@ export async function processAndUploadPhoto(file: File): Promise<string> {
 
   const { put } = await import("@vercel/blob");
   const blob = await put(`review-photos/${randomUUID()}.webp`, outputBuffer, {
-    access: "public",
+    access: "private",
     contentType: "image/webp",
   });
   return blob.url;
