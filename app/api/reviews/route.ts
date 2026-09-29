@@ -154,12 +154,16 @@ async function notifyAdmin(input: {
     input.hasPhoto ? "Yes" : "No"
   }\nDate: ${when}\n\nReview:\n${input.comment}\n\nApprove or reject at /admin/reviews`;
 
+  const adminRecipients = [to];
+  const qudusEmail = process.env.QUDUS_EMAIL;
+  if (qudusEmail && qudusEmail !== to) adminRecipients.push(qudusEmail);
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from,
-      to: [to],
+      to: adminRecipients,
       subject: "New Veylora Review Submitted",
       text,
     }),

@@ -153,6 +153,10 @@ export async function POST(req: Request) {
       ? `<p style="font-family:Arial,sans-serif;font-size:13px;color:#667482">Resume attached: ${esc(attachment.filename)}</p>`
       : "");
 
+  const adminRecipients = [to];
+  const qudusEmail = process.env.QUDUS_EMAIL;
+  if (qudusEmail && qudusEmail !== to) adminRecipients.push(qudusEmail);
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -161,7 +165,7 @@ export async function POST(req: Request) {
     },
     body: JSON.stringify({
       from,
-      to: [to],
+      to: adminRecipients,
       reply_to: email,
       subject: writerName
         ? `New inquiry for ${writerName} from ${fullName} (${service})`

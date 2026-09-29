@@ -108,6 +108,10 @@ export async function POST(req: Request) {
       `<a href="mailto:contact@veylora.haybee.xyz" style="color:#0b3d72;text-decoration:none">contact@veylora.haybee.xyz</a></p>` +
     `</div>`;
 
+  const adminRecipients = [to];
+  const qudusEmail = process.env.QUDUS_EMAIL;
+  if (qudusEmail && qudusEmail !== to) adminRecipients.push(qudusEmail);
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -116,7 +120,7 @@ export async function POST(req: Request) {
     },
     body: JSON.stringify({
       from,
-      to: [to],
+      to: adminRecipients,
       reply_to: email,
       subject: "New Veylora Newsletter Subscriber",
       text: adminText,
