@@ -116,10 +116,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "db_failed" }, { status: 500 });
   }
 
-  // Best-effort admin notification email — never fails the submission.
-  notifyAdmin({ name, rating, comment, hasPhoto: Boolean(photoUrl), createdAt: saved.created_at }).catch(
-    (err) => console.error("Review notification email failed", err),
-  );
+  // Best-effort admin notification email — never fails the submission,
+  // but we await it so Vercel doesn't freeze the function before the
+  // Resend call completes (which is what was silently dropping these).
+  try {
+    await notifyAdmin({
+      name,
+      rating,
+      comment,
+      hasPhoto: Boolean(photoUrl),
+      createdAt: saved.created_at,
+    });
+  } catch (err) {
+    console.error("Review notification email failed", err);
+  }
 
   return NextResponse.json({ ok: true });
 }
