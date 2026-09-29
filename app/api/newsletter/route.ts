@@ -104,15 +104,26 @@ export async function POST(req: Request) {
 
   // Best-effort subscriber confirmation. We never fail the subscription
   // because the confirmation email bounced — they're already on the list.
+  // List-Unsubscribe headers help Gmail classify this as legitimate bulk mail
+  // rather than spam, especially for new senders with low reputation.
+  const unsubMailto = "mailto:contact@veylora.haybee.xyz?subject=unsubscribe";
   const subText =
     `Thanks for subscribing to Veylora.\n\n` +
-    `We'll keep you posted with updates from our team. If you'd like to stop receiving emails, just reply and let us know.\n\n` +
-    `Best,\nVeylora`;
+    `We'll keep you posted with updates from our team.\n\n` +
+    `You can unsubscribe anytime by replying to this email or sending a note to contact@veylora.haybee.xyz.\n\n` +
+    `— The Veylora team\n` +
+    `veylora.haybee.xyz · contact@veylora.haybee.xyz`;
 
   const subHtml =
-    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Thanks for subscribing to Veylora.</p>` +
-    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">We'll keep you posted with updates from our team. If you'd like to stop receiving emails, just reply and let us know.</p>` +
-    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Best,<br>Veylora</p>`;
+    `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.65;color:#0b2a46;max-width:560px">` +
+      `<p>Thanks for subscribing to <strong>Veylora</strong>.</p>` +
+      `<p>We'll keep you posted with updates from our team.</p>` +
+      `<p>You can unsubscribe anytime by replying to this email, or ` +
+      `<a href="${unsubMailto}" style="color:#0b3d72;text-decoration:underline">click here to unsubscribe</a>.</p>` +
+      `<p style="margin-top:28px;color:#667482;font-size:13px">— The Veylora team<br>` +
+      `<a href="https://veylora.haybee.xyz" style="color:#0b3d72;text-decoration:none">veylora.haybee.xyz</a> · ` +
+      `<a href="mailto:contact@veylora.haybee.xyz" style="color:#0b3d72;text-decoration:none">contact@veylora.haybee.xyz</a></p>` +
+    `</div>`;
 
   const confirm = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -123,9 +134,14 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       from,
       to: [email],
+      reply_to: "contact@veylora.haybee.xyz",
       subject: "You're subscribed — Veylora",
       text: subText,
       html: subHtml,
+      headers: {
+        "List-Unsubscribe": `<${unsubMailto}>`,
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+      },
     }),
   });
 

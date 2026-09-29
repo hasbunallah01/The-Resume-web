@@ -180,17 +180,26 @@ export async function POST(req: Request) {
   // Best-effort visitor confirmation. We never fail the submission because
   // the visitor confirmation bounced — the inquiry is already delivered.
   // No employment / turnaround / interview promises, per Veylora's policy.
+  // Headers (Reply-To, List-Unsubscribe) are included to improve Gmail
+  // deliverability — Gmail heavily weighs these trust signals for new senders.
   const confirmText =
     `Hi ${firstName},\n\n` +
     `Thank you for reaching out to Veylora.\n\n` +
     `We've received your request and the information you provided. Our team will review it and get back to you.\n\n` +
-    `Best,\nVeylora`;
+    `If you have any follow-up questions, just reply to this email.\n\n` +
+    `— The Veylora team\n` +
+    `veylora.haybee.xyz · contact@veylora.haybee.xyz`;
 
   const confirmHtml =
-    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Hi ${esc(firstName)},</p>` +
-    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Thank you for reaching out to Veylora.</p>` +
-    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">We've received your request and the information you provided. Our team will review it and get back to you.</p>` +
-    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Best,<br>Veylora</p>`;
+    `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.65;color:#0b2a46;max-width:560px">` +
+      `<p>Hi ${esc(firstName)},</p>` +
+      `<p>Thank you for reaching out to <strong>Veylora</strong>.</p>` +
+      `<p>We've received your request and the information you provided. Our team will review it and get back to you.</p>` +
+      `<p>If you have any follow-up questions, just reply to this email.</p>` +
+      `<p style="margin-top:28px;color:#667482;font-size:13px">— The Veylora team<br>` +
+      `<a href="https://veylora.haybee.xyz" style="color:#0b3d72;text-decoration:none">veylora.haybee.xyz</a> · ` +
+      `<a href="mailto:contact@veylora.haybee.xyz" style="color:#0b3d72;text-decoration:none">contact@veylora.haybee.xyz</a></p>` +
+    `</div>`;
 
   const confirm = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -201,9 +210,14 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       from,
       to: [email],
+      reply_to: "contact@veylora.haybee.xyz",
       subject: "We've received your request — Veylora",
       text: confirmText,
       html: confirmHtml,
+      headers: {
+        "List-Unsubscribe": "<mailto:contact@veylora.haybee.xyz?subject=unsubscribe>",
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+      },
     }),
   });
 
