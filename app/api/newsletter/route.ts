@@ -102,5 +102,40 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "send_failed" }, { status: 502 });
   }
 
+  // Best-effort subscriber confirmation. We never fail the subscription
+  // because the confirmation email bounced — they're already on the list.
+  const subText =
+    `Thanks for subscribing to Veylora.\n\n` +
+    `We'll keep you posted with updates from our team. If you'd like to stop receiving emails, just reply and let us know.\n\n` +
+    `Best,\nVeylora`;
+
+  const subHtml =
+    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Thanks for subscribing to Veylora.</p>` +
+    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">We'll keep you posted with updates from our team. If you'd like to stop receiving emails, just reply and let us know.</p>` +
+    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Best,<br>Veylora</p>`;
+
+  const confirm = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      subject: "You're subscribed — Veylora",
+      text: subText,
+      html: subHtml,
+    }),
+  });
+
+  if (!confirm.ok) {
+    console.error(
+      "Subscriber confirmation email failed",
+      confirm.status,
+      await confirm.text().catch(() => ""),
+    );
+  }
+
   return NextResponse.json({ ok: true });
 }

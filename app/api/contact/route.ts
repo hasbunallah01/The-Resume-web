@@ -177,5 +177,43 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "send_failed" }, { status: 502 });
   }
 
+  // Best-effort visitor confirmation. We never fail the submission because
+  // the visitor confirmation bounced — the inquiry is already delivered.
+  // No employment / turnaround / interview promises, per Veylora's policy.
+  const confirmText =
+    `Hi ${firstName},\n\n` +
+    `Thank you for reaching out to Veylora.\n\n` +
+    `We've received your request and the information you provided. Our team will review it and get back to you.\n\n` +
+    `Best,\nVeylora`;
+
+  const confirmHtml =
+    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Hi ${esc(firstName)},</p>` +
+    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Thank you for reaching out to Veylora.</p>` +
+    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">We've received your request and the information you provided. Our team will review it and get back to you.</p>` +
+    `<p style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#0b2a46">Best,<br>Veylora</p>`;
+
+  const confirm = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      subject: "We've received your request — Veylora",
+      text: confirmText,
+      html: confirmHtml,
+    }),
+  });
+
+  if (!confirm.ok) {
+    console.error(
+      "Visitor confirmation email failed",
+      confirm.status,
+      await confirm.text().catch(() => ""),
+    );
+  }
+
   return NextResponse.json({ ok: true });
 }
