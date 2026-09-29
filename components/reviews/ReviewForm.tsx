@@ -6,14 +6,65 @@ import { UploadIcon } from "../resumes/ResumeIcons";
 import StarPicker from "./StarPicker";
 
 const COMMENT_MAX = 600;
-// Must stay under Vercel's 4.5 MB serverless function request-body limit
-// (multipart overhead included). Anything bigger is rejected at the edge
-// with a 413 that the browser can't read as JSON.
-const PHOTO_MAX_BYTES = 4 * 1024 * 1024;
+// Resize to this max dimension before upload. A 2000px photo is plenty for a
+// 400px avatar and keeps the body well under Vercel's 4.5 MB limit even
+// with multipart overhead.
+const PHOTO_MAX_DIMENSION = 2000;
+const PHOTO_JPEG_QUALITY = 0.85;
+// Hard cap on the resized file (per file, not body). 1.5 MB leaves plenty
+// of headroom for multipart + other form fields.
+const PHOTO_MAX_BYTES = 1_500_000;
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 type Errors = Partial<Record<"name" | "rating" | "comment" | "photo", string>>;
 type Status = "idle" | "sending" | "success" | "error";
+
+/** Loads a File into an HTMLImageElement. */
+function fileToImage(file: File): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = (e) => {
+      URL.revokeObjectURL(url);
+      reject(e);
+    };
+    img.src = url;
+  });
+}
+
+/** Resizes an image to fit within maxDim on the longer side, encodes as JPEG. */
+async function downscalePhoto(file: File, maxDim: number, quality: number): Promise<File> {
+  const img = await fileToImage(file);
+  const { width, height } = img;
+  const scale = Math.min(1, maxDim / Math.max(width, height));
+  const targetW = Math.round(width * scale);
+  const targetH = Math.round(height * scale);
+
+  const canvas = document.createElement("canvas");
+  canvas.width = targetW;
+  canvas.height = targetH;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas 2D context unavailable");
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(img, 0, 0, targetW, targetH);
+
+  const blob: Blob = await new Promise((resolve, reject) => {
+    canvas.toBlob(
+      (b) => (b ? resolve(b) : reject(new Error("Canvas toBlob returned null"))),
+      "image/jpeg",
+      quality,
+    );
+  });
+
+  // Keep the original filename but with .jpg so the server validator works.
+  const baseName = file.name.replace(/\.[^.]+$/, "") || "photo";
+  return new File([blob], `${baseName}.jpg`, { type: "image/jpeg", lastModified: Date.now() });
+}
 
 export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
   const [name, setName] = useState("");
@@ -25,22 +76,54 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const [processing, setProcessing] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const pickPhoto = (e: ChangeEvent<HTMLInputElement>) => {
+  const pickPhoto = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (!ALLOWED_TYPES.includes(file.type)) {
       setErrors((er) => ({ ...er, photo: "Please upload a JPG, PNG or WebP image." }));
       return;
     }
-    if (file.size > PHOTO_MAX_BYTES) {
-      setErrors((er) => ({ ...er, photo: "That image is larger than 4 MB." }));
-      return;
-    }
+    setProcessing(true);
     setErrors((er) => ({ ...er, photo: undefined }));
-    setPhoto(file);
-    setPhotoPreview(URL.createObjectURL(file));
+    try {
+      // Resize + compress in the browser BEFORE storing. Sharp on the server
+      // also resizes, but doing it client-side means the upload itself is
+      // tiny and we never get close to Vercel's 4.5 MB request-body limit.
+      const resized = await downscalePhoto(file, PHOTO_MAX_DIMENSION, PHOTO_JPEG_QUALITY);
+      if (resized.size > PHOTO_MAX_BYTES) {
+        // Resize at lower quality and try once more.
+        const smaller = await downscalePhoto(file, Math.round(PHOTO_MAX_DIMENSION * 0.7), 0.7);
+        if (smaller.size > PHOTO_MAX_BYTES) {
+          setErrors((er) => ({
+            ...er,
+            photo: "That image is still too large after compression — please pick a smaller photo.",
+          }));
+          return;
+        }
+        setPhoto(smaller);
+        setPhotoPreview(URL.createObjectURL(smaller));
+      } else {
+        setPhoto(resized);
+        setPhotoPreview(URL.createObjectURL(resized));
+      }
+    } catch {
+      // If the browser can't decode it (e.g. HEIC, corrupted), fall back to
+      // the original file — server validation will surface a clearer error.
+      if (file.size > PHOTO_MAX_BYTES) {
+        setErrors((er) => ({
+          ...er,
+          photo: "That image is too large and the browser couldn't compress it. Try a smaller one.",
+        }));
+        return;
+      }
+      setPhoto(file);
+      setPhotoPreview(URL.createObjectURL(file));
+    } finally {
+      setProcessing(false);
+    }
   };
 
   const removePhoto = () => {
@@ -96,6 +179,13 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
         setMessage(data.message || "You've already submitted a review recently.");
         return;
       }
+      if (res.status === 413) {
+        setStatus("error");
+        setMessage(
+          "That submission was too large to send. Please try removing the photo or using a much smaller one.",
+        );
+        return;
+      }
       setStatus("error");
       setMessage(
         data.error === "not_configured"
@@ -104,7 +194,11 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
       );
     } catch {
       setStatus("error");
-      setMessage("We couldn't reach the server. Please check your connection and try again.");
+      setMessage(
+        "We couldn't reach the server. Please try again — your review wasn't sent, you can also email us at " +
+          contactEmail +
+          ".",
+      );
     }
   };
 
@@ -185,7 +279,7 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
             <UploadIcon className="h-[20px] w-[20px] shrink-0 text-navy" />
             <span className="text-[13px] leading-[1.4] text-ink-muted">
               <span className="font-medium text-navy">Choose a photo</span>
-              <span className="block text-[11.5px]">JPG, PNG or WebP (max 4 MB)</span>
+              <span className="block text-[11.5px]">JPG, PNG or WebP — large photos are compressed automatically</span>
             </span>
             <input
               ref={fileRef}
