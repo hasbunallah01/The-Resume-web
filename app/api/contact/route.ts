@@ -4,11 +4,11 @@ import { writers } from "../../../data/writers";
 export const runtime = "nodejs";
 
 const WRITER_EMAILS: Record<string, string> = {
-  "daramola-qudus-abolaji": "abdulqudus@veylora.haybee.xyz",
-  "abdul-kareem-ismail": "ismail@veylora.haybee.xyz",
+  "daramola-qudus-abolaji": "contact@veylora.haybee.xyz",
+  "abdul-kareem-ismail": "contact@veylora.haybee.xyz",
 };
 
-const DEFAULT_WRITER_EMAIL = "team@veylora.haybee.xyz";
+const DEFAULT_WRITER_EMAIL = "contact@veylora.haybee.xyz";
 
 const WRITER_LABELS: Record<string, string> = {
   "daramola-qudus-abolaji": "Qudus",
