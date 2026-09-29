@@ -5,6 +5,13 @@ export const runtime = "nodejs";
 const clean = (v: FormDataEntryValue | null, max = 200) =>
   typeof v === "string" ? v.replace(/[\r\n]+/g, " ").trim().slice(0, max) : "";
 
+const esc = (s: string) =>
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
 /**
  * Adds the email to a Resend Audience, if RESEND_AUDIENCE_ID is configured.
  * This is how subscribers are persisted, reusing the Resend account already
@@ -82,6 +89,25 @@ export async function POST(req: Request) {
     timeStyle: "short",
   });
 
+  const adminText =
+    `New Veylora Newsletter Subscriber\n\n` +
+    `Email: ${email}\n` +
+    `Date: ${when}\n\n` +
+    `They've been added to the Resend Audience \"General\".\n\n` +
+    `— Veylora\nveylora.haybee.xyz · contact@veylora.haybee.xyz`;
+
+  const adminHtml =
+    `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.65;color:#0b2a46;max-width:560px">` +
+      `<p><strong>New Veylora Newsletter Subscriber</strong></p>` +
+      `<table style="font-size:14px;color:#0b2a46;margin:8px 0 16px"><tr><td style="padding:2px 12px 2px 0;color:#667482">Email</td><td><a href="mailto:${esc(email)}" style="color:#0b3d72">${esc(email)}</a></td></tr>` +
+      `<tr><td style="padding:2px 12px 2px 0;color:#667482">Date</td><td>${esc(when)}</td></tr>` +
+      `<tr><td style="padding:2px 12px 2px 0;color:#667482">Audience</td><td>General (Resend)</td></tr></table>` +
+      `<p style="color:#667482;font-size:13px">Reply to this email to reach the subscriber directly.</p>` +
+      `<p style="margin-top:24px;color:#667482;font-size:13px">— Veylora<br>` +
+      `<a href="https://veylora.haybee.xyz" style="color:#0b3d72;text-decoration:none">veylora.haybee.xyz</a> · ` +
+      `<a href="mailto:contact@veylora.haybee.xyz" style="color:#0b3d72;text-decoration:none">contact@veylora.haybee.xyz</a></p>` +
+    `</div>`;
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -91,9 +117,10 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       from,
       to: [to],
+      reply_to: email,
       subject: "New Veylora Newsletter Subscriber",
-      text: `New Veylora Newsletter Subscriber\n\nEmail: ${email}\nDate: ${when}`,
-      html: `<p style="font-family:Arial,sans-serif;font-size:14px;color:#0b2a46"><strong>New Veylora Newsletter Subscriber</strong></p><p style="font-family:Arial,sans-serif;font-size:14px;color:#0b2a46">Email: ${email}<br>Date: ${when}</p>`,
+      text: adminText,
+      html: adminHtml,
     }),
   });
 

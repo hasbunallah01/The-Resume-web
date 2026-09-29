@@ -1,18 +1,5 @@
 import Logo from "./Logo";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  XIcon,
-} from "./Icons";
 import { navLinks } from "@/data/writers";
-
-const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com", Icon: LinkedInIcon },
-  { label: "X", href: "https://x.com", Icon: XIcon },
-  { label: "Facebook", href: "https://www.facebook.com", Icon: FacebookIcon },
-  { label: "Instagram", href: "https://www.instagram.com", Icon: InstagramIcon },
-];
 
 export default function Footer() {
   return (
@@ -36,22 +23,6 @@ export default function Footer() {
             </a>
           ))}
         </nav>
-
-        <ul className="mt-8 flex items-center gap-[20px] lg:absolute lg:right-[24px] lg:top-[24px] lg:mt-0 lg:gap-[19px]">
-          {socials.map(({ label, href, Icon }) => (
-            <li key={label}>
-              <a
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-white transition-colors hover:text-gold"
-              >
-                <Icon className="h-[18px] w-[18px] lg:h-[16px] lg:w-[16px]" />
-              </a>
-            </li>
-          ))}
-        </ul>
 
         <p className="mt-8 text-[12px] text-white/90 lg:absolute lg:left-[10px] lg:top-[86px] lg:mt-0 lg:text-[9.6px]">
           &copy; {new Date().getFullYear()} Veylora. All rights reserved.
