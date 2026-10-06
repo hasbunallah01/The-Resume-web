@@ -21,6 +21,14 @@ export type Writer = {
   weight?: number;
   /** Shown in the "X+ years of experience" badge on the Writers page */
   experience: string;
+  /**
+   * Direct email address, if the writer has a published inbox on the
+   * Veylora domain. When set, the "Start Your Resume" CTA on the
+   * writer's card opens a mailto: link to this address. When undefined,
+   * the CTA is hidden and the visitor is routed to the contact form
+   * instead (with the writer slug preserved).
+   */
+  email?: string;
 };
 
 export const writers: Writer[] = [
@@ -41,6 +49,7 @@ export const writers: Writer[] = [
     ],
     photo: "/images/founder-square.jpg",
     featured: true,
+    email: "abdulqudus@veylora.haybee.xyz",
   },
   {
     slug: "abdul-kareem-ismail",
@@ -59,6 +68,7 @@ export const writers: Writer[] = [
     ],
     photo: "/images/writer-abdul-kareem-ismail.jpg",
     featured: true,
+    email: "ismail@veylora.haybee.xyz",
   },
   {
     slug: "ericka-m",
