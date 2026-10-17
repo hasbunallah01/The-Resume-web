@@ -12,6 +12,7 @@ const serviceLinks = [
 ];
 
 const links = [
+  { label: "Samples", href: "/samples", key: "Samples" },
   { label: "About Us", href: "/about", key: "About" },
   { label: "Pricing", href: "/services#pricing", key: "Pricing" },
 ];

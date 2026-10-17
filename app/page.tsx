@@ -4,6 +4,7 @@ import Mission from "@/components/Mission";
 import Problem from "@/components/home/Problem";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import BeforeAfter from "@/components/home/BeforeAfter";
+import SamplesTeaser from "@/components/home/SamplesTeaser";
 import Steps from "@/components/resumes/Steps";
 import { storySteps } from "@/data/pricing";
 import Writers from "@/components/Writers";
@@ -23,6 +24,7 @@ export default function HomePage() {
         <Mission />
         <Problem />
         <ServicesOverview />
+        <SamplesTeaser />
         <BeforeAfter />
         <Steps
           id="how-it-works"

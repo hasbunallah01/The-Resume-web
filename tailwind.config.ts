@@ -58,6 +58,14 @@ const config: Config = {
           "0%": { transform: "scale(1.02) translate3d(0, 0, 0)" },
           "100%": { transform: "scale(1.05) translate3d(-0.8%, -0.6%, 0)" },
         },
+        rise: {
+          "0%": { opacity: "0", transform: "translate3d(0, 14px, 0)" },
+          "100%": { opacity: "1", transform: "translate3d(0, 0, 0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         twinkle: {
           "0%, 100%": { opacity: "0.25" },
           "50%": { opacity: "1" },
