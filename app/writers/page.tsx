@@ -15,7 +15,7 @@ export default function WritersPage() {
   return (
     <>
       <Header active="Our Writers" />
-      <main>
+      <main id="main">
         <WritersHero />
         <WriterCards />
         <TeamTrust />

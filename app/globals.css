@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 92px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -14,25 +15,74 @@ body {
 }
 
 body {
-  background: #f7f6f1;
-  color: #0b2a46;
+  color: #142848;
   font-family: "Inter Variable", system-ui, sans-serif;
+  background-color: #e7f3fb;
+  background-image:
+    radial-gradient(1100px 520px at 85% -10%, rgba(255, 255, 255, 0.85), transparent 62%),
+    radial-gradient(900px 480px at 0% 12%, rgba(255, 255, 255, 0.55), transparent 58%),
+    linear-gradient(180deg, #d5ecf9 0%, #eaf5fb 32%, #f5fafd 68%, #f8fbfe 100%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 :focus-visible {
-  outline: 2px solid #16557c;
+  outline: 2px solid #163056;
   outline-offset: 3px;
+}
+
+::selection {
+  background: #c5e2f4;
+  color: #102038;
+}
+
+@layer components {
+  .wrap {
+    width: min(1120px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .wrap {
+      width: min(1160px, calc(100% - 80px));
+    }
+  }
+
+  .btn-navy {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full bg-navy-btn px-6 text-[14.5px] font-medium text-white shadow-[0_10px_24px_rgba(16,36,64,0.18)] transition duration-200 hover:bg-[#0e2340];
+  }
+
+  .btn-white {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-[14.5px] font-medium text-navy shadow-paper ring-1 ring-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#f7fbfe];
+  }
+
+  .btn-line {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white/70 px-6 text-[14.5px] font-medium text-navy ring-1 ring-[#d5e4f0] transition duration-200 hover:bg-white;
+  }
+
+  .paper {
+    background-color: #fff;
+    background-image: radial-gradient(rgba(20, 50, 80, 0.03) 0.65px, transparent 0.65px);
+    background-size: 4px 4px;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-sky-ink;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  * {
-    transition-duration: 0.01ms !important;
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

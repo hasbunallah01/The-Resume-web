@@ -71,7 +71,7 @@ const empty: Values = {
 };
 
 const inputCls =
-  "h-[48px] w-full rounded-[3px] border border-[#d6d0be] bg-white px-4 text-[15px] text-navy placeholder:text-[#9aa5af] transition-colors focus:border-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark/15 aria-[invalid=true]:border-[#b4442f]";
+  "h-12 w-full rounded-2xl border border-[#d3e3f0] bg-white px-4 text-[15px] text-navy placeholder:text-[#8ea3b8] transition focus:border-[#8eb8d6] focus:outline-none focus:ring-4 focus:ring-[#d3e8f6] aria-[invalid=true]:border-[#b4442f] aria-[invalid=true]:ring-[#f6d9d2]";
 
 function Field({
   id,
@@ -92,7 +92,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="mb-2 block text-[13.5px] font-medium text-navy">
+      <label htmlFor={id} className="mb-2 block text-[13px] font-medium text-navy">
         {label}
         {required && <span className="ml-0.5 text-[#b4442f]">*</span>}
         {optional && <span className="ml-1 font-normal text-ink-muted">(Optional)</span>}
@@ -127,7 +127,7 @@ function ChoiceGroup({
   const selectId = `${name}-select`;
   return (
     <fieldset className="min-w-0">
-      <legend className="mb-2.5 text-[13.5px] font-medium text-navy">
+      <legend className="mb-2.5 text-[13px] font-medium text-navy">
         {legend}
         <span className="ml-0.5 text-[#b4442f]">*</span>
       </legend>
@@ -162,7 +162,7 @@ function ChoiceGroup({
               value={o}
               checked={value === o}
               onChange={() => onChange(o)}
-              className="h-[17px] w-[17px] shrink-0 cursor-pointer appearance-none rounded-full border border-[#b5ae98] bg-white transition-all checked:border-[5px] checked:border-navy-dark focus-visible:ring-2 focus-visible:ring-navy-dark/30"
+              className="h-[18px] w-[18px] shrink-0 cursor-pointer appearance-none rounded-full border border-[#b7c9d8] bg-white transition-all checked:border-[5px] checked:border-[#163056] focus-visible:ring-2 focus-visible:ring-[#8eb8d6]"
             />
             {o}
           </label>
@@ -301,19 +301,19 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="form" aria-labelledby="form-heading" className="scroll-mt-6 bg-ivory">
-      <div className="mx-auto grid w-[min(1232px,calc(100%-48px))] items-start gap-8 py-14 lg:grid-cols-[1.7fr_1fr] lg:gap-8 lg:py-[80px]">
+    <section id="form" aria-labelledby="form-heading" className="scroll-mt-28">
+      <div className="wrap grid items-start gap-8 py-14 lg:grid-cols-[1.7fr_1fr] lg:gap-8 lg:py-20">
         {/* ---------- Form ---------- */}
         <div
           ref={formRef}
-          className="scroll-mt-6 rounded-[4px] border border-[#e4dfd0] bg-white px-6 py-8 shadow-[0_4px_24px_rgba(11,42,70,0.06)] sm:px-9 sm:py-10"
+          className="paper scroll-mt-28 rounded-[28px] bg-white/95 px-6 py-8 shadow-paper ring-1 ring-white sm:px-9 sm:py-10"
         >
           {status === "success" ? (
             <div className="py-10 text-center" role="status">
-              <span className="mx-auto inline-flex h-[64px] w-[64px] items-center justify-center rounded-full border border-[#ddd5be] bg-[#faf8f2] text-navy">
+              <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#e7f3fb] text-navy">
                 <CheckCircleIcon className="h-[32px] w-[32px]" />
               </span>
-              <h2 className="mt-6 font-serif text-[32px] font-[500] leading-[1.15] text-navy">
+              <h2 className="mt-6 font-serif text-[32px] font-medium leading-[1.15] text-navy">
                 Thank you, {values.firstName.trim() || "and welcome"}.
               </h2>
               <p className="mx-auto mt-4 max-w-[460px] text-[15.5px] leading-[1.7] text-ink-body">
@@ -323,7 +323,7 @@ export default function ContactSection() {
               <button
                 type="button"
                 onClick={reset}
-                className="mt-7 text-[14px] font-medium text-navy underline decoration-gold decoration-[1.5px] underline-offset-[6px]"
+                className="mt-7 text-[14px] font-medium text-navy underline decoration-[#9ec0da] decoration-2 underline-offset-[6px]"
               >
                 Send another request
               </button>
@@ -332,7 +332,7 @@ export default function ContactSection() {
             <form onSubmit={submit} noValidate>
               <h2
                 id="form-heading"
-                className="font-serif text-[30px] font-[500] leading-[1.15] tracking-[-0.01em] text-navy sm:text-[34px]"
+                className="font-serif text-[30px] font-medium leading-[1.15] tracking-[-0.02em] text-navy sm:text-[34px]"
               >
                 Tell Us About Your Career Goals
               </h2>
@@ -460,10 +460,10 @@ export default function ContactSection() {
                     }}
                     onDragLeave={() => setDragging(false)}
                     onDrop={onDrop}
-                    className={`flex min-h-[48px] cursor-pointer items-center gap-3.5 rounded-[3px] border border-dashed px-4 py-2.5 transition-colors ${
+                    className={`flex min-h-12 cursor-pointer items-center gap-3.5 rounded-2xl border border-dashed px-4 py-2.5 transition-colors ${
                       dragging
-                        ? "border-navy-dark bg-[#eef3f7]"
-                        : "border-[#c9c2ac] bg-[#fbfaf6] hover:border-navy-dark"
+                        ? "border-[#163056] bg-[#eef6fb]"
+                        : "border-[#c5d7e6] bg-[#f7fbfe] hover:border-[#163056]"
                     }`}
                   >
                     <UploadIcon className="h-[22px] w-[22px] shrink-0 text-navy" />
@@ -529,7 +529,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="mt-8 flex h-[54px] w-full items-center justify-center gap-2.5 rounded-[4px] bg-navy-dark text-[15px] font-medium text-white transition-colors hover:bg-[#0a2a42] disabled:cursor-wait disabled:opacity-70"
+                className="btn-navy mt-8 h-[52px] w-full disabled:cursor-wait disabled:opacity-70"
               >
                 {status === "sending" ? "Sending..." : "Submit My Request"}
                 {status !== "sending" && <ArrowRight className="h-[16px] w-[16px]" />}
@@ -542,8 +542,8 @@ export default function ContactSection() {
         </div>
 
         {/* ---------- Side panels ---------- */}
-        <aside className="rounded-[4px] border border-[#e6dfcd] bg-[#f4efe4] px-6 py-8 sm:px-9 sm:py-10 lg:sticky lg:top-6">
-          <h2 className="font-serif text-[30px] font-[500] leading-[1.15] tracking-[-0.01em] text-navy">
+        <aside className="paper rounded-[28px] bg-white/70 px-6 py-8 shadow-paper ring-1 ring-white backdrop-blur-sm sm:px-9 sm:py-10 lg:sticky lg:top-24">
+          <h2 className="font-serif text-[30px] font-medium leading-[1.15] tracking-[-0.02em] text-navy">
             Not Sure Which Service You Need?
           </h2>
           <p className="mt-4 text-[15px] leading-[1.7] text-ink-body">
@@ -554,32 +554,32 @@ export default function ContactSection() {
           <button
             type="button"
             onClick={helpMeChoose}
-            className="mt-6 inline-flex h-[48px] items-center gap-2.5 rounded-[4px] border border-navy-dark px-6 text-[14px] font-medium text-navy-dark transition-colors hover:bg-navy-dark hover:text-white"
+            className="btn-line mt-6"
           >
             Help Me Choose
             <ArrowRight className="h-[15px] w-[15px]" />
           </button>
 
-          <div className="my-9 h-px bg-[#dfd7c1]" />
+          <div className="my-9 h-px bg-[#d5e4f0]" />
 
-          <h3 className="font-serif text-[24px] font-[500] text-navy">Get in Touch Directly</h3>
+          <h3 className="font-serif text-[24px] font-medium text-navy">Get in Touch Directly</h3>
           <ul className="mt-6 space-y-6">
             <li className="flex gap-4">
-              <span className="inline-flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full border border-[#d9d0b8] bg-white text-navy">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e7f3fb] text-[#3a7eb4]">
                 <MailIcon className="h-[22px] w-[22px]" />
               </span>
               <div>
                 <p className="text-[14px] font-semibold text-navy">Email</p>
                 <a
                   href={`mailto:${contactEmail}`}
-                  className="mt-0.5 block break-all text-[14.5px] text-ink-body underline decoration-gold decoration-[1.5px] underline-offset-4 hover:text-navy"
+                  className="mt-0.5 block break-all text-[14.5px] text-ink-body underline decoration-[#9ec0da] decoration-2 underline-offset-4 hover:text-navy"
                 >
                   {contactEmail}
                 </a>
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="inline-flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full border border-[#d9d0b8] bg-white text-navy">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e7f3fb] text-[#3a7eb4]">
                 <ClockIcon className="h-[22px] w-[22px]" />
               </span>
               <div>
@@ -590,7 +590,7 @@ export default function ContactSection() {
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="inline-flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full border border-[#d9d0b8] bg-white text-navy">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e7f3fb] text-[#3a7eb4]">
                 <CalendarIcon className="h-[22px] w-[22px]" />
               </span>
               <div>

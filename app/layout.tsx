@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "@fontsource-variable/inter";
-import "@fontsource-variable/newsreader/wght.css";
-import "@fontsource-variable/newsreader/wght-italic.css";
-import "@fontsource/cormorant-garamond/500.css";
-import "@fontsource/cormorant-garamond/600.css";
-import "@fontsource/cormorant-garamond/700.css";
-import "@fontsource/caveat/600.css";
+import "@fontsource/playfair-display/latin-500.css";
+import "@fontsource/playfair-display/latin-600.css";
+import "@fontsource/playfair-display/latin-700.css";
+import "@fontsource/playfair-display/latin-500-italic.css";
+import "@fontsource/playfair-display/latin-600-italic.css";
 import "./globals.css";
 
 const siteUrl = "https://veylora.haybee.xyz";

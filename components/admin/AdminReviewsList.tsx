@@ -107,7 +107,7 @@ export default function AdminReviewsList() {
       ) : (
         <ul className="mt-6 grid gap-4 sm:grid-cols-2">
           {shown.map((r) => (
-            <li key={r.id} className="rounded-[6px] border border-[#e4dfd0] bg-white p-5">
+            <li key={r.id} className="paper rounded-[22px] bg-white p-5 shadow-paper ring-1 ring-white">
               <div className="flex items-center gap-3">
                 {r.photo_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -132,14 +132,14 @@ export default function AdminReviewsList() {
                 <button
                   disabled={busyId === r.id || r.status === "approved"}
                   onClick={() => act(r.id, "approved")}
-                  className="h-[38px] flex-1 rounded-[4px] bg-navy-dark text-[13.5px] font-medium text-white disabled:opacity-50"
+                  className="h-10 flex-1 rounded-full bg-navy-dark text-[13.5px] font-medium text-white disabled:opacity-50"
                 >
                   Approve
                 </button>
                 <button
                   disabled={busyId === r.id || r.status === "rejected"}
                   onClick={() => act(r.id, "rejected")}
-                  className="h-[38px] flex-1 rounded-[4px] border border-[#b4442f] text-[13.5px] font-medium text-[#b4442f] disabled:opacity-50"
+                  className="h-10 flex-1 rounded-full border border-[#b4442f] text-[13.5px] font-medium text-[#b4442f] disabled:opacity-50"
                 >
                   Reject
                 </button>

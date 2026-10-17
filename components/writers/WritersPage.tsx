@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight } from "../Icons";
 import { writers, type Writer } from "@/data/writers";
+import SkyBand from "../visual/SkyBand";
 
 const wrap = "mx-auto w-[min(1232px,calc(100%-48px))]";
 
@@ -14,7 +15,7 @@ function Avatar({ writer, size }: { writer: Writer; size: number }) {
   if (writer.photo) {
     return (
       <span
-        className="relative block shrink-0 overflow-hidden rounded-full ring-1 ring-[#d8cfb6] ring-offset-[5px] ring-offset-[#f4efe4]"
+        className="relative block shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-paper"
         style={style}
       >
         <Image
@@ -31,7 +32,7 @@ function Avatar({ writer, size }: { writer: Writer; size: number }) {
     <span
       role="img"
       aria-label={`Initials of ${writer.name}`}
-      className="flex shrink-0 items-center justify-center rounded-full bg-white font-serif font-[500] text-navy ring-1 ring-[#d8cfb6] ring-offset-[5px] ring-offset-[#f4efe4]"
+      className="flex shrink-0 items-center justify-center rounded-full bg-white font-serif font-medium text-navy ring-4 ring-white shadow-paper"
       style={{ ...style, fontSize: size * 0.34 }}
     >
       {initials(writer.name)}
@@ -41,15 +42,13 @@ function Avatar({ writer, size }: { writer: Writer; size: number }) {
 
 export function WritersHero() {
   return (
-    <section aria-labelledby="writers-page-heading" className="bg-ivory">
-      <div className={`${wrap} pb-10 pt-14 lg:pb-[56px] lg:pt-[84px]`}>
-        <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.2em] text-[#8a6d3a]">
-          <span aria-hidden="true" className="h-px w-[44px] bg-gold" />
-          Our Writers
-        </p>
+    <SkyBand dense>
+    <section aria-labelledby="writers-page-heading">
+      <div className={`${wrap} pb-10 pt-12 lg:pb-14 lg:pt-16`}>
+        <p className="eyebrow">Our Writers</p>
         <h1
           id="writers-page-heading"
-          className="mt-5 max-w-[860px] font-serif text-[36px] font-[500] leading-[1.1] tracking-[-0.015em] text-navy sm:text-[46px] lg:text-[56px]"
+          className="mt-4 max-w-[860px] font-serif text-[36px] font-medium leading-[1.08] tracking-[-0.02em] text-navy sm:text-[48px] lg:text-[56px]"
         >
           Meet the Writers Behind Your Career Documents
         </h1>
@@ -66,7 +65,7 @@ export function WritersHero() {
               <li key={w.slug}>
                 <a
                   href={`#${w.slug}`}
-                  className="inline-flex items-center gap-2.5 rounded-full border border-[#dcd5c0] bg-white py-1.5 pl-1.5 pr-4 text-[13.5px] font-medium text-navy transition-colors hover:border-navy-dark"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-white/85 py-1.5 pl-1.5 pr-4 text-[13.5px] font-medium text-navy shadow-sm ring-1 ring-white transition hover:bg-white"
                 >
                   {w.photo ? (
                     <span className="relative block h-[28px] w-[28px] overflow-hidden rounded-full">
@@ -85,6 +84,7 @@ export function WritersHero() {
         </nav>
       </div>
     </section>
+    </SkyBand>
   );
 }
 
@@ -94,28 +94,28 @@ function WriterCard({ writer }: { writer: Writer }) {
     <article
       id={writer.slug}
       aria-labelledby={`${writer.slug}-name`}
-      className="scroll-mt-8 overflow-hidden rounded-[6px] border border-[#e4dfd0] bg-white shadow-[0_4px_24px_rgba(11,42,70,0.06)] transition-shadow target:border-gold target:shadow-[0_0_0_2px_#b39669,0_20px_48px_rgba(11,42,70,0.14)]"
+      className="paper scroll-mt-28 overflow-hidden rounded-[28px] bg-white shadow-paper ring-1 ring-white target:ring-2 target:ring-[#163056]"
     >
       <div className="grid lg:grid-cols-[340px_1fr]">
-        <div className="flex flex-col items-center bg-[#f4efe4] px-8 py-10 text-center lg:border-r lg:border-[#e6dfcd] lg:py-12">
+        <div className="flex flex-col items-center bg-[#f4f9fd] px-8 py-10 text-center lg:border-r lg:border-[#e3eef6] lg:py-12">
           <Avatar writer={writer} size={190} />
           <h2
             id={`${writer.slug}-name`}
-            className="mt-7 font-serif text-[30px] font-[500] leading-[1.1] tracking-[-0.01em] text-navy"
+            className="mt-7 font-serif text-[30px] font-medium leading-[1.1] text-navy"
           >
             {writer.name}
           </h2>
           <p className="mt-3 max-w-[260px] text-[14.5px] leading-[1.55] text-ink-muted">
             {writer.title}
           </p>
-          <p className="mt-5 inline-flex items-center rounded-full border border-[#d8c8a0] bg-white px-4 py-1.5 text-[11.5px] font-semibold uppercase tracking-[0.12em] text-[#8a6d3a]">
+          <p className="mt-5 inline-flex items-center rounded-full bg-white px-4 py-1.5 text-[11.5px] font-semibold uppercase tracking-[0.12em] text-sky-ink ring-1 ring-[#d5e4f0]">
             {writer.experience} years of experience
           </p>
           <ul className="mt-6 flex flex-wrap justify-center gap-2">
             {writer.focus.map((f) => (
               <li
                 key={f}
-                className="rounded-[3px] bg-white/80 px-2.5 py-1 text-[12px] text-[#3f6a8c] ring-1 ring-[#e2dbc6]"
+                className="rounded-full bg-white/80 px-2.5 py-1 text-[12px] text-sky-ink ring-1 ring-[#d5e4f0]"
               >
                 {f}
               </li>
@@ -124,7 +124,7 @@ function WriterCard({ writer }: { writer: Writer }) {
         </div>
 
         <div className="flex flex-col px-8 py-10 lg:px-14 lg:py-12">
-          <p className="font-serif text-[20px] font-[420] leading-[1.6] text-navy lg:text-[22px]">
+          <p className="font-serif text-[20px] leading-[1.6] text-navy lg:text-[22px]">
             {lead}
           </p>
           <div className="mt-6 space-y-4">
@@ -134,19 +134,16 @@ function WriterCard({ writer }: { writer: Writer }) {
               </p>
             ))}
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-[#ece7d8] pt-6">
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-[#e3eef6] pt-6">
             {writer.email ? (
-              <a
-                href={`mailto:${writer.email}`}
-                className="inline-flex h-[46px] items-center gap-2.5 rounded-[4px] bg-navy-dark px-6 text-[14px] font-medium text-white transition-colors hover:bg-[#0a2a42]"
-              >
+              <a href={`mailto:${writer.email}`} className="btn-navy">
                 Start Your Resume
                 <ArrowRight className="h-[15px] w-[15px]" />
               </a>
             ) : null}
             <a
               href={`/contact?writer=${encodeURIComponent(writer.slug)}#form`}
-              className="text-[13.5px] font-medium text-ink-muted underline decoration-[#cbbf9d] decoration-[1.5px] underline-offset-[6px] transition-colors hover:text-navy"
+              className="text-[13.5px] font-medium text-ink-muted underline decoration-[#9ec0da] decoration-2 underline-offset-[6px] transition-colors hover:text-navy"
             >
               Submit Your Info
             </a>
@@ -159,7 +156,7 @@ function WriterCard({ writer }: { writer: Writer }) {
 
 export function WriterCards() {
   return (
-    <section aria-label="Writer profiles" className="bg-ivory">
+    <section aria-label="Writer profiles">
       <div className={`${wrap} space-y-7 pb-16 lg:space-y-9 lg:pb-[96px]`}>
         {writers.map((w) => (
           <WriterCard key={w.slug} writer={w} />

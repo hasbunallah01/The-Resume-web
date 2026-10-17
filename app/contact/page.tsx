@@ -17,7 +17,7 @@ export default function ContactPage() {
   return (
     <>
       <Header active="Contact" />
-      <main>
+      <main id="main">
         <ContactHero />
         <ContactSection />
         <Process />

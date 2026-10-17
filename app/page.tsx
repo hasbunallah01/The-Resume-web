@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import TrustStrip from "@/components/TrustStrip";
 import Mission from "@/components/Mission";
 import Problem from "@/components/home/Problem";
 import ServicesOverview from "@/components/home/ServicesOverview";
@@ -18,16 +17,15 @@ import Footer from "@/components/Footer";
 export default function HomePage() {
   return (
     <>
-      <Header active="Home" />
-      <main>
+      <Header />
+      <main id="main">
         <Hero />
-        <TrustStrip />
         <Mission />
         <Problem />
         <ServicesOverview />
         <BeforeAfter />
         <Steps
-          id="home-process-heading"
+          id="how-it-works"
           heading="How Working With Veylora Works"
           steps={storySteps}
         />

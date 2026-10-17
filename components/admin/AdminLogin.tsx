@@ -39,7 +39,7 @@ export default function AdminLogin() {
   return (
     <form
       onSubmit={submit}
-      className="mx-auto mt-10 max-w-[360px] rounded-[6px] border border-[#e4dfd0] bg-white p-7 shadow-[0_4px_24px_rgba(11,42,70,0.06)]"
+      className="paper mx-auto mt-10 max-w-[380px] rounded-[28px] bg-white p-7 shadow-paper ring-1 ring-white"
     >
       <label htmlFor="admin-password" className="mb-2 block text-[13.5px] font-medium text-navy">
         Admin password
@@ -50,7 +50,7 @@ export default function AdminLogin() {
         autoComplete="current-password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="h-[46px] w-full rounded-[3px] border border-[#d6d0be] px-4 text-[15px] text-navy focus:border-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark/15"
+        className="h-12 w-full rounded-2xl border border-[#d3e3f0] px-4 text-[15px] text-navy focus:border-[#8eb8d6] focus:outline-none focus:ring-4 focus:ring-[#d3e8f6]"
       />
       {error && (
         <p role="alert" className="mt-2 text-[13px] text-[#b4442f]">
@@ -60,7 +60,7 @@ export default function AdminLogin() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-5 flex h-[46px] w-full items-center justify-center rounded-[4px] bg-navy-dark text-[14px] font-medium text-white transition-colors hover:bg-[#0a2a42] disabled:opacity-70"
+        className="btn-navy mt-5 w-full disabled:opacity-70"
       >
         {status === "sending" ? "Checking..." : "Sign In"}
       </button>

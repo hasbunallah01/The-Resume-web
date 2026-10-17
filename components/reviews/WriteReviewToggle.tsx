@@ -19,7 +19,7 @@ export default function WriteReviewToggle() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex h-[48px] items-center gap-2.5 rounded-[4px] border border-navy-dark px-6 text-[14px] font-medium text-navy-dark transition-colors hover:bg-navy-dark hover:text-white"
+        className="btn-line"
       >
         Share Your Experience
       </button>

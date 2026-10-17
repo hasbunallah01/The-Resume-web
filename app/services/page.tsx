@@ -21,7 +21,7 @@ export default function ServicesPage() {
   return (
     <>
       <Header active="Services" />
-      <main>
+      <main id="main">
         <Intro />
         <Pricing />
         <Steps

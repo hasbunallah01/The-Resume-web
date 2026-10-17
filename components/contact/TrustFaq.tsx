@@ -1,9 +1,7 @@
-import { ChatIcon, CheckCircleIcon, PersonIcon, PlusIcon } from "../resumes/ResumeIcons";
-
 const trust = [
-  { Icon: ChatIcon, title: "Professional Communication", text: "Clear communication throughout your project." },
-  { Icon: PersonIcon, title: "Personalized Service", text: "Your documents are built around your career story." },
-  { Icon: CheckCircleIcon, title: "Human Collaboration", text: "You work with a real member of the Veylora team." },
+  { title: "Professional Communication", text: "Clear communication throughout your project." },
+  { title: "Personalized Service", text: "Your documents are built around your career story." },
+  { title: "Human Collaboration", text: "You work with a real member of the Veylora team." },
 ];
 
 const faqs = [
@@ -31,55 +29,36 @@ const faqs = [
 
 export default function TrustFaq() {
   return (
-    <section
-      aria-labelledby="care-heading"
-      className="border-t border-[#e9e4d6] bg-[#f3efe4]"
-    >
-      <div className="mx-auto grid w-[min(1232px,calc(100%-48px))] gap-14 py-14 lg:grid-cols-[1fr_1fr] lg:gap-[88px] lg:py-[84px]">
-        <div>
-          <h2
-            id="care-heading"
-            className="font-serif text-[30px] font-[500] leading-[1.18] tracking-[-0.012em] text-navy sm:text-[36px] lg:text-[40px]"
-          >
-            Your career information deserves to be handled with care.
-          </h2>
-          <ul className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-0">
-            {trust.map(({ Icon, title, text }, i) => (
-              <li
-                key={title}
-                className={`sm:px-5 ${i === 0 ? "sm:pl-0" : "sm:border-l sm:border-[#dcd6c6]"}`}
-              >
-                <span className="inline-flex h-[46px] w-[46px] items-center justify-center rounded-full border border-[#d9d0b8] bg-white text-navy">
-                  <Icon className="h-[22px] w-[22px]" />
-                </span>
-                <h3 className="mt-4 text-[14.5px] font-semibold leading-[1.35] text-navy">
-                  {title}
-                </h3>
-                <p className="mt-1.5 text-[14px] leading-[1.6] text-ink-muted">{text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.18em] text-[#8a6d3a]">
-            <span aria-hidden="true" className="h-px w-[44px] bg-gold" />
-            Frequently asked questions
-          </p>
-          <h2 className="mt-4 font-serif text-[30px] font-[500] leading-[1.15] text-navy sm:text-[36px]">
-            Quick Answers
-          </h2>
-          <div className="mt-7 border-t border-[#d9d2bd]">
-            {faqs.map(({ q, a }) => (
-              <details key={q} className="group border-b border-[#d9d2bd]">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-[18px] text-[15.5px] font-medium text-navy transition-colors hover:text-navy-btn [&::-webkit-details-marker]:hidden">
-                  {q}
-                  <PlusIcon className="h-[18px] w-[18px] shrink-0 text-[#8a6d3a] transition-transform duration-200 group-open:rotate-45" />
-                </summary>
-                <p className="pb-5 pr-10 text-[14.5px] leading-[1.7] text-ink-muted">{a}</p>
-              </details>
-            ))}
-          </div>
+    <section aria-labelledby="care-heading" className="wrap grid gap-14 py-8 lg:grid-cols-2 lg:gap-16 lg:py-12">
+      <div>
+        <h2
+          id="care-heading"
+          className="font-serif text-[30px] font-medium leading-[1.18] tracking-[-0.02em] text-navy sm:text-[36px]"
+        >
+          Your career information deserves to be handled with care.
+        </h2>
+        <ul className="mt-8 space-y-6">
+          {trust.map(({ title, text }) => (
+            <li key={title} className="border-l-2 border-[#b7d4ea] pl-5">
+              <h3 className="font-serif text-[20px] font-medium text-navy">{title}</h3>
+              <p className="mt-1 text-[14.5px] leading-[1.6] text-ink-muted">{text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="paper rounded-[28px] bg-white/85 px-5 shadow-paper ring-1 ring-white sm:px-7">
+        <p className="eyebrow pt-6">Frequently asked questions</p>
+        <h2 className="mt-3 font-serif text-[28px] font-medium text-navy">Quick Answers</h2>
+        <div className="mt-2">
+          {faqs.map(({ q, a }) => (
+            <details key={q} className="group border-b border-[#e3eef6] last:border-b-0">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-4 text-[15.5px] font-medium text-navy [&::-webkit-details-marker]:hidden">
+                {q}
+                <span className="text-[22px] font-light text-sky-ink transition group-open:rotate-45">+</span>
+              </summary>
+              <p className="pb-4 pr-8 text-[14.5px] leading-[1.7] text-ink-muted">{a}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>

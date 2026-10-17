@@ -1,25 +1,23 @@
-import { PlusIcon } from "../resumes/ResumeIcons";
 import { homeFaqs } from "@/data/homeFaq";
 
 export default function FAQ() {
   return (
-    <section aria-labelledby="home-faq-heading" className="bg-ivory">
-      <div className="mx-auto w-[min(820px,calc(100%-48px))] py-14 lg:py-[80px]">
+    <section aria-labelledby="home-faq-heading" className="wrap pb-8 lg:pb-12">
+      <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
         <h2
           id="home-faq-heading"
-          className="text-center font-serif text-[30px] font-[500] leading-[1.2] tracking-[-0.012em] text-navy sm:text-[38px]"
+          className="font-serif text-[32px] font-medium leading-[1.15] tracking-[-0.02em] text-navy sm:text-[40px]"
         >
           Frequently Asked Questions
         </h2>
-
-        <div className="mt-10 border-t border-[#d9d2bd]">
+        <div className="paper rounded-[28px] bg-white/85 px-5 shadow-paper ring-1 ring-white sm:px-8">
           {homeFaqs.map(({ q, a }) => (
-            <details key={q} className="group border-b border-[#d9d2bd]">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-[18px] text-[15.5px] font-medium text-navy transition-colors hover:text-navy-btn [&::-webkit-details-marker]:hidden">
+            <details key={q} className="group border-b border-[#e3eef6] last:border-b-0">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-serif text-[18px] font-medium text-navy [&::-webkit-details-marker]:hidden">
                 {q}
-                <PlusIcon className="h-[18px] w-[18px] shrink-0 text-[#8a6d3a] transition-transform duration-200 group-open:rotate-45" />
+                <span className="text-[22px] font-light leading-none text-sky-ink transition group-open:rotate-45">+</span>
               </summary>
-              <p className="pb-5 pr-10 text-[14.5px] leading-[1.7] text-ink-muted">{a}</p>
+              <p className="pb-5 pr-8 text-[15px] leading-[1.7] text-ink-muted">{a}</p>
             </details>
           ))}
         </div>

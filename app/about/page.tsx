@@ -21,7 +21,7 @@ export default function AboutPage() {
   return (
     <>
       <Header active="About" />
-      <main>
+      <main id="main">
         <AboutIntro />
         <WhyVeylora />
         <OurApproach />

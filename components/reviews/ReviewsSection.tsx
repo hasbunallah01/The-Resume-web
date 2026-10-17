@@ -31,7 +31,7 @@ function Stars({ value }: { value: number }) {
 
 function ReviewCard({ review }: { review: ReviewRow }) {
   return (
-    <li className="flex flex-col rounded-[6px] border border-[#e3e9ef] bg-white p-5 shadow-[0_2px_10px_rgba(20,50,80,0.05)]">
+    <li className="paper flex flex-col rounded-[22px] bg-white p-5 shadow-paper ring-1 ring-white">
       <div className="flex items-center gap-3.5">
         {review.photo_url ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -43,7 +43,7 @@ function ReviewCard({ review }: { review: ReviewRow }) {
         ) : (
           <span
             aria-hidden="true"
-            className="inline-flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-full bg-[#e3ebf1] font-serif text-[16px] font-[600] text-[#164a73]"
+            className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e7f3fb] font-serif text-[16px] font-semibold text-[#164a73]"
           >
             {initials(review.name)}
           </span>
@@ -67,17 +67,14 @@ export default async function ReviewsSection() {
     reviews.length > 0 ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length : null;
 
   return (
-    <section aria-labelledby="reviews-heading" className="bg-ivory">
-      <div className="mx-auto w-[min(1232px,calc(100%-48px))] py-14 lg:py-[76px]">
+    <section aria-labelledby="reviews-heading">
+      <div className="wrap py-16 lg:py-20">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-[600px]">
-            <p className="flex items-center gap-4 text-[12px] font-medium uppercase tracking-[0.2em] text-[#0f3f78]">
-              <span aria-hidden="true" className="h-px w-[44px] bg-gold" />
-              Client reviews
-            </p>
+            <p className="eyebrow">Client reviews</p>
             <h2
               id="reviews-heading"
-              className="mt-3 font-serif text-[32px] font-[500] leading-[1.15] tracking-[-0.01em] text-navy sm:text-[40px]"
+              className="mt-3 font-serif text-[32px] font-medium leading-[1.15] tracking-[-0.02em] text-navy sm:text-[40px]"
             >
               What Our Clients Say
             </h2>
@@ -87,7 +84,7 @@ export default async function ReviewsSection() {
           </div>
 
           {average !== null && (
-            <div className="flex items-center gap-6 rounded-[8px] border border-[#e3e9ef] bg-white/80 px-6 py-5 shadow-[0_2px_12px_rgba(20,50,80,0.05)]">
+            <div className="paper flex items-center gap-6 rounded-[22px] bg-white/90 px-6 py-5 shadow-paper ring-1 ring-white">
               <span
                 aria-hidden="true"
                 className="inline-flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full bg-[#e9ab3e] text-white"
@@ -116,7 +113,7 @@ export default async function ReviewsSection() {
             ))}
           </ul>
         ) : (
-          <p className="mt-9 rounded-[4px] border border-[#e4dfd0] bg-white/70 px-6 py-8 text-center text-[15px] text-ink-muted">
+          <p className="paper mt-9 rounded-[22px] bg-white/80 px-6 py-8 text-center text-[15px] text-ink-muted ring-1 ring-white">
             Be the first to share your experience with Veylora.
           </p>
         )}

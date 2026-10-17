@@ -16,9 +16,9 @@ export default async function AdminReviewsPage() {
   const authed = verifySessionCookieValue(jar.get(ADMIN_COOKIE_NAME)?.value);
 
   return (
-    <div className="min-h-screen bg-ivory">
-      <div className="mx-auto w-[min(1000px,calc(100%-48px))] py-12">
-        <h1 className="font-serif text-[28px] font-[520] text-navy">Review Moderation</h1>
+    <div className="min-h-screen">
+      <div className="wrap py-12">
+        <h1 className="font-serif text-[34px] font-medium text-navy">Review Moderation</h1>
         <p className="mt-1.5 text-[14px] text-ink-muted">
           Approve or reject reviews submitted through the public Services page.
         </p>

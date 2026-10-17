@@ -1,30 +1,120 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import { navLinks } from "@/data/writers";
+import { ArrowIcon } from "./visual/Marks";
 
-export default function Header({ active = "Home" }: { active?: string }) {
+const serviceLinks = [
+  { label: "Resume writing", href: "/services" },
+  { label: "Packages and pricing", href: "/services#pricing" },
+  { label: "Our writers", href: "/writers" },
+];
+
+const links = [
+  { label: "How It Works", href: "/#how-it-works", key: "How" },
+  { label: "About Us", href: "/about", key: "About" },
+  { label: "Pricing", href: "/services#pricing", key: "Pricing" },
+];
+
+function Chevron({ open }: { open?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 12 12"
+      className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      aria-hidden="true"
+    >
+      <path d="M2 4.2 6 8l4-3.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export default function Header({ active = "" }: { active?: string }) {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const servicesActive = active === "Services" || active === "Our Writers";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <header className="relative z-30 bg-ivory-nav">
-      <div className="relative mx-auto flex h-[84px] w-[min(1232px,calc(100%-48px))] items-center justify-between lg:h-[108px]">
+    <header
+      className={`sticky top-0 z-40 transition-colors duration-300 ${
+        scrolled || open
+          ? "border-b border-[#d5e4f0]/80 bg-[#f4f9fc]/80 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2"
+      >
+        Skip to content
+      </a>
+      <div className="wrap flex h-[76px] items-center justify-between gap-4">
         <Logo />
 
-        <nav
-          aria-label="Primary"
-          className="hidden items-center gap-[12px] whitespace-nowrap text-[13.5px] text-[#12324f] md:flex lg:gap-[26px] lg:text-[14px] xl:absolute xl:left-[451px] xl:top-1/2 xl:-translate-y-1/2 xl:gap-[34px] xl:text-[14.2px]"
-        >
-          {navLinks.map((link) => (
+        <nav aria-label="Primary" className="hidden items-center gap-8 text-[15px] text-[#1c3554] lg:flex">
+          <div
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) setServicesOpen(false);
+            }}
+          >
+            <a
+              href="/services"
+              aria-current={servicesActive ? "page" : undefined}
+              className={`inline-flex items-center gap-1.5 py-2 transition-colors hover:text-navy ${
+                servicesActive ? "text-navy" : ""
+              }`}
+              onFocus={() => setServicesOpen(true)}
+            >
+              Services
+              <Chevron open={servicesOpen} />
+            </a>
+            <div
+              id="services-menu"
+              className={`absolute left-1/2 top-full z-20 w-60 -translate-x-1/2 pt-3 transition duration-150 ${
+                servicesOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"
+              }`}
+            >
+              <div className="rounded-2xl bg-white/95 p-2 shadow-lift ring-1 ring-[#e4eef6] backdrop-blur">
+                {serviceLinks.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="block rounded-xl px-3 py-2.5 text-[14px] text-[#1c3554] transition hover:bg-[#f3f8fc]"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {links.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              aria-current={link.label === active ? "page" : undefined}
-              className={`relative py-1 transition-colors hover:text-navy-btn ${
-                link.label === active
-                  ? "after:absolute after:bottom-[-2px] after:left-0 after:h-[1.5px] after:w-full after:bg-[#12324f]"
-                  : ""
+              aria-current={active === link.key ? "page" : undefined}
+              className={`py-2 transition-colors hover:text-navy ${
+                active === link.key ? "text-navy" : ""
               }`}
             >
               {link.label}
@@ -32,36 +122,24 @@ export default function Header({ active = "Home" }: { active?: string }) {
           ))}
         </nav>
 
-        <a
-          href="/contact"
-          className="hidden h-[42px] w-[104px] items-center justify-center rounded-[4px] bg-gold text-[14px] font-medium tracking-[0.01em] text-white transition-colors hover:bg-[#a5895f] md:inline-flex lg:h-[49px] lg:w-[136px]"
-        >
-          Get Started
+        <a href="/contact" className="btn-navy hidden h-11 px-5 text-[14px] lg:inline-flex">
+          Start My Resume
+          <ArrowIcon className="h-3.5 w-3.5" />
         </a>
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-[#12324f]/25 text-[#12324f] md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/80 text-navy shadow-sm ring-1 ring-[#d5e4f0] lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             {open ? (
-              <path
-                d="M4 4l12 12M16 4L4 16"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
+              <path d="M4 4l12 12M16 4 4 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
             ) : (
-              <path
-                d="M3 6h14M3 10h14M3 14h14"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
+              <path d="M3.5 6h13M3.5 10h13M3.5 14h13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
             )}
           </svg>
         </button>
@@ -71,26 +149,39 @@ export default function Header({ active = "Home" }: { active?: string }) {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="absolute inset-x-0 top-full border-t border-[#12324f]/10 bg-ivory-nav px-6 pb-6 pt-2 shadow-[0_12px_24px_rgba(11,42,70,0.08)] md:hidden"
+          className="max-h-[calc(100svh-76px)] overflow-y-auto border-t border-[#d5e4f0] bg-[#f7fbfe]/95 px-5 pb-8 pt-2 backdrop-blur-md lg:hidden"
         >
-          <ul className="flex flex-col">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="block border-b border-[#12324f]/10 py-3.5 text-[15px] text-[#12324f]"
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </a>
-              </li>
+          <a href="/services" className="block border-b border-[#e1ebf3] py-3.5 text-[17px] text-navy" onClick={() => setOpen(false)}>
+            Services
+          </a>
+          <div className="border-b border-[#e1ebf3] py-2 pl-3">
+            {serviceLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="block py-2 text-[14.5px] text-ink-body"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </a>
             ))}
-          </ul>
-          <a
-            href="/contact"
-            className="mt-5 inline-flex h-[46px] w-full items-center justify-center rounded-[4px] bg-gold text-[14px] font-medium text-white"
-          >
-            Get Started
+          </div>
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="block border-b border-[#e1ebf3] py-3.5 text-[17px] text-navy"
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          <a href="/contact" className="block border-b border-[#e1ebf3] py-3.5 text-[17px] text-navy" onClick={() => setOpen(false)}>
+            Contact
+          </a>
+          <a href="/contact" className="btn-navy mt-5 w-full" onClick={() => setOpen(false)}>
+            Start My Resume
+            <ArrowIcon className="h-3.5 w-3.5" />
           </a>
         </nav>
       )}

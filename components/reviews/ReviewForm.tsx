@@ -206,9 +206,9 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
     return (
       <div
         role="status"
-        className="rounded-[4px] border border-[#d8c8a0] bg-[#faf7ef] px-6 py-7 text-center"
+        className="paper rounded-[24px] bg-white px-6 py-7 text-center shadow-paper ring-1 ring-[#d5e4f0]"
       >
-        <p className="font-serif text-[20px] font-[520] text-navy">Thank you for sharing your experience.</p>
+        <p className="font-serif text-[22px] font-medium text-navy">Thank you for sharing your experience.</p>
         <p className="mt-2 text-[14.5px] leading-[1.6] text-ink-muted">
           Your review has been submitted and will appear after approval.
         </p>
@@ -220,9 +220,9 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
     <form
       onSubmit={submit}
       noValidate
-      className="rounded-[6px] border border-[#e4dfd0] bg-white p-6 shadow-[0_4px_24px_rgba(11,42,70,0.06)] sm:p-8"
+      className="paper rounded-[28px] bg-white p-6 shadow-paper ring-1 ring-white sm:p-8"
     >
-      <h3 className="font-serif text-[24px] font-[520] text-navy">Share Your Experience</h3>
+      <h3 className="font-serif text-[26px] font-medium text-navy">Share Your Experience</h3>
 
       <div className="mt-6">
         <StarPicker value={rating} onChange={setRating} error={errors.rating} />
@@ -242,7 +242,7 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
           placeholder="Your name"
           aria-invalid={!!errors.name}
           aria-describedby={errors.name ? "review-name-error" : undefined}
-          className="h-[46px] w-full rounded-[3px] border border-[#d6d0be] bg-white px-4 text-[15px] text-navy placeholder:text-[#9aa5af] focus:border-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark/15"
+          className="h-12 w-full rounded-2xl border border-[#d3e3f0] bg-white px-4 text-[15px] text-navy placeholder:text-[#8ea3b8] focus:border-[#8eb8d6] focus:outline-none focus:ring-4 focus:ring-[#d3e8f6]"
         />
         {errors.name && (
           <p id="review-name-error" role="alert" className="mt-1.5 text-[12.5px] text-[#b4442f]">
@@ -274,7 +274,7 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
         ) : (
           <label
             htmlFor="review-photo"
-            className="flex min-h-[46px] cursor-pointer items-center gap-3 rounded-[3px] border border-dashed border-[#c9c2ac] bg-[#fbfaf6] px-4 py-2.5 transition-colors hover:border-navy-dark"
+            className="flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-[#c5d7e6] bg-[#f7fbfe] px-4 py-2.5 transition-colors hover:border-[#163056]"
           >
             <UploadIcon className="h-[20px] w-[20px] shrink-0 text-navy" />
             <span className="text-[13px] leading-[1.4] text-ink-muted">
@@ -319,7 +319,7 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
           placeholder="Tell us about your experience..."
           aria-invalid={!!errors.comment}
           aria-describedby={errors.comment ? "review-comment-error" : undefined}
-          className="min-h-[110px] w-full resize-y rounded-[3px] border border-[#d6d0be] bg-white px-4 py-3 text-[15px] leading-[1.6] text-navy placeholder:text-[#9aa5af] focus:border-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark/15"
+          className="min-h-[110px] w-full resize-y rounded-2xl border border-[#d3e3f0] bg-white px-4 py-3 text-[15px] leading-[1.6] text-navy placeholder:text-[#8ea3b8] focus:border-[#8eb8d6] focus:outline-none focus:ring-4 focus:ring-[#d3e8f6]"
         />
         {errors.comment && (
           <p id="review-comment-error" role="alert" className="mt-1.5 text-[12.5px] text-[#b4442f]">
@@ -350,7 +350,7 @@ export default function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-6 flex h-[50px] w-full items-center justify-center gap-2.5 rounded-[4px] bg-navy-dark text-[14.5px] font-medium text-white transition-colors hover:bg-[#0a2a42] disabled:cursor-wait disabled:opacity-70 sm:w-auto sm:px-8"
+        className="btn-navy mt-6 w-full disabled:cursor-wait disabled:opacity-70 sm:w-auto"
       >
         {status === "sending" ? "Submitting..." : "Submit Review"}
       </button>
