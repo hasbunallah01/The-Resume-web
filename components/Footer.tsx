@@ -44,9 +44,17 @@ export default function Footer() {
         <div className="border-t border-white/10">
           <div className="wrap flex flex-col gap-3 py-5 text-[12.5px] text-white/55 sm:flex-row sm:items-center sm:justify-between">
             <p>&copy; {new Date().getFullYear()} Veylora. All rights reserved.</p>
-            <a href={`mailto:${contactEmail}`} className="transition hover:text-white">
-              {contactEmail}
-            </a>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <a href="/privacy" className="transition hover:text-white">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="transition hover:text-white">
+                Terms of Service
+              </a>
+              <a href={`mailto:${contactEmail}`} className="transition hover:text-white">
+                {contactEmail}
+              </a>
+            </div>
           </div>
         </div>
       </div>

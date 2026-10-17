@@ -537,6 +537,11 @@ export default function ContactSection() {
               <p className="mt-4 text-center text-[12.5px] text-ink-muted">
                 Your information is used only to respond to your request.
               </p>
+              <p className="mt-2 text-center text-[12px] text-ink-soft">
+                By submitting, you agree to our{" "}
+                <a href="/terms" className="underline decoration-[#9ec0da] underline-offset-2 hover:text-navy">Terms</a> and{" "}
+                <a href="/privacy" className="underline decoration-[#9ec0da] underline-offset-2 hover:text-navy">Privacy Policy</a>.
+              </p>
             </form>
           )}
         </div>

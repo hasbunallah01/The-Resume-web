@@ -492,3 +492,33 @@ body {
     transform: none !important;
   }
 }
+
+.legal-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.legal-body li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.legal-body li + li {
+  margin-top: 0.5rem;
+}
+
+.legal-body li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.72em;
+  height: 6px;
+  width: 6px;
+  border-radius: 999px;
+  background: #8ec0ea;
+}
+
+.legal-body strong {
+  font-weight: 600;
+  color: #142848;
+}
