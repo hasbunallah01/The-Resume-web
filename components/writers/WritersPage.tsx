@@ -94,7 +94,7 @@ function WriterCard({ writer }: { writer: Writer }) {
     <article
       id={writer.slug}
       aria-labelledby={`${writer.slug}-name`}
-      className="paper scroll-mt-28 overflow-hidden rounded-[28px] bg-white shadow-paper ring-1 ring-white target:ring-2 target:ring-[#163056]"
+      className="paper overflow-hidden rounded-[28px] bg-white shadow-paper ring-1 ring-white target:ring-2 target:ring-[#163056]"
     >
       <div className="grid lg:grid-cols-[340px_1fr]">
         <div className="flex flex-col items-center bg-[#f4f9fd] px-8 py-10 text-center lg:border-r lg:border-[#e3eef6] lg:py-12">

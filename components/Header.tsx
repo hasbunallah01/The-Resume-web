@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import { ArrowIcon } from "./visual/Marks";
 
@@ -39,12 +40,53 @@ export default function Header({ active = "" }: { active?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const servicesActive = active === "Services" || active === "Our Writers";
 
+  const headerRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+
+  // Only the background changes after scrolling; the header itself never moves or hides.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      setScrolled(window.scrollY > 8);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
+
+  // Close the mobile menu on route change.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Close the mobile menu on Escape, a tap outside the header, or a same page hash jump.
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) close();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    window.addEventListener("hashchange", close);
+    window.addEventListener("popstate", close);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+      window.removeEventListener("hashchange", close);
+      window.removeEventListener("popstate", close);
+    };
+  }, [open]);
 
   // Desktop Services dropdown: close on outside click or Escape.
   useEffect(() => {
@@ -70,19 +112,30 @@ export default function Header({ active = "" }: { active?: string }) {
     if (!open) setMobileServicesOpen(false);
   }, [open]);
 
+  // Lock page scroll behind the open menu and restore it afterwards.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const html = document.documentElement;
+    const prev = [html.style.overflow, document.body.style.overflow];
+    html.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      html.style.overflow = prev[0];
+      document.body.style.overflow = prev[1];
     };
   }, [open]);
 
+  const solid = scrolled || open;
+
   return (
+    <>
+    {/* Fixed, never hidden. Only the background fades in after the page scrolls. */}
     <header
-      className={`sticky top-0 z-40 transition-colors duration-300 ${
-        scrolled || open
-          ? "border-b border-[#d5e4f0]/80 bg-[#f4f9fc]/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
+      ref={headerRef}
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-200 ${
+        solid
+          ? "border-[#d5e4f0] bg-[#f4f9fc]/95 shadow-[0_8px_24px_rgba(20,56,92,0.06)] supports-[backdrop-filter]:bg-[#f4f9fc]/[0.88] supports-[backdrop-filter]:backdrop-blur-md"
+          : "border-transparent bg-transparent"
       }`}
     >
       <a
@@ -165,7 +218,7 @@ export default function Header({ active = "" }: { active?: string }) {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/80 text-navy shadow-sm ring-1 ring-[#d5e4f0] lg:hidden"
+          className="inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-full bg-white/80 text-navy shadow-sm ring-1 ring-[#d5e4f0] lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -185,7 +238,7 @@ export default function Header({ active = "" }: { active?: string }) {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="max-h-[calc(100svh-76px)] overflow-y-auto border-t border-[#d5e4f0] bg-[#f7fbfe]/95 px-5 pb-8 pt-2 backdrop-blur-md lg:hidden"
+          className="max-h-[calc(100vh-77px)] overflow-y-auto overscroll-contain supports-[height:100dvh]:max-h-[calc(100dvh-77px)] border-t border-[#d5e4f0] bg-[#f7fbfe] px-5 pb-8 pt-2 lg:hidden"
         >
           <a href="/" className="block border-b border-[#e1ebf3] py-3.5 text-[17px] text-navy" onClick={() => setOpen(false)}>
             Home
@@ -245,5 +298,8 @@ export default function Header({ active = "" }: { active?: string }) {
         </nav>
       )}
     </header>
+    {/* Holds the header's space in the flow so content never slides under it. */}
+    <div aria-hidden="true" className="h-[77px]" />
+    </>
   );
 }

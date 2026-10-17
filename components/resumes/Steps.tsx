@@ -16,7 +16,7 @@ export default function Steps({
       <div className="wrap py-16 lg:py-24">
         <h2
           id={id}
-          className="scroll-mt-28 max-w-[760px] font-serif text-[32px] font-medium leading-[1.15] tracking-[-0.02em] text-navy sm:text-[40px]"
+          className="max-w-[760px] font-serif text-[32px] font-medium leading-[1.15] tracking-[-0.02em] text-navy sm:text-[40px]"
         >
           {heading}
         </h2>

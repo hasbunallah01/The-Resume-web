@@ -11,7 +11,7 @@ function Tick() {
 
 export default function Pricing() {
   return (
-    <section id="pricing" aria-labelledby="pricing-heading" className="scroll-mt-28">
+    <section id="pricing" aria-labelledby="pricing-heading">
       <div className="wrap py-16 lg:py-24">
         <div className="mx-auto max-w-[680px] text-center">
           <p className="eyebrow justify-center">Career documents built with purpose</p>

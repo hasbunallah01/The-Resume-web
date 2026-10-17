@@ -301,12 +301,12 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="form" aria-labelledby="form-heading" className="scroll-mt-28">
+    <section id="form" aria-labelledby="form-heading">
       <div className="wrap grid items-start gap-8 py-14 lg:grid-cols-[1.7fr_1fr] lg:gap-8 lg:py-20">
         {/* ---------- Form ---------- */}
         <div
           ref={formRef}
-          className="paper scroll-mt-28 rounded-[28px] bg-white/95 px-6 py-8 shadow-paper ring-1 ring-white sm:px-9 sm:py-10"
+          className="paper rounded-[28px] bg-white/95 px-6 py-8 shadow-paper ring-1 ring-white sm:px-9 sm:py-10"
         >
           {status === "success" ? (
             <div className="py-10 text-center" role="status">
