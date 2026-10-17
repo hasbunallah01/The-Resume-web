@@ -65,10 +65,10 @@ export default function Header({ active = "" }: { active?: string }) {
       >
         Skip to content
       </a>
-      <div className="wrap flex h-[76px] items-center justify-between gap-4">
+      <div className="head-wrap flex h-[76px] items-center justify-between gap-4">
         <Logo />
 
-        <nav aria-label="Primary" className="hidden items-center gap-8 text-[15px] text-[#1c3554] lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-[clamp(2rem,3vw,3rem)] text-[clamp(15px,1.15vw,17px)] text-[#13254b] lg:flex">
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -122,9 +122,9 @@ export default function Header({ active = "" }: { active?: string }) {
           ))}
         </nav>
 
-        <a href="/contact" className="btn-navy hidden h-11 px-5 text-[14px] lg:inline-flex">
+        <a href="/contact" className="btn-navy hidden h-12 gap-3 px-7 text-[clamp(15px,1.1vw,16px)] lg:inline-flex">
           Start My Resume
-          <ArrowIcon className="h-3.5 w-3.5" />
+          <ArrowIcon className="h-4 w-4" />
         </a>
 
         <button

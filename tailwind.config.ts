@@ -9,7 +9,7 @@ const config: Config = {
           DEFAULT: "#142848",
           deep: "#0e1c33",
           footer: "#102038",
-          btn: "#163056",
+          btn: "#11275a",
           dark: "#163056",
         },
         ivory: {
@@ -33,7 +33,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ['"Playfair Display"', "Georgia", "serif"],
+        serif: ['"Newsreader Variable"', "Georgia", "serif"],
         logo: ['"Playfair Display"', "Georgia", "serif"],
         sans: ['"Inter Variable"', "system-ui", "sans-serif"],
       },
@@ -54,6 +54,10 @@ const config: Config = {
           "0%, 100%": { transform: "translate3d(0, 0, 0)" },
           "50%": { transform: "translate3d(0, -12px, 0)" },
         },
+        "sky-drift": {
+          "0%": { transform: "scale(1.02) translate3d(0, 0, 0)" },
+          "100%": { transform: "scale(1.05) translate3d(-0.8%, -0.6%, 0)" },
+        },
         twinkle: {
           "0%, 100%": { opacity: "0.25" },
           "50%": { opacity: "1" },
@@ -65,6 +69,7 @@ const config: Config = {
         "drift-reverse": "drift-reverse 48s ease-in-out infinite",
         floaty: "floaty 7.5s ease-in-out infinite",
         "floaty-slow": "floaty 9.5s ease-in-out infinite",
+        "sky-drift": "sky-drift 38s ease-in-out infinite alternate",
         twinkle: "twinkle 3.6s ease-in-out infinite",
       },
     },

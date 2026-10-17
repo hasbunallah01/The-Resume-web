@@ -1,6 +1,10 @@
-import CloudLayers from "./CloudLayers";
+import Image from "next/image";
 import HeroParallax from "./HeroParallax";
 
+/**
+ * Soft sky used behind the top of inner pages. It borrows the cloud bank from
+ * the home hero art so every page opens in the same sky, just quieter.
+ */
 export default function SkyBand({
   children,
   className = "",
@@ -11,10 +15,26 @@ export default function SkyBand({
   dense?: boolean;
 }) {
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <HeroParallax>
-        <CloudLayers dense={dense} />
-      </HeroParallax>
+    <div className={`relative isolate overflow-hidden ${className}`}>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(1100px_520px_at_78%_0%,rgba(255,255,255,0.75),transparent_65%),linear-gradient(180deg,#e3f0fa_0%,#dcedf9_40%,rgba(234,244,251,0)_100%)]" />
+        <HeroParallax>
+          <div
+            data-depth="0.08"
+            className={`absolute inset-x-0 bottom-0 ${dense ? "h-[300px] opacity-80" : "h-[220px] opacity-60"} [mask-image:linear-gradient(180deg,transparent,#000_45%,#000_70%,transparent)]`}
+          >
+            <div className="absolute inset-0 motion-safe:animate-drift-slow">
+              <Image
+                src="/hero/clouds-1920.webp"
+                alt=""
+                fill
+                sizes="100vw"
+                className="scale-110 object-cover object-bottom"
+              />
+            </div>
+          </div>
+        </HeroParallax>
+      </div>
       <div className="relative">{children}</div>
     </div>
   );

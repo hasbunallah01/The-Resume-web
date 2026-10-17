@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import "@fontsource-variable/inter";
-import "@fontsource/playfair-display/latin-500.css";
+import "@fontsource-variable/newsreader/opsz.css";
+import "@fontsource-variable/newsreader/opsz-italic.css";
 import "@fontsource/playfair-display/latin-600.css";
-import "@fontsource/playfair-display/latin-700.css";
-import "@fontsource/playfair-display/latin-500-italic.css";
-import "@fontsource/playfair-display/latin-600-italic.css";
 import "./globals.css";
 
 const siteUrl = "https://veylora.haybee.xyz";

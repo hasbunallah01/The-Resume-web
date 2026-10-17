@@ -13,7 +13,7 @@ export default function Logo({ variant = "dark", size = "lg" }: LogoProps) {
       <span
         className={`relative font-logo font-semibold tracking-[0.01em] ${
           light ? "text-white" : "text-[#142848]"
-        } ${sm ? "text-[30px]" : "text-[32px] sm:text-[34px]"}`}
+        } ${sm ? "text-[30px]" : "text-[32px] sm:text-[34px] lg:text-[clamp(34px,2.8vw,40px)]"}`}
       >
         Veylora
         <FeatherMark

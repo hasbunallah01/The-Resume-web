@@ -17,12 +17,8 @@ body {
 body {
   color: #142848;
   font-family: "Inter Variable", system-ui, sans-serif;
-  background-color: #e7f3fb;
-  background-image:
-    radial-gradient(1100px 520px at 85% -10%, rgba(255, 255, 255, 0.85), transparent 62%),
-    radial-gradient(900px 480px at 0% 12%, rgba(255, 255, 255, 0.55), transparent 58%),
-    linear-gradient(180deg, #d5ecf9 0%, #eaf5fb 32%, #f5fafd 68%, #f8fbfe 100%);
-  background-attachment: fixed;
+  background-color: #edf5fb;
+  background-image: linear-gradient(180deg, #e3f0fa 0, #eaf4fb 1200px, #f0f6fc 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -47,6 +43,29 @@ body {
   @media (min-width: 1024px) {
     .wrap {
       width: min(1160px, calc(100% - 80px));
+    }
+  }
+
+  /* Wider frame used by the header and the home hero. */
+  .hero-wrap {
+    width: min(1280px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-wrap {
+      width: min(1288px, calc(100% - 112px));
+    }
+  }
+
+  .head-wrap {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .head-wrap {
+      width: min(1348px, calc(100% - 80px));
     }
   }
 

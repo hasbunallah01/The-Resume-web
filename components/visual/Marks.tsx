@@ -121,3 +121,50 @@ export function ShieldMark({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+
+/* Filled hero marks, drawn to sit inside a soft blue circle. */
+export function DocSolid({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
+      <path
+        d="M9.6 4h9.1L25 10.3v16.2A1.5 1.5 0 0 1 23.5 28h-13.9A1.6 1.6 0 0 1 8 26.4V5.6A1.6 1.6 0 0 1 9.6 4Z"
+        fill="currentColor"
+      />
+      <path d="M18.6 4v5.1c0 .7.5 1.2 1.2 1.2H25" fill="#fff" fillOpacity="0.38" />
+      <path
+        d="M11.6 14.4h9.8M11.6 18h9.8M11.6 21.6h6.6"
+        stroke="#fff"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function QuillSolid({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
+      <path
+        d="M26.6 4.2c-7.7.6-13.5 4.8-16.4 11.3-1 2.3-1.6 4.8-1.8 7.4l2.2-2.2c1.9.3 4.2-.2 6.2-1.6l-2.3-.6 3.6-1.3c1.4-1.3 2.6-2.9 3.5-4.7l-2.6.1 3.6-2.3c1.6-2.1 3-4.1 4-6.1Z"
+        fill="currentColor"
+      />
+      <path d="M6 27.2 18.4 12.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function CompassSolid({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" className={className} aria-hidden="true" fill="none">
+      <circle cx="16" cy="16" r="11.2" stroke="currentColor" strokeWidth="2" />
+      <path
+        d="M16 6.6v1.8M16 23.6v1.8M6.6 16h1.8M23.6 16h1.8"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path d="m20.6 11.4-3 6.2-6.2 3 3-6.2 6.2-3Z" fill="currentColor" />
+      <circle cx="16" cy="16" r="1.3" fill="#fff" />
+    </svg>
+  );
+}
