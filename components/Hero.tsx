@@ -31,6 +31,27 @@ function SkyArt({ className = "", mobile = false }: { className?: string; mobile
     blurDataURL: BLUR,
     quality: 85,
   };
+  if (mobile) {
+    // On small screens the art is drawn at roughly twice the viewport width.
+    const { props } = getImageProps({
+      ...common,
+      priority: false,
+      loading: "eager",
+      fetchPriority: "high",
+      src: "/hero/sky-1920.webp",
+      width: 1920,
+      height: 1080,
+      sizes: "(min-width: 640px) 135vw, 195vw",
+    });
+    return (
+      <picture>
+        {/* Hidden on desktop: hand wide screens a 1px placeholder so this copy is never downloaded there. */}
+        <source media="(min-width: 1024px)" srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <img {...props} className={className} />
+      </picture>
+    );
+  }
   const {
     props: { srcSet: wide },
   } = getImageProps({ ...common, src: "/hero/sky-1920.webp", width: 1920, height: 1080, sizes: "100vw" });
@@ -40,7 +61,7 @@ function SkyArt({ className = "", mobile = false }: { className?: string; mobile
 
   return (
     <picture>
-      {!mobile && <source media="(min-width: 1024px)" srcSet={wide} sizes="100vw" />}
+      <source media="(min-width: 1024px)" srcSet={wide} sizes="100vw" />
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <img {...rest} srcSet={small} sizes="100vw" className={className} />
     </picture>
@@ -69,7 +90,17 @@ export default function Hero() {
       />
 
       <div className="hero-wrap relative flex flex-1 flex-col pb-6 lg:pb-[clamp(1.5rem,6.5vh,3.75rem)]">
-        <div className="relative flex min-h-[calc(100svh-76px)] flex-col pt-7 sm:pt-10 lg:block lg:min-h-0 lg:pt-[clamp(1.5rem,7vh,4.5rem)]">
+        <div className="relative pb-2 pt-7 sm:pt-10 lg:pb-0 lg:pt-[clamp(1.5rem,7vh,4.5rem)]">
+          {/* Small screens: the plane and drifting pages sit right behind the copy, under a soft light wash */}
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -top-[76px] left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden [mask-image:linear-gradient(180deg,#000_72%,transparent)] lg:hidden">
+            <div className="absolute left-[-64vw] top-[9vw] aspect-[16/9] w-[190vw] sm:left-[-12vw] sm:top-[calc(76px-2vw)] sm:w-[132vw]">
+              <div className="absolute inset-0 motion-safe:animate-sky-drift">
+                <SkyArt mobile className="h-full w-full object-cover [mask-image:linear-gradient(180deg,transparent_0%,#000_12%,#000_78%,transparent_100%)]" />
+              </div>
+            </div>
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(246,250,254,0.74)_0%,rgba(246,250,254,0.42)_50%,rgba(246,250,254,0.08)_100%)]" />
+            <div className="absolute inset-x-0 top-0 h-[180px] bg-gradient-to-b from-[rgba(246,250,254,0.75)] to-transparent" />
+          </div>
           <div className="max-w-[700px]">
           <p className="inline-flex items-center gap-2.5 text-[12px] font-medium uppercase tracking-[0.2em] text-[#4b8fd6] sm:text-[13px] lg:text-[clamp(12.5px,1.08vw,15.5px)]">
             <Spark className="h-[18px] w-[18px] text-[#7fb3e6]" />
@@ -109,22 +140,9 @@ export default function Hero() {
           </div>
         </div>
 
-          {/* Small screens: the same sky fills the first screen; the plane flies in the open space under the buttons */}
-          <div aria-hidden="true" className="pointer-events-none relative min-h-[64vw] flex-1 sm:min-h-[46vw] lg:hidden">
-            <div className="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2">
-              <div className="absolute left-[-58vw] top-[calc(50%-49.8vw)] aspect-[16/9] w-[175vw] sm:left-[-26vw] sm:top-[calc(50%-34.6vw)] sm:w-[125vw]">
-                <div className="absolute inset-0 motion-safe:animate-sky-drift">
-                  <SkyArt
-                    mobile
-                    className="h-full w-full object-cover [mask-image:linear-gradient(180deg,transparent_0%,#000_24%,#000_84%,transparent_100%)]"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div className="relative z-10 mx-auto -mt-[14vw] w-full sm:-mt-[8vw] lg:mt-auto lg:max-w-[1210px] lg:pt-8">
+        <div className="relative z-10 mx-auto mt-8 w-full sm:mt-10 lg:mt-auto lg:max-w-[1210px] lg:pt-8">
           <ul className="grid gap-3.5 lg:grid-cols-3 lg:gap-4 xl:gap-5">
             {cards.map(({ title, text, Icon }) => (
               <li

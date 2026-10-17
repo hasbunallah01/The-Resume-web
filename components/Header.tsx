@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import { ArrowIcon } from "./visual/Marks";
 
@@ -11,7 +11,6 @@ const serviceLinks = [
 ];
 
 const links = [
-  { label: "How It Works", href: "/#how-it-works", key: "How" },
   { label: "About Us", href: "/about", key: "About" },
   { label: "Pricing", href: "/services#pricing", key: "Pricing" },
 ];
@@ -34,6 +33,9 @@ function Chevron({ open }: { open?: boolean }) {
 export default function Header({ active = "" }: { active?: string }) {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const servicesActive = active === "Services" || active === "Our Writers";
 
@@ -43,6 +45,30 @@ export default function Header({ active = "" }: { active?: string }) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Desktop Services dropdown: close on outside click or Escape.
+  useEffect(() => {
+    if (!servicesOpen) return;
+    const onPointer = (e: PointerEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) setServicesOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setServicesOpen(false);
+        servicesButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [servicesOpen]);
+
+  useEffect(() => {
+    if (!open) setMobileServicesOpen(false);
+  }, [open]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -69,29 +95,38 @@ export default function Header({ active = "" }: { active?: string }) {
         <Logo />
 
         <nav aria-label="Primary" className="hidden items-center gap-[clamp(2rem,3vw,3rem)] text-[clamp(15px,1.15vw,17px)] text-[#13254b] lg:flex">
+          <a
+            href="/"
+            aria-current={active === "Home" ? "page" : undefined}
+            className={`py-2 transition-colors hover:text-navy ${active === "Home" ? "text-navy" : ""}`}
+          >
+            Home
+          </a>
+
           <div
+            ref={servicesRef}
             className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
             onBlur={(e) => {
               if (!e.currentTarget.contains(e.relatedTarget as Node)) setServicesOpen(false);
             }}
           >
-            <a
-              href="/services"
-              aria-current={servicesActive ? "page" : undefined}
+            <button
+              ref={servicesButtonRef}
+              type="button"
+              aria-expanded={servicesOpen}
+              aria-controls="services-menu"
               className={`inline-flex items-center gap-1.5 py-2 transition-colors hover:text-navy ${
                 servicesActive ? "text-navy" : ""
               }`}
-              onFocus={() => setServicesOpen(true)}
+              onClick={() => setServicesOpen((v) => !v)}
             >
               Services
               <Chevron open={servicesOpen} />
-            </a>
+            </button>
             <div
               id="services-menu"
               className={`absolute left-1/2 top-full z-20 w-60 -translate-x-1/2 pt-3 transition duration-150 ${
-                servicesOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"
+                servicesOpen ? "visible translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-1 opacity-0"
               }`}
             >
               <div className="rounded-2xl bg-white/95 p-2 shadow-lift ring-1 ring-[#e4eef6] backdrop-blur">
@@ -99,7 +134,8 @@ export default function Header({ active = "" }: { active?: string }) {
                   <a
                     key={item.href}
                     href={item.href}
-                    className="block rounded-xl px-3 py-2.5 text-[14px] text-[#1c3554] transition hover:bg-[#f3f8fc]"
+                    className="block rounded-xl px-3 py-2.5 text-[14px] text-[#1c3554] transition hover:bg-[#f3f8fc] focus-visible:bg-[#f3f8fc]"
+                    onClick={() => setServicesOpen(false)}
                   >
                     {item.label}
                   </a>
@@ -151,20 +187,43 @@ export default function Header({ active = "" }: { active?: string }) {
           aria-label="Mobile"
           className="max-h-[calc(100svh-76px)] overflow-y-auto border-t border-[#d5e4f0] bg-[#f7fbfe]/95 px-5 pb-8 pt-2 backdrop-blur-md lg:hidden"
         >
-          <a href="/services" className="block border-b border-[#e1ebf3] py-3.5 text-[17px] text-navy" onClick={() => setOpen(false)}>
-            Services
+          <a href="/" className="block border-b border-[#e1ebf3] py-3.5 text-[17px] text-navy" onClick={() => setOpen(false)}>
+            Home
           </a>
-          <div className="border-b border-[#e1ebf3] py-2 pl-3">
-            {serviceLinks.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="block py-2 text-[14.5px] text-ink-body"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
+          <div className="border-b border-[#e1ebf3]">
+            <button
+              type="button"
+              aria-expanded={mobileServicesOpen}
+              aria-controls="mobile-services"
+              className="flex w-full items-center justify-between py-3.5 text-left text-[17px] text-navy"
+              onClick={() => setMobileServicesOpen((v) => !v)}
+            >
+              Services
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#3d6f96] ring-1 ring-[#d5e4f0]">
+                <Chevron open={mobileServicesOpen} />
+              </span>
+            </button>
+            <div
+              id="mobile-services"
+              className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                mobileServicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              }`}
+            >
+              <div className="overflow-hidden" inert={!mobileServicesOpen}>
+                <div className="pb-3 pl-3">
+                  {serviceLinks.map((item) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className="block py-2 text-[15px] text-ink-body"
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
           {links.map((link) => (
             <a
