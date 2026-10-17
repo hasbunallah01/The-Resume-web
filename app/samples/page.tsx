@@ -6,7 +6,7 @@ import SkyBand from "@/components/visual/SkyBand";
 import SampleGallery from "@/components/samples/SampleGallery";
 
 export const metadata: Metadata = {
-  title: "Sample Resumes | Veylora",
+  title: "Our Work | Sample Resumes | Veylora",
   description:
     "A look at resumes written by Veylora across early career, mid level, senior and executive roles. Contact details removed to protect client privacy.",
   alternates: { canonical: "/samples" },
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 export default function SamplesPage() {
   return (
     <>
-      <Header active="Samples" />
+      <Header active="Our Work" />
       <main id="main">
         <SkyBand>
           <section aria-labelledby="samples-heading" className="wrap pb-10 pt-12 lg:pb-12 lg:pt-16">
-            <p className="eyebrow">Sample Work</p>
+            <p className="eyebrow">Our Work</p>
             <h1
               id="samples-heading"
               className="mt-4 max-w-[760px] font-serif text-[40px] font-medium leading-[1.06] tracking-[-0.02em] text-navy sm:text-[54px]"

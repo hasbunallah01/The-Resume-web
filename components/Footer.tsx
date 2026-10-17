@@ -6,7 +6,7 @@ const explore = [
   { label: "Services", href: "/services" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "Our writers", href: "/writers" },
-  { label: "Sample work", href: "/samples" },
+  { label: "Our Work", href: "/samples" },
   { label: "About", href: "/about" },
   { label: "Pricing", href: "/services#pricing" },
   { label: "Contact", href: "/contact" },

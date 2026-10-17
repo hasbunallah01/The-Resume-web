@@ -9,12 +9,12 @@ const serviceLinks = [
   { label: "Resume writing", href: "/services" },
   { label: "Packages and pricing", href: "/services#pricing" },
   { label: "Our writers", href: "/writers" },
-  { label: "Sample work", href: "/samples" },
 ];
 
 const links = [
-  { label: "About Us", href: "/about", key: "About" },
+  { label: "Our Work", href: "/samples", key: "Our Work" },
   { label: "Pricing", href: "/services#pricing", key: "Pricing" },
+  { label: "About Us", href: "/about", key: "About" },
 ];
 
 function Chevron({ open }: { open?: boolean }) {
@@ -39,7 +39,7 @@ export default function Header({ active = "" }: { active?: string }) {
   const servicesRef = useRef<HTMLDivElement>(null);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
-  const servicesActive = active === "Services" || active === "Our Writers" || active === "Samples";
+  const servicesActive = active === "Services" || active === "Our Writers";
 
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
@@ -148,7 +148,7 @@ export default function Header({ active = "" }: { active?: string }) {
       <div className="head-wrap flex h-[76px] items-center justify-between gap-4">
         <Logo />
 
-        <nav aria-label="Primary" className="hidden items-center gap-[clamp(2rem,3vw,3rem)] text-[clamp(15px,1.15vw,17px)] text-[#13254b] lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-[clamp(1.5rem,2.6vw,3rem)] whitespace-nowrap text-[clamp(15px,1.15vw,17px)] text-[#13254b] lg:flex">
           <a
             href="/"
             aria-current={active === "Home" ? "page" : undefined}

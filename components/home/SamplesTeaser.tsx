@@ -16,7 +16,7 @@ export default function SamplesTeaser() {
     <section aria-labelledby="samples-teaser-heading" className="wrap pb-16 pt-2 lg:pb-20 lg:pt-4">
       <div className="paper grid items-center gap-10 overflow-hidden rounded-[30px] bg-white/80 px-6 py-10 shadow-paper ring-1 ring-white sm:px-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:px-14 lg:py-12">
         <div>
-          <p className="eyebrow"><span className="eyebrow-dot" />Sample Work</p>
+          <p className="eyebrow"><span className="eyebrow-dot" />Our Work</p>
           <h2
             id="samples-teaser-heading"
             className="mt-3 font-serif text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-navy sm:text-[40px]"
@@ -28,14 +28,14 @@ export default function SamplesTeaser() {
             details removed to protect client privacy.
           </p>
           <a href="/samples" className="btn-navy mt-7">
-            See Sample Work
+            See Our Work
             <ArrowIcon className="h-3.5 w-3.5" />
           </a>
         </div>
 
         <a
           href="/samples"
-          aria-label="See sample work"
+          aria-label="See our work"
           data-tilt="6"
           className="group relative mx-auto block aspect-[5/4] w-full max-w-[460px] rounded-[24px] bg-[linear-gradient(160deg,#e9f3fb,#d3e6f5)]"
         >
