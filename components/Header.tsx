@@ -9,10 +9,10 @@ const serviceLinks = [
   { label: "Resume writing", href: "/services" },
   { label: "Packages and pricing", href: "/services#pricing" },
   { label: "Our writers", href: "/writers" },
+  { label: "Sample work", href: "/samples" },
 ];
 
 const links = [
-  { label: "Samples", href: "/samples", key: "Samples" },
   { label: "About Us", href: "/about", key: "About" },
   { label: "Pricing", href: "/services#pricing", key: "Pricing" },
 ];
@@ -39,7 +39,7 @@ export default function Header({ active = "" }: { active?: string }) {
   const servicesRef = useRef<HTMLDivElement>(null);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
-  const servicesActive = active === "Services" || active === "Our Writers";
+  const servicesActive = active === "Services" || active === "Our Writers" || active === "Samples";
 
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
