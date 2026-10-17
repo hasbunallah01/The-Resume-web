@@ -14,10 +14,8 @@ function Avatar({ writer, size }: { writer: Writer; size: number }) {
   const style = { width: size, height: size };
   if (writer.photo) {
     return (
-      <span
-        className="relative block shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-paper"
-        style={style}
-      >
+      <span className="frame-layered relative block shrink-0 rounded-[34px]" style={style}>
+      <span className="relative block h-full w-full overflow-hidden rounded-[34px] shadow-[0_24px_44px_-22px_rgba(20,56,92,0.6)] ring-4 ring-white">
         <Image
           src={writer.photo}
           alt={`Portrait of ${writer.name}`}
@@ -26,13 +24,14 @@ function Avatar({ writer, size }: { writer: Writer; size: number }) {
           className="object-cover"
         />
       </span>
+      </span>
     );
   }
   return (
     <span
       role="img"
       aria-label={`Initials of ${writer.name}`}
-      className="flex shrink-0 items-center justify-center rounded-full bg-white font-serif font-medium text-navy ring-4 ring-white shadow-paper"
+      className="frame-layered flex shrink-0 items-center justify-center rounded-[34px] bg-white font-serif font-medium text-navy ring-4 ring-white shadow-[0_24px_44px_-22px_rgba(20,56,92,0.6)]"
       style={{ ...style, fontSize: size * 0.34 }}
     >
       {initials(writer.name)}
@@ -45,7 +44,7 @@ export function WritersHero() {
     <SkyBand dense>
     <section aria-labelledby="writers-page-heading">
       <div className={`${wrap} pb-10 pt-12 lg:pb-14 lg:pt-16`}>
-        <p className="eyebrow">Our Writers</p>
+        <p className="eyebrow"><span className="eyebrow-dot" />Our Writers</p>
         <h1
           id="writers-page-heading"
           className="mt-4 max-w-[860px] font-serif text-[36px] font-medium leading-[1.08] tracking-[-0.02em] text-navy sm:text-[48px] lg:text-[56px]"
@@ -94,10 +93,11 @@ function WriterCard({ writer }: { writer: Writer }) {
     <article
       id={writer.slug}
       aria-labelledby={`${writer.slug}-name`}
-      className="paper overflow-hidden rounded-[28px] bg-white shadow-paper ring-1 ring-white target:ring-2 target:ring-[#163056]"
+      className="paper overflow-hidden rounded-[30px] bg-white shadow-[inset_0_1px_0_#fff,0_40px_80px_-48px_rgba(20,56,92,0.55),0_14px_30px_-20px_rgba(20,56,92,0.25)] ring-1 ring-white target:ring-2 target:ring-[#163056]"
     >
       <div className="grid lg:grid-cols-[340px_1fr]">
-        <div className="flex flex-col items-center bg-[#f4f9fd] px-8 py-10 text-center lg:border-r lg:border-[#e3eef6] lg:py-12">
+        <div className="relative isolate flex flex-col items-center overflow-hidden bg-[linear-gradient(170deg,#f6fbff_0%,#e3f0fa_100%)] px-8 py-10 text-center lg:border-r lg:border-[#e3eef6] lg:py-12">
+          <div aria-hidden="true" className="absolute -top-24 left-1/2 -z-10 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.95),transparent)]" />
           <Avatar writer={writer} size={190} />
           <h2
             id={`${writer.slug}-name`}
@@ -113,10 +113,7 @@ function WriterCard({ writer }: { writer: Writer }) {
           </p>
           <ul className="mt-6 flex flex-wrap justify-center gap-2">
             {writer.focus.map((f) => (
-              <li
-                key={f}
-                className="rounded-full bg-white/80 px-2.5 py-1 text-[12px] text-sky-ink ring-1 ring-[#d5e4f0]"
-              >
+              <li key={f} className="chip-glass !py-1 !pl-3 !pr-3 !text-[12px] !font-normal !tracking-normal">
                 {f}
               </li>
             ))}

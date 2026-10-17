@@ -113,16 +113,22 @@ function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) 
               className={`block w-full overflow-hidden rounded-[6px] bg-white shadow-[0_24px_60px_rgba(20,56,92,0.18)] ring-1 ring-black/5 ${zoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
             >
               {shown.map((img, i) => (
+                <span key={img.src} data-page={i + 1} className={`relative block ${i > 0 ? "border-t-[10px] border-[#e3eef7]" : ""}`}>
+                {shown.length > 1 ? (
+                  <span aria-hidden="true" className="absolute left-3 top-3 z-[1] rounded-full bg-navy/85 px-2.5 py-1 text-[11px] font-medium tracking-[0.04em] text-white shadow-sm">
+                    Page {i + 1} of {shown.length}
+                  </span>
+                ) : null}
                 <Image
-                  key={img.src}
                   src={img.src}
                   width={img.width}
                   height={img.height}
                   alt={`${sampleAlt(sample)}, page ${i + 1}`}
                   sizes={zoomed ? "1200px" : "(min-width: 640px) 620px, 100vw"}
-                  className={`h-auto w-full ${i > 0 ? "border-t-[10px] border-[#e3eef7]" : ""}`}
+                  className="h-auto w-full"
                   priority={i === 0}
                 />
+                </span>
               ))}
             </button>
           </div>

@@ -59,6 +59,44 @@ export default function MotionLayer() {
       cleanups.push(() => io.disconnect());
     }
 
+    /* ---------- Flight paths: a paper plane travels along numbered steps ---------- */
+    const flights = Array.from(document.querySelectorAll<HTMLElement>("[data-flight]"));
+    let flightRaf = 0;
+    const paintFlights = () => {
+      flightRaf = 0;
+      const vh = window.innerHeight;
+      flights.forEach((f) => {
+        const r = f.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        const p = Math.min(1, Math.max(0, (vh * 0.72 - r.top) / Math.max(1, r.height * 0.9)));
+        f.querySelectorAll<HTMLElement>("[data-flight-plane]").forEach((plane) => {
+          const track = plane.parentElement as HTMLElement;
+          if (!track.offsetParent) return; // hidden at this breakpoint
+          track.style.setProperty("--flight-p", p.toFixed(3));
+          if (plane.dataset.flightPlane === "x") {
+            const len = track.clientWidth - plane.offsetWidth;
+            plane.style.transform = `translate3d(${(p * len).toFixed(1)}px, -50%, 0)`;
+          } else {
+            const len = track.clientHeight - plane.offsetHeight;
+            plane.style.transform = `translate3d(-50%, ${(p * len).toFixed(1)}px, 0)`;
+          }
+        });
+      });
+    };
+    if (flights.length) {
+      const queueFlights = () => {
+        if (!flightRaf) flightRaf = requestAnimationFrame(paintFlights);
+      };
+      paintFlights();
+      window.addEventListener("scroll", queueFlights, { passive: true });
+      window.addEventListener("resize", queueFlights, { passive: true });
+      cleanups.push(() => {
+        window.removeEventListener("scroll", queueFlights);
+        window.removeEventListener("resize", queueFlights);
+        if (flightRaf) cancelAnimationFrame(flightRaf);
+      });
+    }
+
     /* ---------- Hero parallax ---------- */
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const mouseLayers = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax-mouse]"));
@@ -144,6 +182,7 @@ export default function MotionLayer() {
         cleanups.forEach((c) => c());
         document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => el.classList.add("is-in"));
         [...mouseLayers, ...scrollLayers].forEach((el) => (el.style.transform = ""));
+        document.querySelectorAll<HTMLElement>("[data-flight-plane]").forEach((el) => (el.style.transform = ""));
       }
     };
     reduce.addEventListener("change", onChange);

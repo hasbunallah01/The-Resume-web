@@ -8,6 +8,13 @@ import MotionLayer from "@/components/visual/MotionLayer";
 
 const siteUrl = "https://veylora.haybee.xyz";
 const title = "Veylora | Professional Resume Writing & Career Documents";
+const ogImage = {
+  url: `${siteUrl}/og-sky-v2.jpg`,
+  width: 1200,
+  height: 630,
+  alt: "Veylora: Your Career Deserves a Resume That Does You Justice. A paper airplane flying through a soft blue sky.",
+  type: "image/jpeg",
+};
 const description =
   "Veylora creates professionally written, strategically structured resumes and career documents designed to present your experience with clarity, confidence, and impact.";
 
@@ -22,11 +29,13 @@ export const metadata: Metadata = {
     url: siteUrl,
     title,
     description,
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    images: [{ url: ogImage.url, alt: ogImage.alt }],
   },
 };
 

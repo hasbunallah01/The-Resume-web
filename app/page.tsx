@@ -25,13 +25,13 @@ export default function HomePage() {
         <Mission />
         <Problem />
         <ServicesOverview />
-        <CloudSeam />
         <SamplesTeaser />
         <BeforeAfter />
         <Steps
           id="how-it-works"
           heading="How Working With Veylora Works"
           steps={storySteps}
+          eyebrow="How it works"
         />
         <CloudSeam />
         <Writers />

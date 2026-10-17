@@ -2,6 +2,7 @@ import { StarIcon } from "../resumes/ResumeIcons";
 import { listApprovedReviews, type ReviewRow } from "@/lib/reviews";
 import { databaseConfigured } from "@/lib/db";
 import WriteReviewToggle from "./WriteReviewToggle";
+import { QuoteMark } from "../visual/LineIcons";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
@@ -31,7 +32,8 @@ function Stars({ value }: { value: number }) {
 
 function ReviewCard({ review }: { review: ReviewRow }) {
   return (
-    <li className="paper flex flex-col rounded-[22px] bg-white p-5 shadow-paper ring-1 ring-white">
+    <li className="glass-card relative flex flex-col overflow-hidden rounded-[22px] p-5">
+      <QuoteMark className="pointer-events-none absolute right-4 top-4 h-6 w-8 text-[#e1eef8]" />
       <div className="flex items-center gap-3.5">
         {review.photo_url ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -67,16 +69,16 @@ export default async function ReviewsSection() {
     reviews.length > 0 ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length : null;
 
   return (
-    <section aria-labelledby="reviews-heading">
+    <section aria-labelledby="reviews-heading" className="skywash">
       <div className="wrap py-16 lg:py-20">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-[600px]">
-            <p className="eyebrow">Client reviews</p>
+            <p className="eyebrow"><span className="eyebrow-dot" />Client reviews</p>
             <h2
               id="reviews-heading"
               className="mt-3 font-serif text-[32px] font-medium leading-[1.15] tracking-[-0.02em] text-navy sm:text-[40px]"
             >
-              What Our Clients Say
+              What Our Clients <span className="italic text-[#1f4f80]">Say</span>
             </h2>
             <p className="mt-4 max-w-[520px] text-[15.5px] leading-[1.7] text-ink-body">
               Real reviews from people who have worked with Veylora.
@@ -113,9 +115,12 @@ export default async function ReviewsSection() {
             ))}
           </ul>
         ) : (
-          <p className="paper mt-9 rounded-[22px] bg-white/80 px-6 py-8 text-center text-[15px] text-ink-muted ring-1 ring-white">
-            Be the first to share your experience with Veylora.
-          </p>
+          <div className="paper relative mt-9 overflow-hidden rounded-[24px] bg-white/85 px-6 py-10 text-center shadow-[inset_0_1px_0_#fff,0_30px_60px_-38px_rgba(20,56,92,0.5)] ring-1 ring-white">
+            <QuoteMark className="mx-auto h-8 w-11 text-[#bcd8ee]" />
+            <p className="mt-4 font-serif text-[20px] italic text-navy">
+              Be the first to share your experience with Veylora.
+            </p>
+          </div>
         )}
 
         <WriteReviewToggle />

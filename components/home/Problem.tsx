@@ -1,3 +1,5 @@
+import { Accent, FlightSteps } from "../visual/Rich";
+
 const points = [
   {
     n: "01",
@@ -23,28 +25,19 @@ const points = [
 
 export default function Problem() {
   return (
-    <section aria-labelledby="problem-heading" className="wrap pb-16 lg:pb-24">
-      <div className="grid items-end gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-        <h2
-          id="problem-heading"
-          className="max-w-[720px] font-serif text-[34px] font-medium leading-[1.12] tracking-[-0.02em] text-navy sm:text-[44px] lg:col-span-2"
-        >
-          Your Experience Deserves More Than a Generic Resume.
-        </h2>
-      </div>
-
-      <ol className="mt-10 border-t border-[#d5e4f0]">
-        {points.map((point) => (
-          <li
-            key={point.n}
-            className="grid gap-3 border-b border-[#d5e4f0] py-6 sm:grid-cols-[72px_minmax(0,280px)_1fr] sm:items-baseline sm:gap-6"
+    <section aria-labelledby="problem-heading" className="gridpaper pb-16 pt-4 lg:pb-24">
+      <div className="wrap grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <p className="eyebrow"><span className="eyebrow-dot" />Sound familiar?</p>
+          <h2
+            id="problem-heading"
+            className="mt-3 max-w-[720px] font-serif text-[34px] font-medium leading-[1.12] tracking-[-0.02em] text-navy sm:text-[44px]"
           >
-            <span className="font-serif text-[20px] italic text-sky-ink">{point.n}</span>
-            <h3 className="font-serif text-[22px] font-medium leading-snug text-navy">{point.title}</h3>
-            <p className="text-[15px] leading-[1.65] text-ink-muted">{point.text}</p>
-          </li>
-        ))}
-      </ol>
+            Your Experience Deserves More Than a <Accent>Generic</Accent> Resume.
+          </h2>
+        </div>
+        <FlightSteps steps={points} numerals cols={1} />
+      </div>
     </section>
   );
 }

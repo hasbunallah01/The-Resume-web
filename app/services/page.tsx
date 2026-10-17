@@ -28,6 +28,7 @@ export default function ServicesPage() {
           id="story-heading"
           heading="Every Veylora Project Begins With Your Story"
           steps={storySteps}
+          eyebrow="How it works"
         />
         <ReviewsSection />
         <Steps
@@ -35,6 +36,7 @@ export default function ServicesPage() {
           heading="How our executive partnership process works:"
           steps={partnershipSteps}
           tone="mist"
+          eyebrow="Executive partnership"
         />
         <CTA />
       </main>

@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { contactEmail } from "@/data/site";
+import { EnvelopeLine } from "../visual/LineIcons";
+import { IconTile, PlaneTrail } from "../visual/Rich";
 
 type Status = "idle" | "sending" | "success" | "duplicate" | "error";
 
@@ -54,10 +56,12 @@ export default function Newsletter() {
 
   return (
     <section aria-labelledby="newsletter-heading" className="wrap pb-20">
-      <div className="paper mx-auto max-w-[720px] rounded-[28px] bg-white/80 px-6 py-10 text-center shadow-paper ring-1 ring-white sm:px-10">
+      <div className="paper gridpaper relative mx-auto max-w-[720px] overflow-hidden rounded-[28px] bg-white/80 px-6 py-10 text-center shadow-[inset_0_1px_0_#fff,0_30px_70px_-40px_rgba(28,72,112,0.45)] ring-1 ring-white sm:px-10">
+        <PlaneTrail className="absolute -left-8 top-3 w-[150px] -scale-x-100 opacity-60 sm:w-[200px]" />
+        <IconTile Icon={EnvelopeLine} className="mx-auto" />
         <h2
           id="newsletter-heading"
-          className="font-serif text-[30px] font-medium leading-tight tracking-[-0.02em] text-navy sm:text-[36px]"
+          className="mt-5 font-serif text-[30px] font-medium leading-tight tracking-[-0.02em] text-navy sm:text-[36px]"
         >
           Stay Ahead of Your Career
         </h2>

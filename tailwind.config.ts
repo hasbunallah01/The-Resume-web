@@ -91,6 +91,7 @@ const config: Config = {
         "sky-drift": "sky-drift 48s ease-in-out infinite alternate",
         "cloud-loop": "cloud-loop 170s linear infinite",
         twinkle: "twinkle 3.6s ease-in-out infinite",
+        "twinkle-slow": "twinkle 7s ease-in-out infinite",
       },
     },
   },

@@ -9,17 +9,14 @@ const fan = [
 ];
 
 export default function SamplesTeaser() {
-  const picks = ["saas-account-executive", "human-resources-executive", "materials-engineer-early-career"]
-    .map((slug) => samples.find((s) => s.slug === slug))
-    .filter((s): s is (typeof samples)[number] => Boolean(s));
-  // If the featured slugs ever change, fall back to the first entries so the stack stays full.
-  const stack = picks.length >= 3 ? picks : samples.slice(0, 3);
+  // The first three entries in data/samples.ts are the featured stack.
+  const stack = samples.slice(0, 3);
 
   return (
     <section aria-labelledby="samples-teaser-heading" className="wrap pb-16 pt-2 lg:pb-20 lg:pt-4">
       <div className="paper grid items-center gap-10 overflow-hidden rounded-[30px] bg-white/80 px-6 py-10 shadow-paper ring-1 ring-white sm:px-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:px-14 lg:py-12">
         <div>
-          <p className="eyebrow">Sample Work</p>
+          <p className="eyebrow"><span className="eyebrow-dot" />Sample Work</p>
           <h2
             id="samples-teaser-heading"
             className="mt-3 font-serif text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-navy sm:text-[40px]"
