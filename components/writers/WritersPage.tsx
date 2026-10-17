@@ -72,7 +72,7 @@ export function WritersHero() {
                       <Image src={w.photo} alt="" fill sizes="28px" className="object-cover" />
                     </span>
                   ) : (
-                    <span className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#f4efe4] font-serif text-[11px] text-navy">
+                    <span className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#e7f2fa] font-serif text-[11px] text-navy">
                       {initials(w.name)}
                     </span>
                   )}
@@ -124,7 +124,7 @@ function WriterCard({ writer }: { writer: Writer }) {
         </div>
 
         <div className="flex flex-col px-8 py-10 lg:px-14 lg:py-12">
-          <p className="font-serif text-[20px] leading-[1.6] text-navy lg:text-[22px]">
+          <p className="font-serif text-[18px] leading-[1.55] text-navy sm:text-[20px] sm:leading-[1.6] lg:text-[22px]">
             {lead}
           </p>
           <div className="mt-6 space-y-4">

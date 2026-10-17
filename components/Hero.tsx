@@ -65,22 +65,25 @@ export default function Hero() {
       {/* Small screens: soft sky wash behind the copy */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#f3f8fd_0%,#e6f1fa_34%,#d3e7f7_62%,#cfe4f6_100%)] lg:hidden"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#f5f9fd_0%,#e8f2fb_28%,#d6e8f7_55%,#e2edf8_82%,#e6f0f9_100%)] lg:hidden"
       />
 
       <div className="hero-wrap relative flex flex-1 flex-col pb-6 lg:pb-[clamp(1.5rem,6.5vh,3.75rem)]">
-        <div className="max-w-[700px] pt-7 sm:pt-10 lg:pt-[clamp(1.5rem,7vh,4.5rem)]">
+        <div className="relative flex min-h-[calc(100svh-76px)] flex-col pt-7 sm:pt-10 lg:block lg:min-h-0 lg:pt-[clamp(1.5rem,7vh,4.5rem)]">
+          <div className="max-w-[700px]">
           <p className="inline-flex items-center gap-2.5 text-[12px] font-medium uppercase tracking-[0.2em] text-[#4b8fd6] sm:text-[13px] lg:text-[clamp(12.5px,1.08vw,15.5px)]">
             <Spark className="h-[18px] w-[18px] text-[#7fb3e6]" />
             Professional Resume Writing
           </p>
           <h1
             id="hero-heading"
-            className="mt-4 font-serif text-[2.7rem] font-[540] leading-[1.06] tracking-[-0.018em] text-[#13254b] sm:text-[3.6rem] lg:mt-[clamp(0.9rem,2vh,1.5rem)] lg:text-[clamp(3.4rem,4.62vw,4.5rem)] lg:leading-[1.07]"
+            className="mt-4 font-serif text-[length:min(calc((100vw-40px)/8.75),2.9rem)] font-[540] leading-[1.08] sm:whitespace-nowrap sm:leading-[1.06] tracking-[-0.018em] text-[#13254b] sm:text-[3.6rem] lg:mt-[clamp(0.9rem,2vh,1.5rem)] lg:text-[clamp(3.4rem,4.62vw,4.5rem)] lg:leading-[1.07]"
           >
-            <span className="lg:block lg:whitespace-nowrap">Your Career Deserves </span>
-            <span className="lg:block lg:whitespace-nowrap">a Resume That Does </span>
-            <span className="lg:block lg:whitespace-nowrap">You Justice.</span>
+            Your Career
+            <br className="sm:hidden" /> Deserves
+            <br className="hidden sm:inline" /> a Resume
+            <br className="sm:hidden" /> That Does
+            <br /> You Justice.
           </h1>
           <p className="mt-5 max-w-[470px] text-[17px] leading-[1.6] text-[#33496a] lg:mt-[clamp(0.85rem,1.8vh,1.25rem)] lg:text-[clamp(17px,1.32vw,19px)]">
             Thoughtful writing. Strategic storytelling. Resumes that open doors and elevate careers.
@@ -106,15 +109,22 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Small screens: the plane gets its own window between the copy and the cards */}
-        <div aria-hidden="true" className="relative -mx-5 mt-2 h-[340px] sm:-mx-10 sm:h-[420px] lg:hidden">
-          <SkyArt
-            mobile
-            className="h-full w-full object-cover object-[100%_42%] sm:object-[86%_42%] [mask-image:linear-gradient(180deg,transparent,#000_22%,#000_70%,transparent)]"
-          />
+          {/* Small screens: the same sky fills the first screen; the plane flies in the open space under the buttons */}
+          <div aria-hidden="true" className="pointer-events-none relative min-h-[64vw] flex-1 sm:min-h-[46vw] lg:hidden">
+            <div className="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2">
+              <div className="absolute left-[-58vw] top-[calc(50%-49.8vw)] aspect-[16/9] w-[175vw] sm:left-[-26vw] sm:top-[calc(50%-34.6vw)] sm:w-[125vw]">
+                <div className="absolute inset-0 motion-safe:animate-sky-drift">
+                  <SkyArt
+                    mobile
+                    className="h-full w-full object-cover [mask-image:linear-gradient(180deg,transparent_0%,#000_24%,#000_84%,transparent_100%)]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="relative z-10 mx-auto -mt-16 w-full sm:-mt-24 lg:mt-auto lg:max-w-[1210px] lg:pt-8">
+        <div className="relative z-10 mx-auto -mt-[14vw] w-full sm:-mt-[8vw] lg:mt-auto lg:max-w-[1210px] lg:pt-8">
           <ul className="grid gap-3.5 lg:grid-cols-3 lg:gap-4 xl:gap-5">
             {cards.map(({ title, text, Icon }) => (
               <li

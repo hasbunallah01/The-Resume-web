@@ -205,7 +205,7 @@ export function BrandStatement() {
   return (
     <section aria-labelledby="brand-heading" className="bg-[#102038] text-white">
       <div className={`${wrap} py-16 lg:py-20`}>
-        <p className="text-[12px] font-medium uppercase tracking-[0.16em] text-[#d7c4a2]">The Veylora Approach</p>
+        <p className="text-[12px] font-medium uppercase tracking-[0.16em] text-[#a9cdea]">The Veylora Approach</p>
         <div className="mt-5 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
           <h2
             id="brand-heading"
