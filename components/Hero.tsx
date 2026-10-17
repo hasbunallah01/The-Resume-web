@@ -1,4 +1,5 @@
 import { getImageProps } from "next/image";
+import { preload } from "react-dom";
 import CloudBank from "./visual/CloudBank";
 import { ArrowIcon, CompassSolid, DocSolid, QuillSolid, ShieldMark, Spark } from "./visual/Marks";
 
@@ -39,7 +40,7 @@ function SkyArt({ className = "", mobile = false }: { className?: string; mobile
       priority: false,
       loading: "eager",
       fetchPriority: "high",
-      src: "/hero/sky-1920.webp",
+      src: "/hero/sky-clean-1920.webp",
       width: 1920,
       height: 1080,
       sizes: "(min-width: 640px) 135vw, 195vw",
@@ -55,10 +56,10 @@ function SkyArt({ className = "", mobile = false }: { className?: string; mobile
   }
   const {
     props: { srcSet: wide },
-  } = getImageProps({ ...common, src: "/hero/sky-1920.webp", width: 1920, height: 1080, sizes: "100vw" });
+  } = getImageProps({ ...common, src: "/hero/sky-clean-1920.webp", width: 1920, height: 1080, sizes: "100vw" });
   const {
     props: { srcSet: small, ...rest },
-  } = getImageProps({ ...common, src: "/hero/sky-1080.webp", width: 1080, height: 608, sizes: "100vw" });
+  } = getImageProps({ ...common, src: "/hero/sky-clean-1080.webp", width: 1080, height: 608, sizes: "100vw" });
 
   return (
     <picture>
@@ -69,7 +70,49 @@ function SkyArt({ className = "", mobile = false }: { className?: string; mobile
   );
 }
 
+/** Cut out layers of the hero art, positioned in percent of the 16:9 sky so they sit exactly where they were painted. */
+const LAYERS = [
+  { id: "plane", src: "/hero/layer-plane.webp", w: 555, h: 418, left: 53.073, top: 24.815, width: 28.906 },
+  { id: "p1", src: "/hero/layer-p1.webp", w: 210, h: 155, left: 54.167, top: 14.63, width: 10.938 },
+  { id: "p2", src: "/hero/layer-p2.webp", w: 202, h: 142, left: 82.552, top: 13.981, width: 10.521 },
+  { id: "p3", src: "/hero/layer-p3.webp", w: 218, h: 165, left: 83.646, top: 36.111, width: 11.354 },
+  { id: "p4", src: "/hero/layer-p4.webp", w: 248, h: 183, left: 74.74, top: 52.87, width: 12.917 },
+] as const;
+
+function SkyLayers({ depth }: { depth: "mouse" | "scroll" }) {
+  return (
+    <div className="pointer-events-none absolute inset-0">
+      {LAYERS.map((l) => {
+        const parallax = l.id === "plane" ? (depth === "mouse" ? { "data-parallax-mouse": "6" } : { "data-parallax-scroll": "0.05" }) : {};
+        return (
+          <div
+            key={l.id}
+            {...parallax}
+            className="absolute"
+            style={{ left: `${l.left}%`, top: `${l.top}%`, width: `${l.width}%` }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={l.src}
+              alt=""
+              width={l.w}
+              height={l.h}
+              decoding="async"
+              loading="eager"
+              fetchPriority={l.id === "plane" ? "high" : "auto"}
+              draggable={false}
+              className={`sky-layer sky-layer-${l.id} block h-auto w-full`}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Hero() {
+  // The plane and pages are separate files now; fetch them alongside the sky so the art paints in one go.
+  LAYERS.forEach((l) => preload(l.src, { as: "image", fetchPriority: l.id === "plane" ? "high" : "auto" }));
   return (
     <section
       aria-labelledby="hero-heading"
@@ -78,8 +121,12 @@ export default function Hero() {
       {/* Desktop: full bleed sky behind everything */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 hidden lg:block">
         <div data-parallax-mouse="10" className="absolute -inset-3 will-change-transform">
-        <div className="absolute inset-0 motion-safe:animate-sky-drift">
-          <SkyArt className="h-full w-full object-cover object-[62%_58%]" />
+        <div className="absolute inset-0 [container-type:size] motion-safe:animate-sky-drift">
+          {/* A 16:9 box that covers the hero like object-cover at 62% 58%, so the layers track the art */}
+          <div className="sky-cover">
+            <SkyArt className="h-full w-full object-cover" />
+            <SkyLayers depth="mouse" />
+          </div>
         </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#e3f0fa]" />
@@ -103,6 +150,7 @@ export default function Hero() {
               <div data-parallax-scroll="0.12" className="absolute inset-0">
               <div className="absolute inset-0 motion-safe:animate-sky-drift">
                 <SkyArt mobile className="h-full w-full object-cover [mask-image:linear-gradient(180deg,transparent_0%,#000_12%,#000_78%,transparent_100%)]" />
+                <SkyLayers depth="scroll" />
               </div>
               </div>
             </div>

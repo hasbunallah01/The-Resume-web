@@ -522,3 +522,36 @@ body {
   font-weight: 600;
   color: #142848;
 }
+
+/* Hero art: a 16:9 box that reproduces object-cover with object-position 62% 58% */
+.sky-cover {
+  --bw: max(100cqw, 100cqh * 16 / 9);
+  --bh: max(100cqh, 100cqw * 9 / 16);
+  position: absolute;
+  width: var(--bw);
+  height: var(--bh);
+  left: calc((100cqw - var(--bw)) * 0.62);
+  top: calc((100cqh - var(--bh)) * 0.58);
+}
+
+/* Hero plane and loose pages: a slow glide, transform only */
+.sky-layer { transform-origin: 50% 50%; backface-visibility: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .sky-layer { will-change: transform; animation: page-float 9s cubic-bezier(.45,0,.55,1) infinite; }
+  .sky-layer-plane { transform-origin: 46% 55%; animation: plane-glide 7s cubic-bezier(.45,0,.55,1) infinite; }
+  .sky-layer-p1 { animation-duration: 9.5s; animation-delay: -1.2s; }
+  .sky-layer-p2 { animation-duration: 11s; animation-delay: -4.6s; animation-direction: reverse; }
+  .sky-layer-p3 { animation-duration: 10s; animation-delay: -7.1s; }
+  .sky-layer-p4 { animation-duration: 12s; animation-delay: -2.8s; animation-direction: reverse; }
+}
+@keyframes plane-glide {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  28% { transform: translate3d(4px, -10px, 0) rotate(-1.6deg); }
+  52% { transform: translate3d(6px, -6px, 0) rotate(-0.4deg); }
+  76% { transform: translate3d(-2px, 2px, 0) rotate(1.2deg); }
+}
+@keyframes page-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  33% { transform: translate3d(3px, -6px, 0) rotate(1.4deg); }
+  66% { transform: translate3d(-2px, -3px, 0) rotate(-1deg); }
+}
