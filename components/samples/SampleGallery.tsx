@@ -153,7 +153,7 @@ function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) 
           <p className="hidden text-[14px] text-ink-muted lg:mt-1.5 lg:block">{sample.field}</p>
           <p className="hidden text-[14.5px] leading-[1.65] text-ink-body lg:mt-5 lg:block">{sample.summary}</p>
           <p className="hidden text-[13px] text-ink-soft lg:mt-4 lg:block">
-            {pageNote} Personal details removed.
+            {pageNote} Contact details removed.
           </p>
           <div className="flex items-center justify-between gap-3 lg:mt-auto lg:block lg:pt-6">
             <p className="text-[12.5px] text-ink-soft lg:hidden">Tap the page to zoom</p>
@@ -242,7 +242,7 @@ export default function SampleGallery() {
         ))}
       </ul>
 
-      <p className="mt-12 text-center text-[13.5px] text-ink-soft">Shown with personal details removed.</p>
+      <p className="mt-12 text-center text-[13.5px] text-ink-soft">Contact details removed to protect client privacy.</p>
 
       {open && <Lightbox sample={open} onClose={close} />}
     </section>

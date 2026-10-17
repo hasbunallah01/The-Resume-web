@@ -1,7 +1,7 @@
 /**
  * Sample resumes shown on /samples. The page, filters, lightbox and home
  * teaser all read from this list, so adding a sample is just a new entry here
- * plus its images in public/samples. Every image must have personal details
+ * plus its images in public/samples. Every image must have contact details
  * removed before publishing.
  *
  * `image` is page one (also used when `images` is absent). Add an optional

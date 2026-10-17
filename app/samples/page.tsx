@@ -8,7 +8,7 @@ import SampleGallery from "@/components/samples/SampleGallery";
 export const metadata: Metadata = {
   title: "Sample Resumes | Veylora",
   description:
-    "A look at resumes written by Veylora across early career, mid level, senior and executive roles. Shown with personal details removed to protect client privacy.",
+    "A look at resumes written by Veylora across early career, mid level, senior and executive roles. Contact details removed to protect client privacy.",
   alternates: { canonical: "/samples" },
 };
 
@@ -27,8 +27,8 @@ export default function SamplesPage() {
               A Look at Our Work
             </h1>
             <p className="mt-5 max-w-[560px] text-[17px] leading-[1.7] text-ink-body">
-              A selection of resumes written for professionals at different stages of their careers. Personal
-              details have been removed to protect client privacy.
+              A selection of resumes written for professionals at different stages of their careers. Contact
+              details removed to protect client privacy.
             </p>
           </section>
         </SkyBand>

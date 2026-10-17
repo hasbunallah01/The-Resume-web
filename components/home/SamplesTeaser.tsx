@@ -24,8 +24,8 @@ export default function SamplesTeaser() {
             See the Difference on the Page
           </h2>
           <p className="mt-4 max-w-[440px] text-[16px] leading-[1.7] text-ink-body">
-            Browse resumes we have written for early career, mid level, senior and executive professionals, shown
-            with personal details removed.
+            Browse resumes we have written for early career, mid level, senior and executive professionals. Contact
+            details removed to protect client privacy.
           </p>
           <a href="/samples" className="btn-navy mt-7">
             See Sample Work
