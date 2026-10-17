@@ -1,8 +1,15 @@
 /**
- * Sample resumes shown on /samples. Images are page one only, with all
- * personal details removed before publishing.
+ * Sample resumes shown on /samples. The page, filters, lightbox and home
+ * teaser all read from this list, so adding a sample is just a new entry here
+ * plus its images in public/samples. Every image must have personal details
+ * removed before publishing.
+ *
+ * `image` is page one (also used when `images` is absent). Add an optional
+ * `images` array to show more pages in the lightbox, in reading order.
  */
 export type SampleLevel = "Early Career" | "Mid Level" | "Senior" | "Executive";
+
+export type SampleImage = { src: string; width: number; height: number };
 
 export type Sample = {
   slug: string;
@@ -10,8 +17,9 @@ export type Sample = {
   field: string;
   level: SampleLevel;
   pages: number;
-  image: { src: string; width: number; height: number };
-  thumb: { src: string; width: number; height: number };
+  image: SampleImage;
+  images?: SampleImage[];
+  thumb: SampleImage;
   summary: string;
 };
 
@@ -90,4 +98,9 @@ export const samples: Sample[] = [
 export function sampleAlt(sample: Sample) {
   const article = /^[aeiou]/i.test(sample.title) ? "an" : "a";
   return `Sample resume for ${article} ${sample.title}`;
+}
+
+/** All pages to show for a sample, page one first. */
+export function samplePages(sample: Sample): SampleImage[] {
+  return sample.images && sample.images.length > 0 ? sample.images : [sample.image];
 }

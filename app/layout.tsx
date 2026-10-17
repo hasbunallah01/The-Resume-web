@@ -4,6 +4,7 @@ import "@fontsource-variable/newsreader/opsz.css";
 import "@fontsource-variable/newsreader/opsz-italic.css";
 import "@fontsource/playfair-display/latin-600.css";
 import "./globals.css";
+import MotionLayer from "@/components/visual/MotionLayer";
 
 const siteUrl = "https://veylora.haybee.xyz";
 const title = "Veylora | Professional Resume Writing & Career Documents";
@@ -36,7 +37,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <MotionLayer />
+      </body>
     </html>
   );
 }

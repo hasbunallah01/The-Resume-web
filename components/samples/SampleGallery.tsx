@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { sampleAlt, samples, sampleLevels, type Sample } from "@/data/samples";
+import { sampleAlt, samplePages, samples, sampleLevels, type Sample } from "@/data/samples";
 import { ArrowIcon } from "../visual/Marks";
 
 
@@ -19,6 +19,15 @@ function LevelBadge({ level }: { level: string }) {
 function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const [zoomed, setZoomed] = useState(false);
+  const shown = samplePages(sample);
+  const pageNote =
+    sample.pages === 1
+      ? "One page resume."
+      : shown.length >= sample.pages
+        ? `All ${sample.pages} pages shown.`
+        : shown.length === 1
+          ? `Page one of ${sample.pages}.`
+          : `Pages 1 to ${shown.length} of ${sample.pages}.`;
 
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
@@ -62,7 +71,7 @@ function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) 
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-[#0e1c33]/55 backdrop-blur-sm motion-safe:animate-[fade-in_180ms_ease-out] sm:items-center sm:p-6"
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-[#0e1c33]/55 backdrop-blur-sm motion-safe:animate-[fade-in_320ms_cubic-bezier(.22,1,.36,1)] sm:items-center sm:p-6"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -95,7 +104,7 @@ function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) 
         </div>
 
         <div className="relative min-h-0 flex-1 overflow-auto overscroll-contain bg-[#e3eef7] p-4 sm:p-6">
-          <div className={`mx-auto transition-[max-width] duration-300 ${zoomed ? "max-w-[1200px]" : "max-w-[620px]"}`}>
+          <div className={`mx-auto transition-[max-width] duration-500 ease-sky ${zoomed ? "max-w-[1200px]" : "max-w-[620px]"}`}>
             <button
               type="button"
               onClick={() => setZoomed((z) => !z)}
@@ -103,15 +112,18 @@ function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) 
               aria-label={zoomed ? "Zoom out" : "Zoom in"}
               className={`block w-full overflow-hidden rounded-[6px] bg-white shadow-[0_24px_60px_rgba(20,56,92,0.18)] ring-1 ring-black/5 ${zoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
             >
-              <Image
-                src={sample.image.src}
-                width={sample.image.width}
-                height={sample.image.height}
-                alt={`${sampleAlt(sample)}, page one`}
-                sizes={zoomed ? "1200px" : "(min-width: 640px) 620px, 100vw"}
-                className="h-auto w-full"
-                priority
-              />
+              {shown.map((img, i) => (
+                <Image
+                  key={img.src}
+                  src={img.src}
+                  width={img.width}
+                  height={img.height}
+                  alt={`${sampleAlt(sample)}, page ${i + 1}`}
+                  sizes={zoomed ? "1200px" : "(min-width: 640px) 620px, 100vw"}
+                  className={`h-auto w-full ${i > 0 ? "border-t-[10px] border-[#e3eef7]" : ""}`}
+                  priority={i === 0}
+                />
+              ))}
             </button>
           </div>
         </div>
@@ -135,7 +147,7 @@ function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) 
           <p className="hidden text-[14px] text-ink-muted lg:mt-1.5 lg:block">{sample.field}</p>
           <p className="hidden text-[14.5px] leading-[1.65] text-ink-body lg:mt-5 lg:block">{sample.summary}</p>
           <p className="hidden text-[13px] text-ink-soft lg:mt-4 lg:block">
-            {sample.pages === 1 ? "One page resume." : `Page one of ${sample.pages}.`} Personal details removed.
+            {pageNote} Personal details removed.
           </p>
           <div className="flex items-center justify-between gap-3 lg:mt-auto lg:block lg:pt-6">
             <p className="text-[12.5px] text-ink-soft lg:hidden">Tap the page to zoom</p>
@@ -157,7 +169,7 @@ export default function SampleGallery() {
   const shown = level === "All" ? samples : samples.filter((s) => s.level === level);
 
   return (
-    <section aria-label="Sample resumes" className="wrap pb-10">
+    <section aria-label="Sample resumes" data-noreveal className="wrap pb-10">
       <div role="group" aria-label="Filter by career level" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
         {levels.map((l) => {
           const active = l === level;
@@ -183,17 +195,18 @@ export default function SampleGallery() {
         {shown.map((s, i) => (
           <li
             key={s.slug}
-            className="motion-safe:animate-[rise_420ms_cubic-bezier(.2,.7,.2,1)_both]"
-            style={{ animationDelay: `${i * 50}ms` }}
+            className="motion-safe:animate-[rise_750ms_cubic-bezier(.22,1,.36,1)_both]"
+            style={{ animationDelay: `${Math.min(i, 8) * 70}ms` }}
           >
             <button
               type="button"
               onClick={() => setOpen(s)}
-              className="group block h-full w-full rounded-[26px] bg-white/75 p-4 text-left shadow-paper ring-1 ring-white backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lift sm:p-5"
+              data-tilt="5"
+              className="group relative block h-full w-full rounded-[26px] bg-white/75 p-4 text-left shadow-paper ring-1 ring-white backdrop-blur-sm transition duration-500 ease-sky hover:bg-white hover:shadow-lift sm:p-5"
               aria-label={`View ${sampleAlt(s).replace("Sample", "sample")}`}
             >
               <div className="relative overflow-hidden rounded-[18px] bg-[linear-gradient(160deg,#e9f3fb,#d7e8f6)] px-8 pt-8 [perspective:1200px] sm:px-10 sm:pt-9">
-                <div className="mx-auto max-w-[260px] origin-bottom transition-transform duration-500 ease-out [transform:rotateX(6deg)_rotateZ(-1.2deg)] group-hover:[transform:rotateX(0deg)_rotateZ(0deg)_translateY(-6px)]">
+                <div className="mx-auto max-w-[260px] origin-bottom transition-transform duration-700 ease-sky [transform:rotateX(6deg)_rotateZ(-1.2deg)] group-hover:[transform:rotateX(0deg)_rotateZ(0deg)_translateY(-6px)]">
                   <Image
                     src={s.thumb.src}
                     width={s.thumb.width}

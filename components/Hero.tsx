@@ -1,4 +1,5 @@
 import { getImageProps } from "next/image";
+import CloudBank from "./visual/CloudBank";
 import { ArrowIcon, CompassSolid, DocSolid, QuillSolid, ShieldMark, Spark } from "./visual/Marks";
 
 const cards = [
@@ -76,8 +77,10 @@ export default function Hero() {
     >
       {/* Desktop: full bleed sky behind everything */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 hidden lg:block">
+        <div data-parallax-mouse="10" className="absolute -inset-3 will-change-transform">
         <div className="absolute inset-0 motion-safe:animate-sky-drift">
           <SkyArt className="h-full w-full object-cover object-[62%_58%]" />
+        </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#e3f0fa]" />
         <div className="absolute inset-0 bg-[radial-gradient(900px_560px_at_14%_30%,rgba(247,251,254,0.72),rgba(247,251,254,0.28)_55%,transparent_75%)]" />
@@ -89,17 +92,30 @@ export default function Hero() {
         className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#f5f9fd_0%,#e8f2fb_28%,#d6e8f7_55%,#e2edf8_82%,#e6f0f9_100%)] lg:hidden"
       />
 
+      {/* Drifting cloud bank along the bottom of the hero, behind the cards */}
+      <CloudBank className="bottom-0 h-[calc(var(--cloud-h)*1.4)] [--cloud-h:clamp(120px,15vw,230px)] [mask-image:linear-gradient(180deg,transparent,#000_40%)]" />
+
       <div className="hero-wrap relative flex flex-1 flex-col pb-6 lg:pb-[clamp(1.5rem,6.5vh,3.75rem)]">
         <div className="relative pb-2 pt-7 sm:pt-10 lg:pb-0 lg:pt-[clamp(1.5rem,7vh,4.5rem)]">
           {/* Small screens: the plane and drifting pages sit right behind the copy, under a soft light wash */}
           <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -top-[76px] left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden [mask-image:linear-gradient(180deg,#000_72%,transparent)] lg:hidden">
             <div className="absolute left-[-64vw] top-[9vw] aspect-[16/9] w-[190vw] sm:left-[-12vw] sm:top-[calc(76px-2vw)] sm:w-[132vw]">
+              <div data-parallax-scroll="0.12" className="absolute inset-0">
               <div className="absolute inset-0 motion-safe:animate-sky-drift">
                 <SkyArt mobile className="h-full w-full object-cover [mask-image:linear-gradient(180deg,transparent_0%,#000_12%,#000_78%,transparent_100%)]" />
+              </div>
               </div>
             </div>
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(246,250,254,0.74)_0%,rgba(246,250,254,0.42)_50%,rgba(246,250,254,0.08)_100%)]" />
             <div className="absolute inset-x-0 top-0 h-[180px] bg-gradient-to-b from-[rgba(246,250,254,0.75)] to-transparent" />
+            {/* Phones: a soft bank drifting behind the lower copy */}
+            <CloudBank
+              className="top-[300px] h-[200px] [--cloud-h:130px] [mask-image:linear-gradient(180deg,transparent,#000_35%,#000_70%,transparent)] sm:hidden"
+              layers={[
+                { scale: 0.75, opacity: 0.7, seconds: 220, lift: "38%", reverse: true },
+                { scale: 1, opacity: 0.95, seconds: 150, lift: "8%" },
+              ]}
+            />
           </div>
           <div className="max-w-[700px]">
           <p className="inline-flex items-center gap-2.5 text-[12px] font-medium uppercase tracking-[0.2em] text-[#4b8fd6] sm:text-[13px] lg:text-[clamp(12.5px,1.08vw,15.5px)]">
@@ -147,7 +163,8 @@ export default function Hero() {
             {cards.map(({ title, text, Icon }) => (
               <li
                 key={title}
-                className="flex items-center gap-4 rounded-[20px] bg-white/[0.9] p-5 shadow-[0_18px_44px_rgba(36,86,138,0.12),0_2px_6px_rgba(36,86,138,0.05)] ring-1 ring-white backdrop-blur-[6px] sm:gap-5 lg:px-5 lg:py-5 xl:gap-[18px] xl:px-6"
+                data-tilt="5"
+                className="relative flex items-center gap-4 rounded-[20px] bg-white/[0.9] p-5 shadow-[0_18px_44px_rgba(36,86,138,0.12),0_2px_6px_rgba(36,86,138,0.05)] ring-1 ring-white backdrop-blur-[6px] sm:gap-5 lg:px-5 lg:py-5 xl:gap-[18px] xl:px-6"
               >
                 <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[radial-gradient(circle_at_35%_30%,#f3f8fe,#dceaf9)] text-[#2f6fcc] ring-1 ring-[#e3eefa] xl:h-[72px] xl:w-[72px]">
                   <Icon className="h-7 w-7 xl:h-9 xl:w-9" />

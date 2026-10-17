@@ -41,6 +41,9 @@ const config: Config = {
         paper: "0 18px 50px rgba(28, 72, 112, 0.10), 0 2px 8px rgba(28, 72, 112, 0.04)",
         lift: "0 28px 60px rgba(20, 56, 92, 0.16), 0 2px 8px rgba(20, 56, 92, 0.05)",
       },
+      transitionTimingFunction: {
+        sky: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
       keyframes: {
         drift: {
           "0%, 100%": { transform: "translate3d(0, 0, 0)" },
@@ -59,7 +62,15 @@ const config: Config = {
           "100%": { transform: "scale(1.05) translate3d(-0.8%, -0.6%, 0)" },
         },
         rise: {
-          "0%": { opacity: "0", transform: "translate3d(0, 14px, 0)" },
+          "0%": { opacity: "0", transform: "translate3d(0, 16px, 0)" },
+          "100%": { opacity: "1", transform: "translate3d(0, 0, 0)" },
+        },
+        "cloud-loop": {
+          "0%": { transform: "translate3d(0, 0, 0)" },
+          "100%": { transform: "translate3d(-50%, 0, 0)" },
+        },
+        "menu-in": {
+          "0%": { opacity: "0", transform: "translate3d(0, -8px, 0)" },
           "100%": { opacity: "1", transform: "translate3d(0, 0, 0)" },
         },
         "fade-in": {
@@ -77,7 +88,8 @@ const config: Config = {
         "drift-reverse": "drift-reverse 48s ease-in-out infinite",
         floaty: "floaty 7.5s ease-in-out infinite",
         "floaty-slow": "floaty 9.5s ease-in-out infinite",
-        "sky-drift": "sky-drift 38s ease-in-out infinite alternate",
+        "sky-drift": "sky-drift 48s ease-in-out infinite alternate",
+        "cloud-loop": "cloud-loop 170s linear infinite",
         twinkle: "twinkle 3.6s ease-in-out infinite",
       },
     },

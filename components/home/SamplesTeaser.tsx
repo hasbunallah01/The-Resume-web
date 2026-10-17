@@ -12,6 +12,8 @@ export default function SamplesTeaser() {
   const picks = ["saas-account-executive", "human-resources-executive", "materials-engineer-early-career"]
     .map((slug) => samples.find((s) => s.slug === slug))
     .filter((s): s is (typeof samples)[number] => Boolean(s));
+  // If the featured slugs ever change, fall back to the first entries so the stack stays full.
+  const stack = picks.length >= 3 ? picks : samples.slice(0, 3);
 
   return (
     <section aria-labelledby="samples-teaser-heading" className="wrap pb-16 pt-2 lg:pb-20 lg:pt-4">
@@ -37,9 +39,10 @@ export default function SamplesTeaser() {
         <a
           href="/samples"
           aria-label="See sample work"
+          data-tilt="6"
           className="group relative mx-auto block aspect-[5/4] w-full max-w-[460px] rounded-[24px] bg-[linear-gradient(160deg,#e9f3fb,#d3e6f5)]"
         >
-          {picks.map((s, i) => (
+          {stack.map((s, i) => (
             <span
               key={s.slug}
               className={`absolute w-[44%] transition-transform duration-500 ease-out ${fan[i]}`}

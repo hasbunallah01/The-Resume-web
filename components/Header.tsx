@@ -239,7 +239,7 @@ export default function Header({ active = "" }: { active?: string }) {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="max-h-[calc(100vh-77px)] overflow-y-auto overscroll-contain supports-[height:100dvh]:max-h-[calc(100dvh-77px)] border-t border-[#d5e4f0] bg-[#f7fbfe] px-5 pb-8 pt-2 lg:hidden"
+          className="max-h-[calc(100vh-77px)] overflow-y-auto motion-safe:animate-[menu-in_320ms_cubic-bezier(.22,1,.36,1)] overscroll-contain supports-[height:100dvh]:max-h-[calc(100dvh-77px)] border-t border-[#d5e4f0] bg-[#f7fbfe] px-5 pb-8 pt-2 lg:hidden"
         >
           <a href="/" className="block border-b border-[#e1ebf3] py-3.5 text-[17px] text-navy" onClick={() => setOpen(false)}>
             Home

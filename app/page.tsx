@@ -14,6 +14,7 @@ import FAQ from "@/components/home/FAQ";
 import CTA from "@/components/CTA";
 import Newsletter from "@/components/home/Newsletter";
 import Footer from "@/components/Footer";
+import { CloudSeam } from "@/components/visual/CloudBank";
 
 export default function HomePage() {
   return (
@@ -24,6 +25,7 @@ export default function HomePage() {
         <Mission />
         <Problem />
         <ServicesOverview />
+        <CloudSeam />
         <SamplesTeaser />
         <BeforeAfter />
         <Steps
@@ -31,10 +33,12 @@ export default function HomePage() {
           heading="How Working With Veylora Works"
           steps={storySteps}
         />
+        <CloudSeam />
         <Writers />
         <WhoWeHelp />
         <WhyVeylora />
         <FAQ />
+        <CloudSeam />
         <CTA />
         <Newsletter />
       </main>
