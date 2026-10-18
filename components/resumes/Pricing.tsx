@@ -36,7 +36,7 @@ export default function Pricing() {
               data-tilt="4"
               className={`paper relative flex flex-col rounded-[28px] px-6 pb-7 pt-8 sm:px-7 ${
                 plan.featured
-                  ? "order-first bg-white shadow-lift ring-2 ring-[#163056] lg:order-none lg:-my-3 lg:py-10"
+                  ? "bg-white shadow-lift ring-2 ring-[#163056] lg:-my-3 lg:py-10"
                   : "bg-white/90 shadow-paper ring-1 ring-white"
               }`}
             >
