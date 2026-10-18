@@ -63,7 +63,7 @@ export function NavyBand({
     <Tag aria-labelledby={labelledBy} className={`navy-band relative isolate overflow-hidden text-white ${className}`}>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="starfield absolute inset-0" />
-        <div className="starfield starfield-b absolute inset-0 motion-safe:animate-twinkle-slow" />
+        <div className="starfield starfield-b absolute inset-0 animate-twinkle-slow" />
         <div className="absolute -right-24 -top-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(118,176,230,0.32),transparent)]" />
         <div className="absolute -bottom-40 -left-24 h-[460px] w-[460px] rounded-full bg-[radial-gradient(closest-side,rgba(86,140,210,0.22),transparent)]" />
         {clouds ? (

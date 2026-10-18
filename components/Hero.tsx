@@ -121,7 +121,7 @@ export default function Hero() {
       {/* Desktop: full bleed sky behind everything */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 hidden lg:block">
         <div data-parallax-mouse="10" className="absolute -inset-3 will-change-transform">
-        <div className="absolute inset-0 [container-type:size] motion-safe:animate-sky-drift">
+        <div className="absolute inset-0 [container-type:size] animate-sky-drift">
           {/* A 16:9 box that covers the hero like object-cover at 62% 58%, so the layers track the art */}
           <div className="sky-cover">
             <SkyArt className="h-full w-full object-cover" />
@@ -148,7 +148,7 @@ export default function Hero() {
           <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -top-[76px] left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden [mask-image:linear-gradient(180deg,#000_72%,transparent)] lg:hidden">
             <div className="absolute left-[-64vw] top-[9vw] aspect-[16/9] w-[190vw] sm:left-[-12vw] sm:top-[calc(76px-2vw)] sm:w-[132vw]">
               <div data-parallax-scroll="0.12" className="absolute inset-0">
-              <div className="absolute inset-0 motion-safe:animate-sky-drift">
+              <div className="absolute inset-0 animate-sky-drift">
                 <SkyArt mobile className="h-full w-full object-cover [mask-image:linear-gradient(180deg,transparent_0%,#000_12%,#000_78%,transparent_100%)]" />
                 <SkyLayers depth="scroll" />
               </div>

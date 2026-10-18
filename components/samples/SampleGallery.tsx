@@ -71,7 +71,7 @@ function Lightbox({ sample, onClose }: { sample: Sample; onClose: () => void }) 
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-[#0e1c33]/55 backdrop-blur-sm motion-safe:animate-[fade-in_320ms_cubic-bezier(.22,1,.36,1)] sm:items-center sm:p-6"
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-[#0e1c33]/55 backdrop-blur-sm animate-[fade-in_320ms_cubic-bezier(.22,1,.36,1)] sm:items-center sm:p-6"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -201,7 +201,7 @@ export default function SampleGallery() {
         {shown.map((s, i) => (
           <li
             key={s.slug}
-            className="motion-safe:animate-[rise_750ms_cubic-bezier(.22,1,.36,1)_both]"
+            className="animate-[rise_750ms_cubic-bezier(.22,1,.36,1)_both]"
             style={{ animationDelay: `${Math.min(i, 8) * 70}ms` }}
           >
             <button

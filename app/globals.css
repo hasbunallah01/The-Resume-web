@@ -415,22 +415,30 @@ body {
   }
 }
 
+/* Reduced motion: the motion here is slow and small, so it stays on in a calmer form
+   (no smooth scrolling, no parallax, shorter and smaller reveals, slower ambient drift)
+   instead of being switched off. Windows with "Animation effects" off and many laptop
+   power modes report reduce, which used to leave desktop visitors with a still page. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .motion-calm .reveal {
+    transform: translate3d(0, 8px, 0);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0ms;
+  }
+
+  .motion-calm .reveal.is-in {
+    transform: none;
   }
 }
 
-/* ---------- Motion (only when the visitor allows it) ---------- */
-@media (prefers-reduced-motion: no-preference) {
+/* ---------- Motion ---------- */
+@media all {
   .motion-ok .reveal {
     opacity: 0;
     transform: translate3d(0, 18px, 0);
@@ -536,13 +544,21 @@ body {
 
 /* Hero plane and loose pages: a slow glide, transform only */
 .sky-layer { transform-origin: 50% 50%; backface-visibility: hidden; }
-@media (prefers-reduced-motion: no-preference) {
+@media all {
   .sky-layer { will-change: transform; animation: page-float 9s cubic-bezier(.45,0,.55,1) infinite; }
   .sky-layer-plane { transform-origin: 46% 55%; animation: plane-glide 7s cubic-bezier(.45,0,.55,1) infinite; }
   .sky-layer-p1 { animation-duration: 9.5s; animation-delay: -1.2s; }
   .sky-layer-p2 { animation-duration: 11s; animation-delay: -4.6s; animation-direction: reverse; }
   .sky-layer-p3 { animation-duration: 10s; animation-delay: -7.1s; }
   .sky-layer-p4 { animation-duration: 12s; animation-delay: -2.8s; animation-direction: reverse; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* same glide, just slower */
+  .sky-layer-plane { animation-duration: 11s; }
+  .sky-layer-p1 { animation-duration: 14s; }
+  .sky-layer-p2 { animation-duration: 16s; }
+  .sky-layer-p3 { animation-duration: 15s; }
+  .sky-layer-p4 { animation-duration: 18s; }
 }
 @keyframes plane-glide {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }

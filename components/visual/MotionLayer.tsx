@@ -4,16 +4,17 @@ import { useEffect } from "react";
 
 /**
  * Site wide motion, kept light: scroll reveal, hero parallax and desktop card tilt.
- * Everything uses transform and opacity only, and nothing runs when the visitor
- * prefers reduced motion.
+ * Everything uses transform and opacity only. When the visitor prefers reduced
+ * motion the page stays alive in a calmer form: reveals are shorter and smaller and
+ * the pointer and scroll parallax is off.
  */
 export default function MotionLayer() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduce.matches) return;
     const cleanups: Array<() => void> = [];
     const root = document.documentElement;
     root.classList.add("motion-ok");
+    root.classList.toggle("motion-calm", reduce.matches);
 
     /* ---------- Scroll reveal ---------- */
     const main = document.getElementById("main");
@@ -106,6 +107,7 @@ export default function MotionLayer() {
     let my = 0;
     const paint = () => {
       raf = 0;
+      if (reduce.matches) return;
       const y = window.scrollY;
       mouseLayers.forEach((el) => {
         const d = Number(el.dataset.parallaxMouse || 0);
@@ -177,12 +179,12 @@ export default function MotionLayer() {
     }
 
     const onChange = () => {
+      root.classList.toggle("motion-calm", reduce.matches);
       if (reduce.matches) {
-        root.classList.remove("motion-ok");
-        cleanups.forEach((c) => c());
-        document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => el.classList.add("is-in"));
+        // Parallax stops; ambient drift and reveals carry on in their calmer form.
         [...mouseLayers, ...scrollLayers].forEach((el) => (el.style.transform = ""));
-        document.querySelectorAll<HTMLElement>("[data-flight-plane]").forEach((el) => (el.style.transform = ""));
+      } else {
+        queue();
       }
     };
     reduce.addEventListener("change", onChange);

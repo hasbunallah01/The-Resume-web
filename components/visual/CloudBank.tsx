@@ -23,7 +23,7 @@ export default function CloudBank({
       {layers.map((l, i) => (
         <div
           key={i}
-          className="absolute left-0 bg-[url('/hero/cloud-loop.webp')] bg-[length:auto_100%] bg-repeat-x will-change-transform motion-safe:animate-cloud-loop"
+          className="absolute left-0 bg-[url('/hero/cloud-loop.webp')] bg-[length:auto_100%] bg-repeat-x will-change-transform animate-cloud-loop"
           style={{
             bottom: l.lift,
             height: `calc(var(--cloud-h, 200px) * ${l.scale})`,

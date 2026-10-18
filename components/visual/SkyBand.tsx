@@ -32,7 +32,7 @@ export default function SkyBand({
             data-depth="0.08"
             className={`absolute inset-x-0 bottom-0 ${dense ? "h-[300px] opacity-80" : "h-[220px] opacity-60"} [mask-image:linear-gradient(180deg,transparent,#000_45%,#000_70%,transparent)]`}
           >
-            <div className="absolute inset-0 motion-safe:animate-drift-slow">
+            <div className="absolute inset-0 animate-drift-slow">
               <Image
                 src="/hero/clouds-1920.webp"
                 alt=""
