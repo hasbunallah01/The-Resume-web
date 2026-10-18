@@ -56,7 +56,7 @@ export function AboutIntro() {
             <div className="paper relative aspect-[4/5] overflow-hidden rounded-[28px] bg-white p-2 shadow-lift ring-1 ring-white">
               <div className="relative h-full w-full overflow-hidden rounded-[22px]">
                 <Image
-                  src="/images/founder-portrait.jpg"
+                  src="/images/founder-portrait-v2.jpg"
                   alt="Daramola Qudus Abolaji, founder of Veylora"
                   fill
                   sizes="(min-width: 1024px) 380px, 90vw"
@@ -293,7 +293,7 @@ export function FounderPerspective() {
             <div className="frame-layered relative h-[96px] w-[96px] shrink-0 rounded-[26px] sm:h-[112px] sm:w-[112px]">
             <div className="relative h-full w-full overflow-hidden rounded-[26px] ring-[3px] ring-white">
               <Image
-                src="/images/founder-square.jpg"
+                src="/images/founder-square-v2.jpg"
                 alt="Daramola Qudus Abolaji"
                 fill
                 sizes="120px"

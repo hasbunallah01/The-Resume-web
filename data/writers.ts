@@ -47,7 +47,7 @@ export const writers: Writer[] = [
       "Through Veylora, Qudus focuses on helping professionals present their experience with greater clarity, structure, and purpose, whether they are entering the job market, moving into a new role, repositioning their experience, or preparing for a more senior opportunity.",
       "His goal is not to make every resume look the same. It is to understand the person behind the document, identify the strongest parts of their professional story, and turn that information into a resume that communicates their value clearly.",
     ],
-    photo: "/images/founder-square.jpg",
+    photo: "/images/founder-square-v2.jpg",
     featured: true,
     email: "abdulqudus@veylora.haybee.xyz",
   },
