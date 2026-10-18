@@ -71,8 +71,8 @@ export const writers: Writer[] = [
     email: "ismail@veylora.haybee.xyz",
   },
   {
-    slug: "ericka-m",
-    name: "Ericka M.",
+    slug: "rebecca-phillips",
+    name: "Rebecca Phillips",
     title: "Certified Professional Resume Writer & Career Writer",
     cardRole: "CPRW",
     summary:
@@ -80,18 +80,18 @@ export const writers: Writer[] = [
     lines: ["Resumes, cover letters,", "bios and LinkedIn content", "for professionals across", "many industries."],
     focus: ["Resumes", "LinkedIn Content", "Professional Biographies"],
     bio: [
-      "Ericka M. is a professional resume writer with more than 12 years of experience in career writing and professional communication. She works with job seekers across a broad range of industries and career stages, developing resumes, cover letters, professional biographies, LinkedIn content, and other career documents.",
-      "Ericka is known for her attention to detail and her ability to uncover the strongest parts of a client's professional story. She looks beyond job titles and responsibilities to identify accomplishments, transferable strengths, leadership contributions, and the qualities that make each candidate distinctive.",
-      "Her work combines clear writing with thoughtful career positioning. Whether working with someone entering the workforce, an experienced professional seeking advancement, or a senior leader preparing for a major transition, Ericka focuses on producing documents that are professional, authentic, and easy for hiring teams to understand.",
+      "Rebecca Phillips is a professional resume writer with more than 12 years of experience in career writing and professional communication. She works with job seekers across a broad range of industries and career stages, developing resumes, cover letters, professional biographies, LinkedIn content, and other career documents.",
+      "Rebecca is known for her attention to detail and her ability to uncover the strongest parts of a client's professional story. She looks beyond job titles and responsibilities to identify accomplishments, transferable strengths, leadership contributions, and the qualities that make each candidate distinctive.",
+      "Her work combines clear writing with thoughtful career positioning. Whether working with someone entering the workforce, an experienced professional seeking advancement, or a senior leader preparing for a major transition, Rebecca focuses on producing documents that are professional, authentic, and easy for hiring teams to understand.",
     ],
     experience: "12+",
-    photo: "/images/writer-ericka-mingus-v2.jpg",
+    photo: "/images/writer-rebecca-phillips.jpg",
     featured: true,
     weight: 143,
   },
   {
-    slug: "alexis-b",
-    name: "Alexis B.",
+    slug: "ruth-d",
+    name: "Ruth D.",
     title: "Senior Resume Writer & Career Branding Advisor",
     cardRole: "Senior Resume Writer",
     summary:
@@ -99,12 +99,12 @@ export const writers: Writer[] = [
     lines: ["Turns complex career", "histories into clear,", "compelling stories, with a", "focus on career branding."],
     focus: ["Personal Branding", "Interview Preparation", "Career Documentation"],
     bio: [
-      "Alexis B. has more than 10 years of experience working with professionals to strengthen the way they present themselves throughout the hiring process. Her experience includes professional resume development, career documentation, interview preparation, and personal branding for candidates ranging from early career professionals to experienced managers and senior leaders.",
-      "Alexis has a particularly strong interest in turning complex career histories into clear, compelling stories. She works closely with clients to identify accomplishments that are often overlooked and transform them into concise, meaningful statements that communicate professional value.",
+      "Ruth D. has more than 10 years of experience working with professionals to strengthen the way they present themselves throughout the hiring process. Her experience includes professional resume development, career documentation, interview preparation, and personal branding for candidates ranging from early career professionals to experienced managers and senior leaders.",
+      "Ruth has a particularly strong interest in turning complex career histories into clear, compelling stories. She works closely with clients to identify accomplishments that are often overlooked and transform them into concise, meaningful statements that communicate professional value.",
       "Her approach combines careful writing, strategic positioning, and a genuine understanding of what makes each candidate different. Every document is developed to sound natural, confident, and personal rather than generic or overly polished.",
     ],
     experience: "10+",
-    photo: "/images/writer-alexis-binder-v2.jpg",
+    photo: "/images/writer-ruth-d.jpg",
     featured: true,
     weight: 138,
   },
@@ -126,26 +126,6 @@ export const writers: Writer[] = [
     photo: "/images/writer-joy-adams.jpg",
     featured: true,
     weight: 134,
-  },
-  {
-    slug: "suzanne-t",
-    name: "Suzanne T.",
-    title: "Senior Resume Writer & Career Development Specialist",
-    cardRole: "Senior Resume Writer",
-    summary:
-      "Helps clients see the value in their experience and shape a focused professional story.",
-    lines: ["Helps clients see the value", "in their experience and", "shape a focused", "professional story."],
-    focus: ["Resume Writing", "Career Direction", "Career Transitions"],
-    bio: [
-      "Suzanne T. brings more than 9 years of experience in professional writing and career development. Her work has involved helping professionals organize their experience, clarify their career direction, and create stronger professional documents for important career transitions.",
-      "Suzanne has experience working with candidates across multiple career levels, including students and recent graduates, experienced professionals, managers, and senior level candidates. She particularly enjoys helping clients recognize the value in experiences they may not initially consider significant.",
-      "Her writing philosophy is centered on clarity, authenticity, and relevance. Suzanne believes a resume should sound like the person it represents while making it easy for a hiring manager to understand the candidate's capabilities and accomplishments.",
-      "Through a collaborative approach, she helps clients turn years of experience into a focused professional story that supports their next career move.",
-    ],
-    experience: "9+",
-    photo: "/images/writer-suzanne-taylor-v2.jpg",
-    featured: true,
-    weight: 135,
   },
 ];
 
