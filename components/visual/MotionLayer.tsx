@@ -18,7 +18,7 @@ export default function MotionLayer() {
 
     /* ---------- Scroll reveal ---------- */
     const main = document.getElementById("main");
-    if (main && "IntersectionObserver" in window) {
+    if (main) {
       const skip = (el: Element) =>
         Boolean(el.closest('[aria-labelledby="hero-heading"], [data-noreveal], form, nav, article'));
       const targets = new Set<HTMLElement>();
@@ -37,27 +37,68 @@ export default function MotionLayer() {
       main.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => targets.add(el));
 
       // Only hide what is still below the fold, so nothing on screen flickers.
-      const fold = window.innerHeight * 0.92;
-      const pending: HTMLElement[] = [];
+      // Very tall blocks (longer than a screen and a half) are never hidden: fading a
+      // whole page of content is pointless and an observer may never see enough of it.
+      const vh = window.innerHeight;
+      const fold = vh * 0.92;
+      const pending = new Set<HTMLElement>();
       targets.forEach((el) => {
-        if (el.getBoundingClientRect().top > fold) {
+        const r = el.getBoundingClientRect();
+        if (r.top > fold && r.height < vh * 1.5) {
           el.classList.add("reveal");
-          pending.push(el);
+          pending.add(el);
         }
       });
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("is-in");
-              io.unobserve(e.target);
-            }
+      const show = (el: HTMLElement) => {
+        el.classList.add("is-in");
+        pending.delete(el);
+        io?.unobserve(el);
+      };
+      // Safety net: anything that has reached the viewport (or was jumped past by an
+      // anchor link or scroll restoration) is shown, whether or not the observer fired.
+      const sweep = () => {
+        const h = window.innerHeight;
+        pending.forEach((el) => {
+          if (el.getBoundingClientRect().top < h) show(el);
+        });
+      };
+      const io =
+        "IntersectionObserver" in window
+          ? new IntersectionObserver(
+              (entries) => {
+                entries.forEach((e) => {
+                  if (e.isIntersecting || e.boundingClientRect.top < 0) show(e.target as HTMLElement);
+                });
+              },
+              { rootMargin: "0px 0px -4% 0px", threshold: 0 },
+            )
+          : null;
+      if (io) pending.forEach((el) => io.observe(el));
+      else pending.forEach(show);
+      let sweepRaf = 0;
+      const queueSweep = () => {
+        if (!sweepRaf)
+          sweepRaf = requestAnimationFrame(() => {
+            sweepRaf = 0;
+            sweep();
           });
-        },
-        { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
-      );
-      pending.forEach((el) => io.observe(el));
-      cleanups.push(() => io.disconnect());
+      };
+      const timers = [window.setTimeout(sweep, 400), window.setTimeout(sweep, 1500)];
+      window.addEventListener("scroll", queueSweep, { passive: true });
+      window.addEventListener("resize", queueSweep, { passive: true });
+      window.addEventListener("hashchange", queueSweep);
+      window.addEventListener("pageshow", queueSweep);
+      cleanups.push(() => {
+        io?.disconnect();
+        timers.forEach((t) => window.clearTimeout(t));
+        if (sweepRaf) cancelAnimationFrame(sweepRaf);
+        window.removeEventListener("scroll", queueSweep);
+        window.removeEventListener("resize", queueSweep);
+        window.removeEventListener("hashchange", queueSweep);
+        window.removeEventListener("pageshow", queueSweep);
+        // Never leave anything hidden once motion is torn down.
+        pending.forEach((el) => el.classList.add("is-in"));
+      });
     }
 
     /* ---------- Flight paths: a paper plane travels along numbered steps ---------- */
