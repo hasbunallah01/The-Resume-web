@@ -28,7 +28,7 @@ export default function Intro() {
   return (
     <>
       <SkyBand dense>
-        <section aria-labelledby="intro-heading" className="wrap pb-8 pt-10 lg:pb-4 lg:pt-16">
+        <section id="resume-writing" aria-labelledby="intro-heading" className="wrap pb-8 pt-10 lg:pb-4 lg:pt-16">
           <div className="grid items-end gap-8 lg:grid-cols-[1.35fr_0.8fr] lg:gap-16">
             <div>
               <p className="eyebrow"><span className="eyebrow-dot" />Your next opportunity</p>

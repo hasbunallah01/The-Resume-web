@@ -9,8 +9,11 @@ export default function Steps({
   steps,
   tone = "ivory",
   eyebrow = "The process",
+  sectionId,
 }: {
   id: string;
+  /** Anchor for the section itself, used by the Services menu */
+  sectionId?: string;
   heading: string;
   steps: readonly Step[];
   tone?: "ivory" | "mist";
@@ -18,7 +21,7 @@ export default function Steps({
 }) {
   const flight = steps.map((s) => ({ ...s, Icon: lineIcons[s.icon as LineIconName] }));
   return (
-    <section aria-labelledby={id} className={tone === "mist" ? "skywash" : "gridpaper"}>
+    <section id={sectionId} aria-labelledby={id} className={tone === "mist" ? "skywash" : "gridpaper"}>
       <div className="wrap relative py-16 lg:py-24">
         <PlaneTrail className="absolute right-0 top-8 hidden w-[220px] opacity-70 lg:block" />
         <p className="eyebrow"><span className="eyebrow-dot" />{eyebrow}</p>

@@ -10,6 +10,7 @@ import {
   WhatWeDo,
   WhyVeylora,
 } from "@/components/about/Sections";
+import MeetWriters from "@/components/about/MeetWriters";
 
 export const metadata: Metadata = {
   title: "About | Veylora",
@@ -28,6 +29,7 @@ export default function AboutPage() {
         <WhatWeDo />
         <BrandStatement />
         <FounderPerspective />
+        <MeetWriters />
         <AboutCTA />
       </main>
       <Footer />

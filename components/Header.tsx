@@ -6,14 +6,14 @@ import Logo from "./Logo";
 import { ArrowIcon } from "./visual/Marks";
 
 const serviceLinks = [
-  { label: "Resume writing", href: "/services" },
-  { label: "Packages and pricing", href: "/services#pricing" },
-  { label: "Our writers", href: "/writers" },
+  { label: "Resume writing", href: "/services#resume-writing" },
+  { label: "Pricing", href: "/services#pricing" },
+  { label: "How it works", href: "/services#how-it-works" },
+  { label: "Executive partnership", href: "/services#executive-partnership" },
 ];
 
 const links = [
   { label: "Our Work", href: "/samples", key: "Our Work" },
-  { label: "Pricing", href: "/services#pricing", key: "Pricing" },
   { label: "About Us", href: "/about", key: "About" },
 ];
 

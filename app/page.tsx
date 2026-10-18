@@ -11,10 +11,14 @@ import Writers from "@/components/Writers";
 import WhoWeHelp from "@/components/home/WhoWeHelp";
 import WhyVeylora from "@/components/home/WhyVeylora";
 import FAQ from "@/components/home/FAQ";
+import ReviewsCompact from "@/components/reviews/ReviewsCompact";
 import CTA from "@/components/CTA";
 import Newsletter from "@/components/home/Newsletter";
 import Footer from "@/components/Footer";
 import { CloudSeam } from "@/components/visual/CloudBank";
+
+// Reviews are fetched live from the database on every request.
+export const dynamic = "force-dynamic";
 
 export default function HomePage() {
   return (
@@ -38,6 +42,7 @@ export default function HomePage() {
         <WhoWeHelp />
         <WhyVeylora />
         <FAQ />
+        <ReviewsCompact />
         <CloudSeam />
         <CTA />
         <Newsletter />

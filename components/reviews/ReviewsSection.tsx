@@ -17,7 +17,7 @@ function initials(name: string) {
   return ((parts[0]?.[0] ?? "") + (parts[1]?.[0] ?? "")).toUpperCase();
 }
 
-function Stars({ value }: { value: number }) {
+export function Stars({ value }: { value: number }) {
   return (
     <div className="flex gap-[2px]" role="img" aria-label={`${value} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((i) => (
@@ -30,9 +30,9 @@ function Stars({ value }: { value: number }) {
   );
 }
 
-function ReviewCard({ review }: { review: ReviewRow }) {
+export function ReviewCard({ review, className = "", clamp = false }: { review: ReviewRow; className?: string; clamp?: boolean }) {
   return (
-    <li className="glass-card relative flex flex-col overflow-hidden rounded-[22px] p-5">
+    <li className={`glass-card relative flex flex-col overflow-hidden rounded-[22px] p-5 ${className}`}>
       <QuoteMark className="pointer-events-none absolute right-4 top-4 h-6 w-8 text-[#e1eef8]" />
       <div className="flex items-center gap-3.5">
         {review.photo_url ? (
@@ -58,7 +58,7 @@ function ReviewCard({ review }: { review: ReviewRow }) {
       <div className="mt-3.5">
         <Stars value={review.rating} />
       </div>
-      <p className="mt-3 flex-1 text-[14px] leading-[1.6] text-ink-body">&ldquo;{review.comment}&rdquo;</p>
+      <p className={`mt-3 flex-1 text-[14px] leading-[1.6] text-ink-body ${clamp ? "line-clamp-4" : ""}`}>&ldquo;{review.comment}&rdquo;</p>
     </li>
   );
 }
@@ -69,7 +69,7 @@ export default async function ReviewsSection() {
     reviews.length > 0 ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length : null;
 
   return (
-    <section aria-labelledby="reviews-heading" className="skywash">
+    <section id="reviews" aria-labelledby="reviews-heading" className="skywash">
       <div className="wrap py-16 lg:py-20">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-[600px]">

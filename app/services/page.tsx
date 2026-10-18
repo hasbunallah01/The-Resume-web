@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Intro from "@/components/resumes/Intro";
 import Pricing from "@/components/resumes/Pricing";
 import Steps from "@/components/resumes/Steps";
-import ReviewsSection from "@/components/reviews/ReviewsSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { partnershipSteps, storySteps } from "@/data/pricing";
@@ -26,13 +25,14 @@ export default function ServicesPage() {
         <Pricing />
         <Steps
           id="story-heading"
+          sectionId="how-it-works"
           heading="Every Veylora Project Begins With Your Story"
           steps={storySteps}
           eyebrow="How it works"
         />
-        <ReviewsSection />
         <Steps
           id="partnership-heading"
+          sectionId="executive-partnership"
           heading="How our executive partnership process works:"
           steps={partnershipSteps}
           tone="mist"
